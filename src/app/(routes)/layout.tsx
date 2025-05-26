@@ -1,7 +1,7 @@
 import Header from "@/components/shared/header";
 import "../globals.css";
 import { ThemeProvider } from "./theme-provider";
-import { ThemeToggler } from "./theme-toggler";
+import { ThemeToggler } from "../../components/theme-toggler";
 import Footer from "@/components/shared/footer";
 export default function RootLayout({
   children,
