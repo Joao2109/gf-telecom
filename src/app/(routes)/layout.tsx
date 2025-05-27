@@ -1,26 +1,27 @@
+"use client";
 import Header from "@/components/shared/header";
 import "../globals.css";
 import { ThemeProvider } from "./theme-provider";
-import { ThemeToggler } from "../../components/theme-toggler";
 import Footer from "@/components/shared/footer";
+import { usePathname } from "next/navigation";
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const pathname = usePathname();
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >
-          <Header />
+          {pathname.includes("auth") ? null : <Header />}
           {children}
-          <Footer />
-          <ThemeToggler />
+          {pathname.includes("auth") ? null : <Footer />}
         </ThemeProvider>
       </body>
     </html>
