@@ -14,7 +14,6 @@ const ChatSuporte = ({
   const ws = useRef<WebSocket | null>(null);
   useEffect(() => {
     ws.current = new WebSocket("ws://localhost:3001/" + roomId);
-    ws.current.addEventListener("open", () => {});
     ws.current.addEventListener("message", (event) => {
       setMessages((prevMessages) => [...prevMessages, JSON.parse(event.data)]);
     });

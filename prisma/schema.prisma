@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  cpf        String @id
+  nome       String
+  rg         String
+  tel        String
+  email      String
+  plano      Plano
+  vencimento Int
+}
+
+enum Plano {
+  MB100
+  MB300
+  MB500
+}
