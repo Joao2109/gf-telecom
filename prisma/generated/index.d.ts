@@ -1575,7 +1575,7 @@ export namespace Prisma {
     readonly tel: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
     readonly plano: FieldRef<"User", 'Plano'>
-    readonly vencimento: FieldRef<"User", 'Int'>
+    readonly vencimento: FieldRef<"User", 'Float'>
   }
     
 
@@ -2019,20 +2019,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Int'
-   */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-  /**
-   * Reference to a field of type 'Int[]'
-   */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
-    
-
-
-  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -2043,6 +2029,20 @@ export namespace Prisma {
    * Reference to a field of type 'Float[]'
    */
   export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
   /**
    * Deep Input Types
@@ -2059,7 +2059,7 @@ export namespace Prisma {
     tel?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
     plano?: EnumPlanoFilter<"User"> | $Enums.Plano
-    vencimento?: IntFilter<"User"> | number
+    vencimento?: FloatFilter<"User"> | number
   }
 
   export type UserOrderByWithRelationInput = {
@@ -2082,7 +2082,7 @@ export namespace Prisma {
     tel?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
     plano?: EnumPlanoFilter<"User"> | $Enums.Plano
-    vencimento?: IntFilter<"User"> | number
+    vencimento?: FloatFilter<"User"> | number
   }, "cpf">
 
   export type UserOrderByWithAggregationInput = {
@@ -2110,7 +2110,7 @@ export namespace Prisma {
     tel?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
     plano?: EnumPlanoWithAggregatesFilter<"User"> | $Enums.Plano
-    vencimento?: IntWithAggregatesFilter<"User"> | number
+    vencimento?: FloatWithAggregatesFilter<"User"> | number
   }
 
   export type UserCreateInput = {
@@ -2140,7 +2140,7 @@ export namespace Prisma {
     tel?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     plano?: EnumPlanoFieldUpdateOperationsInput | $Enums.Plano
-    vencimento?: IntFieldUpdateOperationsInput | number
+    vencimento?: FloatFieldUpdateOperationsInput | number
   }
 
   export type UserUncheckedUpdateInput = {
@@ -2150,7 +2150,7 @@ export namespace Prisma {
     tel?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     plano?: EnumPlanoFieldUpdateOperationsInput | $Enums.Plano
-    vencimento?: IntFieldUpdateOperationsInput | number
+    vencimento?: FloatFieldUpdateOperationsInput | number
   }
 
   export type UserCreateManyInput = {
@@ -2170,7 +2170,7 @@ export namespace Prisma {
     tel?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     plano?: EnumPlanoFieldUpdateOperationsInput | $Enums.Plano
-    vencimento?: IntFieldUpdateOperationsInput | number
+    vencimento?: FloatFieldUpdateOperationsInput | number
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -2180,7 +2180,7 @@ export namespace Prisma {
     tel?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     plano?: EnumPlanoFieldUpdateOperationsInput | $Enums.Plano
-    vencimento?: IntFieldUpdateOperationsInput | number
+    vencimento?: FloatFieldUpdateOperationsInput | number
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -2205,15 +2205,15 @@ export namespace Prisma {
     not?: NestedEnumPlanoFilter<$PrismaModel> | $Enums.Plano
   }
 
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type UserCountOrderByAggregateInput = {
@@ -2282,20 +2282,20 @@ export namespace Prisma {
     _max?: NestedEnumPlanoFilter<$PrismaModel>
   }
 
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
     _count?: NestedIntFilter<$PrismaModel>
     _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -2306,7 +2306,7 @@ export namespace Prisma {
     set?: $Enums.Plano
   }
 
-  export type IntFieldUpdateOperationsInput = {
+  export type FloatFieldUpdateOperationsInput = {
     set?: number
     increment?: number
     decrement?: number
@@ -2335,15 +2335,15 @@ export namespace Prisma {
     not?: NestedEnumPlanoFilter<$PrismaModel> | $Enums.Plano
   }
 
-  export type NestedIntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -2363,6 +2363,17 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type NestedEnumPlanoWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.Plano | EnumPlanoFieldRefInput<$PrismaModel>
     in?: $Enums.Plano[] | ListEnumPlanoFieldRefInput<$PrismaModel>
@@ -2373,23 +2384,7 @@ export namespace Prisma {
     _max?: NestedEnumPlanoFilter<$PrismaModel>
   }
 
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[] | ListFloatFieldRefInput<$PrismaModel>
     notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
@@ -2397,7 +2392,12 @@ export namespace Prisma {
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
   }
 
 

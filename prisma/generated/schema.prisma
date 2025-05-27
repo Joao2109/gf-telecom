@@ -16,7 +16,7 @@ model User {
   tel        String
   email      String
   plano      Plano
-  vencimento Int
+  vencimento Float
 }
 
 enum Plano {
