@@ -1,7 +1,7 @@
 import { auth } from "@/auth";
 import ChatSuporte from "@/components/suporte/chat-suporte";
 // import { redirect } from "next/navigation";
-const SuportePage = async ({ params }: { params: { id: string } }) => {
+const SuportePage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
   const session = await auth();
   if (!session?.user) {
