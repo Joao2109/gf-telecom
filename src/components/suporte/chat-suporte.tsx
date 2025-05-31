@@ -13,7 +13,7 @@ const ChatSuporte = ({
   const [messages, setMessages] = useState<message[]>([]);
   const ws = useRef<WebSocket | null>(null);
   useEffect(() => {
-    ws.current = new WebSocket("ws://localhost:3001/" + roomId);
+    ws.current = new WebSocket(process.env.WEBSOCKET_SERVER_URL + roomId);
     ws.current.addEventListener("message", (event) => {
       setMessages((prevMessages) => [...prevMessages, JSON.parse(event.data)]);
     });
