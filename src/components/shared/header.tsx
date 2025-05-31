@@ -44,21 +44,21 @@ const Header = () => {
               size="sm"
               asChild
               className={
-                pathname === "/remote-support"
+                pathname === "/planos"
                   ? `bg-primary`
                   : `bg-black/30 sm:bg-transparent hover:bg-primary`
               }
             >
-              {pathname === "/remote-support" ? (
+              {pathname === "/planos" ? (
                 <p className="w-full sm:w-auto text-white rounded-none sm:rounded-sm">
-                  Suporte Remoto
+                  Planos
                 </p>
               ) : (
                 <Link
-                  href="/remote-support"
+                  href="/planos"
                   className="w-full sm:w-auto text-white rounded-none sm:rounded-sm"
                 >
-                  Suporte Remoto
+                  Planos
                 </Link>
               )}
             </Button>
@@ -68,18 +68,18 @@ const Header = () => {
               size="sm"
               asChild
               className={
-                pathname === "/appointment"
+                pathname === "/agendamento"
                   ? `bg-primary`
                   : `bg-black/30 sm:bg-transparent hover:bg-primary`
               }
             >
-              {pathname === "/appointment" ? (
+              {pathname === "/agendamento" ? (
                 <p className="w-full sm:w-auto text-white rounded-none sm:rounded-sm">
                   Agendamento
                 </p>
               ) : (
                 <Link
-                  href="/appointment"
+                  href="/agendamento"
                   className="w-full sm:w-auto text-white rounded-none sm:rounded-sm"
                 >
                   Agendamento
@@ -92,21 +92,21 @@ const Header = () => {
               size="sm"
               asChild
               className={
-                pathname === "/about-us"
+                pathname === "/suporte"
                   ? `bg-primary`
                   : `bg-black/30 sm:bg-transparent hover:bg-primary`
               }
             >
-              {pathname === "/about-us" ? (
+              {pathname === "/suporte" ? (
                 <p className="w-full sm:w-auto text-white rounded-none sm:rounded-sm">
-                  Sobre Nós
+                  Suporte Remoto
                 </p>
               ) : (
                 <Link
-                  href="/about-us"
+                  href="/suporte"
                   className="w-full sm:w-auto text-white rounded-none sm:rounded-sm"
                 >
-                  Sobre Nós
+                  Suporte Remoto
                 </Link>
               )}
             </Button>
