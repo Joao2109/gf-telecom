@@ -1,6 +1,6 @@
 import { WebSocketServer } from "ws";
 import { parse } from "url";
-const wss = new WebSocketServer({ port: 3001 });
+const wss = new WebSocketServer({ port: 3000 });
 const rooms = new Map();
 wss.on("connection", (ws, request) => {
   const { pathname } = parse(request.url || "");

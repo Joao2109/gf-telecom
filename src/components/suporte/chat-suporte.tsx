@@ -13,14 +13,16 @@ const ChatSuporte = ({
   const [messages, setMessages] = useState<message[]>([]);
   const ws = useRef<WebSocket | null>(null);
   useEffect(() => {
-    ws.current = new WebSocket(process.env.WEBSOCKET_SERVER_URL + roomId);
+    ws.current = new WebSocket(
+      "https://websocket-bitter-rain-9314.fly.dev/" + roomId
+    );
     ws.current.addEventListener("message", (event) => {
       setMessages((prevMessages) => [...prevMessages, JSON.parse(event.data)]);
     });
     return () => {
       ws.current?.close();
     };
-  }, []);
+  }, [roomId]);
   const sendMessage = async (message: string) => {
     const msg = { senderId: clientId, type: "text", data: message };
     ws.current?.send(JSON.stringify(msg));
