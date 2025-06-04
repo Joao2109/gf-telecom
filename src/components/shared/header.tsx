@@ -3,15 +3,44 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { usePathname } from "next/navigation";
+import { signOut, useSession } from "next-auth/react";
 const Header = () => {
+  const { data: session } = useSession();
   const pathname = usePathname();
   return (
     <header className="w-full h-auto bg-accent px-0 sm:px-4 py-4">
-      <div className="flex items-center mb-2">
-        <div className="w-20 h-8 relative">
-          <Image src="/public/images/logo.png" alt="Logo" fill />
+      <div className="flex items-center justify-between mb-2">
+        <div className="flex items-center">
+          <div className="w-20 h-8 relative">
+            <Image src="/public/images/logo.png" alt="Logo" fill />
+          </div>
+          <h2 className="text-white text-2xl font-semibold">GF Telecom</h2>
         </div>
-        <h2 className="text-white text-2xl font-semibold">GF Telecom</h2>
+        <div className="flex items-center gap-2">
+          {session ? (
+            <>
+              <p className="text-white">{session.user?.nome}</p>
+              <Button asChild>
+                <Link href={`/dashboard`}>
+                  {session.user?.plano ? "Central do assinante" : "Dashboard"}
+                </Link>
+              </Button>
+              <Button
+                variant={"ghost"}
+                className="text-white"
+                onClick={() => signOut()}
+              >
+                Sair
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button asChild variant={"ghost"} className="text-white">
+                <Link href={`/auth/sign-in`}>Login</Link>
+              </Button>
+            </>
+          )}
+        </div>
       </div>
       <nav>
         <ul className="flex flex-col sm:flex-row list-none gap-1">

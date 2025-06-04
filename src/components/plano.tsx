@@ -4,14 +4,28 @@ import { Button } from "./ui/button";
 import Link from "next/link";
 const Plano = ({
   plano,
+  current,
 }: {
   plano: { valor: number; download: number; upload: number };
+  current?: boolean;
 }) => {
   return (
-    <div className="w-60 bg-background rounded-2xl shadow-xl overflow-hidden">
+    <div
+      className={`w-60 bg-${
+        current ? "primary" : "background"
+      } rounded-2xl shadow-xl overflow-hidden`}
+    >
       <div className="aspect-square p-4 relative flex flex-col justify-center gap-2 items-center">
-        <h2 className="font-bold text-6xl text-accent">{plano.download}MB</h2>
-        <p className="text-2xl font-semibold">
+        <h2
+          className={`font-bold text-6xl text-${current ? "white" : "accent"}`}
+        >
+          {plano.download}MB
+        </h2>
+        <p
+          className={`text-2xl font-semibold text-${
+            current ? "white" : "accent"
+          }`}
+        >
           R$: {plano.valor.toString().split(".")[0]}
           <sup className="text-xs">
             <span>,{plano.valor.toFixed(2).toString().split(".")[1]}</span>
@@ -21,10 +35,18 @@ const Plano = ({
           asChild
           className="w-[calc(100%+32px)] absolute bottom-0 rounded-none"
         >
-          <Link href={`/agendamento?plano=${plano.download}`}>Contratar</Link>
+          {current ? (
+            <p>Assinado</p>
+          ) : (
+            <Link href={`/agendamento?plano=${plano.download}`}>Contratar</Link>
+          )}
         </Button>
       </div>
-      <div className="p-4 hidden md:flex bg-primary flex-col gap-4 items-center">
+      <div
+        className={`p-4 hidden md:flex bg-${
+          current ? "accent" : "primary"
+        } flex-col gap-4 items-center`}
+      >
         <p className="text-white flex gap-2 font-semibold">
           <Wifi />
           Wi-fi 5G Incluso
