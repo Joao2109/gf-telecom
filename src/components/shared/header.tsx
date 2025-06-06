@@ -9,8 +9,8 @@ const Header = () => {
   const pathname = usePathname();
   return (
     <header className="w-full h-auto bg-accent px-0 sm:px-4 py-4">
-      <div className="flex items-center justify-between mb-2">
-        <div className="flex items-center">
+      <div className="flex items-center justify-center sm:justify-between mb-2">
+        <div className="items-center hidden sm:flex">
           <div className="w-20 h-8 relative">
             <Image src="/public/images/logo.png" alt="Logo" fill />
           </div>

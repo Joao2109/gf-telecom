@@ -1,11 +1,12 @@
 import { Button } from "@/components/ui/button";
 import Card from "@/components/ui/card";
+import { Carousel, CarouselContent } from "@/components/ui/carousel";
 import Image from "next/image";
 import Link from "next/link";
 
 const HomePage = () => {
   return (
-    <main className="w-full min-h-[calc(100dvh-650px)]">
+    <main className="w-full min-h-[calc(100dvh-650px)] overflow-x-hidden">
       <div className="w-full h-80 relative">
         <Image
           src="/images/bg.jpg"
@@ -25,39 +26,43 @@ const HomePage = () => {
       <div className="p-4 bg-foreground/10">
         <h2 className="text-2xl text-center font-bold">Suporte Técnico</h2>
         <div className="flex justify-center gap-6 pt-4">
-          <Card
-            className="w-64 h-64 bg-background"
-            variant="link"
-            to="/agendamento"
-          >
-            <h3 className="text-lg font-semibold text-center mb-16">
-              Agendar Suporte
-            </h3>
-            <p className="text-center">De segunda a sábado</p>
-            <p className="text-center">Das 8h às 18h</p>
-          </Card>
-          <Card
-            className="w-64 h-64 bg-background"
-            variant="link"
-            to="/suporte"
-          >
-            <h3 className="text-lg font-semibold text-center mb-16">
-              Suporte Remoto
-            </h3>
-            <p className="text-center">De segunda a sexta</p>
-            <p className="text-center">Das 8h às 22h</p>
-          </Card>
-          <Card
-            className="w-64 h-64 bg-background"
-            variant="link"
-            to="/suporte-emergencial"
-          >
-            <h3 className="text-lg font-semibold text-center mb-16">
-              Suporte Emergencial
-            </h3>
-            <p className="text-center">Atendimento 24h</p>
-            <p className="text-center">7 dias por semana</p>
-          </Card>
+          <Carousel className="w-full max-w-[800px] rounded-2xl overflow-hidden">
+            <CarouselContent className="-ml-4">
+              <Card
+                className="w-64 h-64 bg-background ml-4"
+                variant="link"
+                to="/agendamento"
+              >
+                <h3 className="text-lg font-semibold text-center mb-16">
+                  Agendar Suporte
+                </h3>
+                <p className="text-center">De segunda a sábado</p>
+                <p className="text-center">Das 8h às 18h</p>
+              </Card>
+              <Card
+                className="w-64 h-64 bg-background ml-4"
+                variant="link"
+                to="/suporte"
+              >
+                <h3 className="text-lg font-semibold text-center mb-16">
+                  Suporte Remoto
+                </h3>
+                <p className="text-center">De segunda a sexta</p>
+                <p className="text-center">Das 8h às 22h</p>
+              </Card>
+              <Card
+                className="w-64 h-64 bg-background ml-4"
+                variant="link"
+                to="/suporte-emergencial"
+              >
+                <h3 className="text-lg font-semibold text-center mb-16">
+                  Suporte Emergencial
+                </h3>
+                <p className="text-center">Atendimento 24h</p>
+                <p className="text-center">7 dias por semana</p>
+              </Card>
+            </CarouselContent>
+          </Carousel>
         </div>
       </div>
     </main>

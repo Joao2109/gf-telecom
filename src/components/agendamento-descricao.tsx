@@ -9,7 +9,7 @@ const AgendamentoDescricao = ({ plano }: { plano: string }) => {
   }, [plano]);
   return (
     <label htmlFor="descricao" className="flex justify-center gap-2">
-      Descrição:
+      Descrição: <span className="text-red-500">*</span>
       <textarea
         name="descricao"
         id="descricao"

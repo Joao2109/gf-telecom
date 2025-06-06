@@ -42,5 +42,5 @@ next-env.d.ts
 
 certificates
 
-GF Telecom
-./prisma/generated
+/GF Telecom
+/prisma/generated

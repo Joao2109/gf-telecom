@@ -2,7 +2,7 @@
 import { Button } from "../ui/button";
 import { Send, Upload } from "lucide-react";
 interface ChatInputProps extends React.ComponentProps<"form"> {
-  sendMessage: (message: string) => void;
+  sendMessage: (message: string, type: string) => void;
 }
 const ChatInput = ({ sendMessage, ...props }: ChatInputProps) => {
   return (
@@ -10,7 +10,7 @@ const ChatInput = ({ sendMessage, ...props }: ChatInputProps) => {
       className="w-full flex border border-primary bg-white"
       onSubmit={(e) => {
         e.preventDefault();
-        sendMessage(e.currentTarget.text.value);
+        sendMessage(e.currentTarget.text.value, "text");
         e.currentTarget.text.value = "";
       }}
       {...props}
