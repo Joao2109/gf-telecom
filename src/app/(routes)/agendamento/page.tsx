@@ -3,7 +3,7 @@ import { FormEvent } from "react";
 const AgendamentoPage = async ({
   searchParams,
 }: {
-  searchParams: { plano: string };
+  searchParams: { plano?: string };
 }) => {
   const { plano } = await searchParams;
   const horarios = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
