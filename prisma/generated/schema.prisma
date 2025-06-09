@@ -9,18 +9,68 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-model User {
-  cpf        String @id
-  nome       String
-  rg         String
-  tel        String
-  email      String
-  plano      Plano
-  vencimento Float
+model Cliente {
+  cpf          String        @id
+  senha        String
+  nome         String
+  tel          String
+  email        String
+  plano        Plano
+  vencimento   Float
+  salas        Sala[]
+  agendamentos Agendamento[]
+}
+
+model Funcionario {
+  cpf    String @id
+  senha  String
+  nome   String
+  tel    String
+  email  String
+  funcao Funcao
+  salas  Sala[]
+}
+
+model Sala {
+  id            Int         @id @default(autoincrement())
+  nome          String
+  cliente       Cliente     @relation(fields: [clienteId], references: [cpf])
+  funcionario   Funcionario @relation(fields: [funcionarioId], references: [cpf])
+  clienteId     String
+  funcionarioId String
+  mensagens     Mensagem[]
+}
+
+model Mensagem {
+  id     Int    @id @default(autoincrement())
+  msg    String
+  salaId Int
+  sala   Sala   @relation(fields: [salaId], references: [id])
+}
+
+model Agendamento {
+  id         Int      @id @default(autoincrement())
+  data       DateTime
+  descricao  String
+  clienteCpf String
+  cliente    Cliente  @relation(fields: [clienteCpf], references: [cpf])
+  status     Status   @default(AGENDADO)
 }
 
 enum Plano {
   MB100
   MB300
   MB500
+}
+
+enum Funcao {
+  ADMINISTRATIVO
+  TECNICO
+  GERENTE
+}
+
+enum Status {
+  AGENDADO
+  CONCLUIDO
+  CANCELADO
 }

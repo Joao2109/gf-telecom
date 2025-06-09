@@ -120,14 +120,45 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.UserScalarFieldEnum = {
+exports.Prisma.ClienteScalarFieldEnum = {
   cpf: 'cpf',
+  senha: 'senha',
   nome: 'nome',
-  rg: 'rg',
   tel: 'tel',
   email: 'email',
   plano: 'plano',
   vencimento: 'vencimento'
+};
+
+exports.Prisma.FuncionarioScalarFieldEnum = {
+  cpf: 'cpf',
+  senha: 'senha',
+  nome: 'nome',
+  tel: 'tel',
+  email: 'email',
+  funcao: 'funcao'
+};
+
+exports.Prisma.SalaScalarFieldEnum = {
+  id: 'id',
+  nome: 'nome',
+  clienteId: 'clienteId',
+  funcionarioId: 'funcionarioId',
+  status: 'status'
+};
+
+exports.Prisma.MensagemScalarFieldEnum = {
+  id: 'id',
+  msg: 'msg',
+  salaId: 'salaId'
+};
+
+exports.Prisma.AgendamentoScalarFieldEnum = {
+  id: 'id',
+  data: 'data',
+  descricao: 'descricao',
+  clienteCpf: 'clienteCpf',
+  status: 'status'
 };
 
 exports.Prisma.SortOrder = {
@@ -145,8 +176,29 @@ exports.Plano = exports.$Enums.Plano = {
   MB500: 'MB500'
 };
 
+exports.Funcao = exports.$Enums.Funcao = {
+  ADMINISTRATIVO: 'ADMINISTRATIVO',
+  TECNICO: 'TECNICO',
+  GERENTE: 'GERENTE'
+};
+
+exports.StatusSala = exports.$Enums.StatusSala = {
+  ABERTA: 'ABERTA',
+  FECHADA: 'FECHADA'
+};
+
+exports.Status = exports.$Enums.Status = {
+  AGENDADO: 'AGENDADO',
+  CONCLUIDO: 'CONCLUIDO',
+  CANCELADO: 'CANCELADO'
+};
+
 exports.Prisma.ModelName = {
-  User: 'User'
+  Cliente: 'Cliente',
+  Funcionario: 'Funcionario',
+  Sala: 'Sala',
+  Mensagem: 'Mensagem',
+  Agendamento: 'Agendamento'
 };
 
 /**
