@@ -3,7 +3,6 @@ import { useEffect, useState, useRef } from "react";
 import ChatInput from "./chat-input";
 import ChatDisplay from "./chat-display";
 import { message } from "@/types/message";
-import { prisma } from "@root/prisma";
 const ChatSuporte = ({
   clientId,
   roomId,
