@@ -4,11 +4,7 @@ import { auth } from "@/auth";
 const AgendamentoPage = async ({
   searchParams,
 }: {
-<<<<<<< HEAD
   searchParams: Promise<{ plano?: string }>;
-=======
-  searchParams: { plano?: string };
->>>>>>> bbd0e3e069a4c92c258d64153124f95607eaa288
 }) => {
   const session = await auth();
   const user = session?.user;
