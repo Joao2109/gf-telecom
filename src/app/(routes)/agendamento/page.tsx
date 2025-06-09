@@ -1,10 +1,13 @@
 import AgendamentoForm from "@/components/agendamento-form";
 import { FormEvent } from "react";
+import { auth } from "@/auth";
 const AgendamentoPage = async ({
   searchParams,
 }: {
-  searchParams: { plano: string };
+  searchParams: Promise<{ plano?: string }>;
 }) => {
+  const session = await auth();
+  const user = session?.user;
   const { plano } = await searchParams;
   const horarios = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
   const submit = async (e: FormEvent<HTMLFormElement>) => {
@@ -16,7 +19,12 @@ const AgendamentoPage = async ({
   };
   return (
     <div className="w-full min-h-[calc(100dvh-104px)] flex justify-center items-center bg-muted">
-      <AgendamentoForm submit={submit} plano={plano} horarios={horarios} />
+      <AgendamentoForm
+        submit={submit}
+        user={user}
+        plano={plano}
+        horarios={horarios}
+      />
     </div>
   );
 };

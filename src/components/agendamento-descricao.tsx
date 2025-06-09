@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-const AgendamentoDescricao = ({ plano }: { plano: string }) => {
+const AgendamentoDescricao = ({ plano }: { plano?: string }) => {
   const [descricao, setDescricao] = useState("");
   useEffect(() => {
     if (plano !== undefined) {
