@@ -26,6 +26,7 @@ interface JWT {
   email: string;
   plano: string | null;
   vencimento: string | null;
+  working: boolean | null;
   funcao: string | null;
   salas: string[] | null;
   agendamentos: string[] | null;
@@ -90,6 +91,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         token.email = user.email;
         token.plano = user.plano;
         token.vencimento = user.vencimento;
+        token.working = user.working;
         token.funcao = user.funcao;
         token.salas = user.salas;
         token.agendamentos = user.agendamentos;
@@ -108,6 +110,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           email: token.email,
           plano: token.plano,
           vencimento: token.vencimento,
+          working: token.working,
           funcao: token.funcao,
           salas: token.salas,
           agendamentos: token.agendamentos,

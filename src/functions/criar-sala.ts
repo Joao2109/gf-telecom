@@ -2,12 +2,17 @@
 import { prisma } from "@root/prisma";
 import { StatusSala } from "@root/prisma/generated";
 import { User } from "next-auth";
-export const criarSala = async (user: User) => {
+export const criarSala = async (type: "padrão" | "emergencial", user: User) => {
   console.log(user);
+  const horaAtual = new Date().getHours();
+  const isHorarioComercial = horaAtual >= 8 && horaAtual <= 18;
   const funcionario = await prisma.funcionario.findMany({
     select: {
       cpf: true,
       nome: true,
+      ...(type === "emergencial" || isHorarioComercial
+        ? { working: true }
+        : {}),
       _count: {
         select: {
           salas: {
@@ -25,13 +30,16 @@ export const criarSala = async (user: User) => {
     },
     take: 1,
   });
-  prisma.sala
-    .create({
+  if (funcionario.length === 0) {
+    throw new Error("Nenhum funcionário disponível");
+  }
+  try {
+    const sala = await prisma.sala.create({
       data: {
         nome: "New Sala",
         cliente: {
           connect: {
-            cpf: user?.id,
+            cpf: user.id,
           },
         },
         funcionario: {
@@ -41,9 +49,10 @@ export const criarSala = async (user: User) => {
         },
         status: StatusSala.ABERTA,
       },
-    })
-    .then(() => {})
-    .catch((err) => {
-      console.error(err);
     });
+    return sala;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
 };

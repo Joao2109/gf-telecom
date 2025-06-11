@@ -22,13 +22,14 @@ model Cliente {
 }
 
 model Funcionario {
-  cpf    String @id
-  senha  String
-  nome   String
-  tel    String
-  email  String
-  funcao Funcao
-  salas  Sala[]
+  cpf     String  @id
+  senha   String
+  nome    String
+  tel     String
+  email   String
+  working Boolean @default(false)
+  funcao  Funcao
+  salas   Sala[]
 }
 
 model Sala {

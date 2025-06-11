@@ -136,6 +136,7 @@ exports.Prisma.FuncionarioScalarFieldEnum = {
   nome: 'nome',
   tel: 'tel',
   email: 'email',
+  working: 'working',
   funcao: 'funcao'
 };
 

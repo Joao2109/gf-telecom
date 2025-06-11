@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import { useAppSelector } from "@/lib/hooks";
 import Salas from "@/components/salas";
 import { Button } from "@/components/ui/button";
-import { criarSala } from "@/functions/criar-sala";
+import { criarSala } from "@/functions/criar-sala.ts";
 import { StatusSala } from "@root/prisma/generated";
 import { useEffect, useState } from "react";
 interface Sala {
@@ -14,8 +14,7 @@ interface Sala {
   status: StatusSala;
 }
 const Suporte = () => {
-  const { currentUser } = useAppSelector((state) => state.user);
-  const user = currentUser;
+  const { currentUser: user } = useAppSelector((state) => state.user);
   const router = useRouter();
   useEffect(() => {
     if (!user) {
@@ -56,7 +55,7 @@ const Suporte = () => {
         {user?.plano && (
           <Button
             onClick={() => {
-              criarSala(user);
+              criarSala("padrão", user);
             }}
             className="w-full rounded-none bg-zinc-500/50 hover:bg-zinc-500/60 text-foreground"
           >

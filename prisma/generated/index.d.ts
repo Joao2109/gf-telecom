@@ -2564,6 +2564,7 @@ export namespace Prisma {
     nome: string | null
     tel: string | null
     email: string | null
+    working: boolean | null
     funcao: $Enums.Funcao | null
   }
 
@@ -2573,6 +2574,7 @@ export namespace Prisma {
     nome: string | null
     tel: string | null
     email: string | null
+    working: boolean | null
     funcao: $Enums.Funcao | null
   }
 
@@ -2582,6 +2584,7 @@ export namespace Prisma {
     nome: number
     tel: number
     email: number
+    working: number
     funcao: number
     _all: number
   }
@@ -2593,6 +2596,7 @@ export namespace Prisma {
     nome?: true
     tel?: true
     email?: true
+    working?: true
     funcao?: true
   }
 
@@ -2602,6 +2606,7 @@ export namespace Prisma {
     nome?: true
     tel?: true
     email?: true
+    working?: true
     funcao?: true
   }
 
@@ -2611,6 +2616,7 @@ export namespace Prisma {
     nome?: true
     tel?: true
     email?: true
+    working?: true
     funcao?: true
     _all?: true
   }
@@ -2693,6 +2699,7 @@ export namespace Prisma {
     nome: string
     tel: string
     email: string
+    working: boolean
     funcao: $Enums.Funcao
     _count: FuncionarioCountAggregateOutputType | null
     _min: FuncionarioMinAggregateOutputType | null
@@ -2719,6 +2726,7 @@ export namespace Prisma {
     nome?: boolean
     tel?: boolean
     email?: boolean
+    working?: boolean
     funcao?: boolean
     salas?: boolean | Funcionario$salasArgs<ExtArgs>
     _count?: boolean | FuncionarioCountOutputTypeDefaultArgs<ExtArgs>
@@ -2730,6 +2738,7 @@ export namespace Prisma {
     nome?: boolean
     tel?: boolean
     email?: boolean
+    working?: boolean
     funcao?: boolean
   }, ExtArgs["result"]["funcionario"]>
 
@@ -2739,6 +2748,7 @@ export namespace Prisma {
     nome?: boolean
     tel?: boolean
     email?: boolean
+    working?: boolean
     funcao?: boolean
   }, ExtArgs["result"]["funcionario"]>
 
@@ -2748,10 +2758,11 @@ export namespace Prisma {
     nome?: boolean
     tel?: boolean
     email?: boolean
+    working?: boolean
     funcao?: boolean
   }
 
-  export type FuncionarioOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"cpf" | "senha" | "nome" | "tel" | "email" | "funcao", ExtArgs["result"]["funcionario"]>
+  export type FuncionarioOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"cpf" | "senha" | "nome" | "tel" | "email" | "working" | "funcao", ExtArgs["result"]["funcionario"]>
   export type FuncionarioInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     salas?: boolean | Funcionario$salasArgs<ExtArgs>
     _count?: boolean | FuncionarioCountOutputTypeDefaultArgs<ExtArgs>
@@ -2770,6 +2781,7 @@ export namespace Prisma {
       nome: string
       tel: string
       email: string
+      working: boolean
       funcao: $Enums.Funcao
     }, ExtArgs["result"]["funcionario"]>
     composites: {}
@@ -3200,6 +3212,7 @@ export namespace Prisma {
     readonly nome: FieldRef<"Funcionario", 'String'>
     readonly tel: FieldRef<"Funcionario", 'String'>
     readonly email: FieldRef<"Funcionario", 'String'>
+    readonly working: FieldRef<"Funcionario", 'Boolean'>
     readonly funcao: FieldRef<"Funcionario", 'Funcao'>
   }
     
@@ -6956,6 +6969,7 @@ export namespace Prisma {
     nome: 'nome',
     tel: 'tel',
     email: 'email',
+    working: 'working',
     funcao: 'funcao'
   };
 
@@ -7053,6 +7067,13 @@ export namespace Prisma {
    * Reference to a field of type 'Float[]'
    */
   export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -7208,6 +7229,7 @@ export namespace Prisma {
     nome?: StringFilter<"Funcionario"> | string
     tel?: StringFilter<"Funcionario"> | string
     email?: StringFilter<"Funcionario"> | string
+    working?: BoolFilter<"Funcionario"> | boolean
     funcao?: EnumFuncaoFilter<"Funcionario"> | $Enums.Funcao
     salas?: SalaListRelationFilter
   }
@@ -7218,6 +7240,7 @@ export namespace Prisma {
     nome?: SortOrder
     tel?: SortOrder
     email?: SortOrder
+    working?: SortOrder
     funcao?: SortOrder
     salas?: SalaOrderByRelationAggregateInput
   }
@@ -7231,6 +7254,7 @@ export namespace Prisma {
     nome?: StringFilter<"Funcionario"> | string
     tel?: StringFilter<"Funcionario"> | string
     email?: StringFilter<"Funcionario"> | string
+    working?: BoolFilter<"Funcionario"> | boolean
     funcao?: EnumFuncaoFilter<"Funcionario"> | $Enums.Funcao
     salas?: SalaListRelationFilter
   }, "cpf">
@@ -7241,6 +7265,7 @@ export namespace Prisma {
     nome?: SortOrder
     tel?: SortOrder
     email?: SortOrder
+    working?: SortOrder
     funcao?: SortOrder
     _count?: FuncionarioCountOrderByAggregateInput
     _max?: FuncionarioMaxOrderByAggregateInput
@@ -7256,6 +7281,7 @@ export namespace Prisma {
     nome?: StringWithAggregatesFilter<"Funcionario"> | string
     tel?: StringWithAggregatesFilter<"Funcionario"> | string
     email?: StringWithAggregatesFilter<"Funcionario"> | string
+    working?: BoolWithAggregatesFilter<"Funcionario"> | boolean
     funcao?: EnumFuncaoWithAggregatesFilter<"Funcionario"> | $Enums.Funcao
   }
 
@@ -7510,6 +7536,7 @@ export namespace Prisma {
     nome: string
     tel: string
     email: string
+    working?: boolean
     funcao: $Enums.Funcao
     salas?: SalaCreateNestedManyWithoutFuncionarioInput
   }
@@ -7520,6 +7547,7 @@ export namespace Prisma {
     nome: string
     tel: string
     email: string
+    working?: boolean
     funcao: $Enums.Funcao
     salas?: SalaUncheckedCreateNestedManyWithoutFuncionarioInput
   }
@@ -7530,6 +7558,7 @@ export namespace Prisma {
     nome?: StringFieldUpdateOperationsInput | string
     tel?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    working?: BoolFieldUpdateOperationsInput | boolean
     funcao?: EnumFuncaoFieldUpdateOperationsInput | $Enums.Funcao
     salas?: SalaUpdateManyWithoutFuncionarioNestedInput
   }
@@ -7540,6 +7569,7 @@ export namespace Prisma {
     nome?: StringFieldUpdateOperationsInput | string
     tel?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    working?: BoolFieldUpdateOperationsInput | boolean
     funcao?: EnumFuncaoFieldUpdateOperationsInput | $Enums.Funcao
     salas?: SalaUncheckedUpdateManyWithoutFuncionarioNestedInput
   }
@@ -7550,6 +7580,7 @@ export namespace Prisma {
     nome: string
     tel: string
     email: string
+    working?: boolean
     funcao: $Enums.Funcao
   }
 
@@ -7559,6 +7590,7 @@ export namespace Prisma {
     nome?: StringFieldUpdateOperationsInput | string
     tel?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    working?: BoolFieldUpdateOperationsInput | boolean
     funcao?: EnumFuncaoFieldUpdateOperationsInput | $Enums.Funcao
   }
 
@@ -7568,6 +7600,7 @@ export namespace Prisma {
     nome?: StringFieldUpdateOperationsInput | string
     tel?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    working?: BoolFieldUpdateOperationsInput | boolean
     funcao?: EnumFuncaoFieldUpdateOperationsInput | $Enums.Funcao
   }
 
@@ -7851,6 +7884,11 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type EnumFuncaoFilter<$PrismaModel = never> = {
     equals?: $Enums.Funcao | EnumFuncaoFieldRefInput<$PrismaModel>
     in?: $Enums.Funcao[] | ListEnumFuncaoFieldRefInput<$PrismaModel>
@@ -7864,6 +7902,7 @@ export namespace Prisma {
     nome?: SortOrder
     tel?: SortOrder
     email?: SortOrder
+    working?: SortOrder
     funcao?: SortOrder
   }
 
@@ -7873,6 +7912,7 @@ export namespace Prisma {
     nome?: SortOrder
     tel?: SortOrder
     email?: SortOrder
+    working?: SortOrder
     funcao?: SortOrder
   }
 
@@ -7882,7 +7922,16 @@ export namespace Prisma {
     nome?: SortOrder
     tel?: SortOrder
     email?: SortOrder
+    working?: SortOrder
     funcao?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type EnumFuncaoWithAggregatesFilter<$PrismaModel = never> = {
@@ -8212,6 +8261,10 @@ export namespace Prisma {
     connect?: SalaWhereUniqueInput | SalaWhereUniqueInput[]
   }
 
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
   export type EnumFuncaoFieldUpdateOperationsInput = {
     set?: $Enums.Funcao
   }
@@ -8448,11 +8501,24 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type NestedEnumFuncaoFilter<$PrismaModel = never> = {
     equals?: $Enums.Funcao | EnumFuncaoFieldRefInput<$PrismaModel>
     in?: $Enums.Funcao[] | ListEnumFuncaoFieldRefInput<$PrismaModel>
     notIn?: $Enums.Funcao[] | ListEnumFuncaoFieldRefInput<$PrismaModel>
     not?: NestedEnumFuncaoFilter<$PrismaModel> | $Enums.Funcao
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedEnumFuncaoWithAggregatesFilter<$PrismaModel = never> = {
@@ -8716,6 +8782,7 @@ export namespace Prisma {
     nome: string
     tel: string
     email: string
+    working?: boolean
     funcao: $Enums.Funcao
   }
 
@@ -8725,6 +8792,7 @@ export namespace Prisma {
     nome: string
     tel: string
     email: string
+    working?: boolean
     funcao: $Enums.Funcao
   }
 
@@ -8802,6 +8870,7 @@ export namespace Prisma {
     nome?: StringFieldUpdateOperationsInput | string
     tel?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    working?: BoolFieldUpdateOperationsInput | boolean
     funcao?: EnumFuncaoFieldUpdateOperationsInput | $Enums.Funcao
   }
 
@@ -8811,6 +8880,7 @@ export namespace Prisma {
     nome?: StringFieldUpdateOperationsInput | string
     tel?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    working?: BoolFieldUpdateOperationsInput | boolean
     funcao?: EnumFuncaoFieldUpdateOperationsInput | $Enums.Funcao
   }
 

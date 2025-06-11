@@ -1,4 +1,3 @@
-"use client";
 import { FormEvent } from "react";
 import { Button } from "./ui/button";
 import AgendamentoDescricao from "./agendamento-descricao";

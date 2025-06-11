@@ -1,12 +1,18 @@
-import { auth } from "@/auth";
+"use client";
+import { useRouter } from "next/navigation";
+import { useAppSelector } from "@/lib/hooks";
 import ChatSuporte from "@/components/suporte/chat-suporte";
+import { useEffect } from "react";
 // import { redirect } from "next/navigation";
-const SuportePage = async ({ params }: { params: Promise<{ id: string }> }) => {
-  const { id } = await params;
-  const session = await auth();
-  if (!session?.user) {
-    // redirect("/auth/sign-in");
-  }
+const SuportePage = ({ params }: { params: { id: string } }) => {
+  const { currentUser: user } = useAppSelector((state) => state.user);
+  const { id } = params;
+  const router = useRouter();
+  useEffect(() => {
+    if (!user) {
+      router.push("/auth/sign-in");
+    }
+  }, [user]);
   return (
     <main className="w-full min-h-[calc(100dvh-104px)]">
       <ChatSuporte
