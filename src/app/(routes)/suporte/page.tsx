@@ -1,19 +1,39 @@
-import { redirect } from "next/navigation";
-import { auth } from "@/auth";
+"use client";
+import { useRouter } from "next/navigation";
+import { useAppSelector } from "@/lib/hooks";
 import Salas from "@/components/salas";
 import { Button } from "@/components/ui/button";
-import { prisma } from "@root/prisma";
 import { criarSala } from "@/functions/criar-sala";
-const Suporte = async () => {
-  const session = await auth();
-  if (!session) redirect("/auth/sign-in");
-  const user = session.user;
-  if (!user) redirect("/auth/sign-in");
-  const salas = await prisma.sala.findMany({
-    where: {
-      OR: [{ clienteId: user?.id }, { funcionarioId: user?.id }],
-    },
-  });
+import { StatusSala } from "@root/prisma/generated";
+import { useEffect, useState } from "react";
+interface Sala {
+  nome: string;
+  id: number;
+  clienteId: string;
+  funcionarioId: string;
+  status: StatusSala;
+}
+const Suporte = () => {
+  const { currentUser } = useAppSelector((state) => state.user);
+  const user = currentUser;
+  const router = useRouter();
+  useEffect(() => {
+    if (!user) {
+      router.push("/auth/sign-in");
+    }
+  }, [user]);
+  const [salas, setSalas] = useState<Sala[]>([]);
+  useEffect(() => {
+    fetch("/api/suporte", {
+      method: "GET",
+    })
+      .then(async (res) => {
+        const data = await res.json();
+        console.log(data);
+        setSalas(data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
   const render = () => {
     if (user) {
       return (
@@ -33,17 +53,15 @@ const Suporte = async () => {
     <main className="w-full min-h-[calc(100dvh-108px)] flex justify-center items-center">
       <div className="w-full max-w-[400px] flex flex-col border border-accent">
         {render()}
-        {user.plano && (
-          <form
-            action={async () => {
-              "use server";
+        {user?.plano && (
+          <Button
+            onClick={() => {
               criarSala(user);
             }}
+            className="w-full rounded-none bg-zinc-500/50 hover:bg-zinc-500/60 text-foreground"
           >
-            <Button className="w-full rounded-none bg-zinc-500/50 hover:bg-zinc-500/60 text-foreground">
-              Novo Chamado
-            </Button>
-          </form>
+            Novo Chamado
+          </Button>
         )}
       </div>
     </main>

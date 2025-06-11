@@ -1,9 +1,9 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import Card from "@/components/ui/card";
 import { Carousel, CarouselContent } from "@/components/ui/carousel";
 import Image from "next/image";
 import Link from "next/link";
-
 const HomePage = () => {
   return (
     <main className="w-full min-h-[calc(100dvh-650px)] overflow-x-hidden">

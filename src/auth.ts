@@ -1,5 +1,5 @@
 import { prisma } from "@root/prisma";
-import NextAuth, { type DefaultSession } from "next-auth";
+import NextAuth, { type DefaultSession, CredentialsSignin } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 // import { compareSync } from "bcrypt-ts";
 declare module "next-auth" {
@@ -30,6 +30,9 @@ interface JWT {
   salas: string[] | null;
   agendamentos: string[] | null;
 }
+class InvalidLoginError extends CredentialsSignin {
+  code = "Invalid identifier or password";
+}
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     Credentials({
@@ -48,7 +51,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       authorize: async (credentials) => {
         let user = null;
         if (!credentials) {
-          throw new Error("Credenciais invalidas.");
+          throw new InvalidLoginError();
         }
         user = await prisma.cliente.findUnique({
           where: {

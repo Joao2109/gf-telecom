@@ -3,9 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { usePathname } from "next/navigation";
-import { signOut, useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 const Header = () => {
-  const { data: session } = useSession();
+  const { currentUser } = useAppSelector((state) => state.user);
+  const user = currentUser;
+  const dispatch = useAppDispatch();
   const pathname = usePathname();
   return (
     <header className="w-full h-auto bg-accent px-0 sm:px-4 py-4">
@@ -17,18 +20,21 @@ const Header = () => {
           <h2 className="text-white text-2xl font-semibold">GF Telecom</h2>
         </div>
         <div className="flex items-center gap-2">
-          {session ? (
+          {user ? (
             <>
-              <p className="text-white">{session.user?.nome}</p>
+              <p className="text-white">{user?.nome}</p>
               <Button asChild>
                 <Link href={`/dashboard`}>
-                  {session.user?.plano ? "Central do assinante" : "Dashboard"}
+                  {user?.plano ? "Central do assinante" : "Dashboard"}
                 </Link>
               </Button>
               <Button
                 variant={"ghost"}
                 className="text-white"
-                onClick={() => signOut()}
+                onClick={() => {
+                  signOut();
+                  dispatch({ type: "logout" });
+                }}
               >
                 Sair
               </Button>
