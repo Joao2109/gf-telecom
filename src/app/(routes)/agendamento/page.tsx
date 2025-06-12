@@ -3,6 +3,7 @@ import AgendamentoForm from "@/components/agendamento-form";
 import { FormEvent } from "react";
 import { useAppSelector } from "@/lib/hooks";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 const AgendamentoPage = () => {
   const { currentUser: user } = useAppSelector((state) => state.user);
   const searchParams = useSearchParams();
@@ -16,12 +17,14 @@ const AgendamentoPage = () => {
   };
   return (
     <div className="w-full min-h-[calc(100dvh-104px)] flex justify-center items-center bg-muted">
-      <AgendamentoForm
-        submit={submit}
-        user={user}
-        plano={plano}
-        horarios={horarios}
-      />
+      <Suspense>
+        <AgendamentoForm
+          submit={submit}
+          user={user}
+          plano={plano}
+          horarios={horarios}
+        />
+      </Suspense>
     </div>
   );
 };
