@@ -24,6 +24,11 @@ export type Cliente = $Result.DefaultSelection<Prisma.$ClientePayload>
  */
 export type Funcionario = $Result.DefaultSelection<Prisma.$FuncionarioPayload>
 /**
+ * Model Endereco
+ * 
+ */
+export type Endereco = $Result.DefaultSelection<Prisma.$EnderecoPayload>
+/**
  * Model Sala
  * 
  */
@@ -241,6 +246,16 @@ export class PrismaClient<
   get funcionario(): Prisma.FuncionarioDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.endereco`: Exposes CRUD operations for the **Endereco** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Enderecos
+    * const enderecos = await prisma.endereco.findMany()
+    * ```
+    */
+  get endereco(): Prisma.EnderecoDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.sala`: Exposes CRUD operations for the **Sala** model.
     * Example usage:
     * ```ts
@@ -327,8 +342,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.8.2
-   * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
+   * Prisma Client JS version: 6.9.0
+   * Query Engine version: 81e4af48011447c3cc503a190e86995b66d2a28e
    */
   export type PrismaVersion = {
     client: string
@@ -711,6 +726,7 @@ export namespace Prisma {
   export const ModelName: {
     Cliente: 'Cliente',
     Funcionario: 'Funcionario',
+    Endereco: 'Endereco',
     Sala: 'Sala',
     Mensagem: 'Mensagem',
     Agendamento: 'Agendamento'
@@ -732,7 +748,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "cliente" | "funcionario" | "sala" | "mensagem" | "agendamento"
+      modelProps: "cliente" | "funcionario" | "endereco" | "sala" | "mensagem" | "agendamento"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -881,6 +897,80 @@ export namespace Prisma {
           count: {
             args: Prisma.FuncionarioCountArgs<ExtArgs>
             result: $Utils.Optional<FuncionarioCountAggregateOutputType> | number
+          }
+        }
+      }
+      Endereco: {
+        payload: Prisma.$EnderecoPayload<ExtArgs>
+        fields: Prisma.EnderecoFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EnderecoFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnderecoPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EnderecoFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnderecoPayload>
+          }
+          findFirst: {
+            args: Prisma.EnderecoFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnderecoPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EnderecoFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnderecoPayload>
+          }
+          findMany: {
+            args: Prisma.EnderecoFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnderecoPayload>[]
+          }
+          create: {
+            args: Prisma.EnderecoCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnderecoPayload>
+          }
+          createMany: {
+            args: Prisma.EnderecoCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EnderecoCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnderecoPayload>[]
+          }
+          delete: {
+            args: Prisma.EnderecoDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnderecoPayload>
+          }
+          update: {
+            args: Prisma.EnderecoUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnderecoPayload>
+          }
+          deleteMany: {
+            args: Prisma.EnderecoDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EnderecoUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.EnderecoUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnderecoPayload>[]
+          }
+          upsert: {
+            args: Prisma.EnderecoUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnderecoPayload>
+          }
+          aggregate: {
+            args: Prisma.EnderecoAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEndereco>
+          }
+          groupBy: {
+            args: Prisma.EnderecoGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EnderecoGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EnderecoCountArgs<ExtArgs>
+            result: $Utils.Optional<EnderecoCountAggregateOutputType> | number
           }
         }
       }
@@ -1192,6 +1282,7 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     cliente?: ClienteOmit
     funcionario?: FuncionarioOmit
+    endereco?: EnderecoOmit
     sala?: SalaOmit
     mensagem?: MensagemOmit
     agendamento?: AgendamentoOmit
@@ -1291,11 +1382,13 @@ export namespace Prisma {
   export type ClienteCountOutputType = {
     salas: number
     agendamentos: number
+    enderecos: number
   }
 
   export type ClienteCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     salas?: boolean | ClienteCountOutputTypeCountSalasArgs
     agendamentos?: boolean | ClienteCountOutputTypeCountAgendamentosArgs
+    enderecos?: boolean | ClienteCountOutputTypeCountEnderecosArgs
   }
 
   // Custom InputTypes
@@ -1321,6 +1414,13 @@ export namespace Prisma {
    */
   export type ClienteCountOutputTypeCountAgendamentosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AgendamentoWhereInput
+  }
+
+  /**
+   * ClienteCountOutputType without action
+   */
+  export type ClienteCountOutputTypeCountEnderecosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EnderecoWhereInput
   }
 
 
@@ -1606,6 +1706,7 @@ export namespace Prisma {
     vencimento?: boolean
     salas?: boolean | Cliente$salasArgs<ExtArgs>
     agendamentos?: boolean | Cliente$agendamentosArgs<ExtArgs>
+    enderecos?: boolean | Cliente$enderecosArgs<ExtArgs>
     _count?: boolean | ClienteCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["cliente"]>
 
@@ -1643,6 +1744,7 @@ export namespace Prisma {
   export type ClienteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     salas?: boolean | Cliente$salasArgs<ExtArgs>
     agendamentos?: boolean | Cliente$agendamentosArgs<ExtArgs>
+    enderecos?: boolean | Cliente$enderecosArgs<ExtArgs>
     _count?: boolean | ClienteCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ClienteIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1653,6 +1755,7 @@ export namespace Prisma {
     objects: {
       salas: Prisma.$SalaPayload<ExtArgs>[]
       agendamentos: Prisma.$AgendamentoPayload<ExtArgs>[]
+      enderecos: Prisma.$EnderecoPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       cpf: string
@@ -2058,6 +2161,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     salas<T extends Cliente$salasArgs<ExtArgs> = {}>(args?: Subset<T, Cliente$salasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SalaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     agendamentos<T extends Cliente$agendamentosArgs<ExtArgs> = {}>(args?: Subset<T, Cliente$agendamentosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AgendamentoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    enderecos<T extends Cliente$enderecosArgs<ExtArgs> = {}>(args?: Subset<T, Cliente$enderecosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnderecoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2527,6 +2631,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: AgendamentoScalarFieldEnum | AgendamentoScalarFieldEnum[]
+  }
+
+  /**
+   * Cliente.enderecos
+   */
+  export type Cliente$enderecosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Endereco
+     */
+    select?: EnderecoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Endereco
+     */
+    omit?: EnderecoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnderecoInclude<ExtArgs> | null
+    where?: EnderecoWhereInput
+    orderBy?: EnderecoOrderByWithRelationInput | EnderecoOrderByWithRelationInput[]
+    cursor?: EnderecoWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EnderecoScalarFieldEnum | EnderecoScalarFieldEnum[]
   }
 
   /**
@@ -3641,6 +3769,1111 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: FuncionarioInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Endereco
+   */
+
+  export type AggregateEndereco = {
+    _count: EnderecoCountAggregateOutputType | null
+    _avg: EnderecoAvgAggregateOutputType | null
+    _sum: EnderecoSumAggregateOutputType | null
+    _min: EnderecoMinAggregateOutputType | null
+    _max: EnderecoMaxAggregateOutputType | null
+  }
+
+  export type EnderecoAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type EnderecoSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type EnderecoMinAggregateOutputType = {
+    id: number | null
+    clienteId: string | null
+    endereco: string | null
+    cep: string | null
+    cidade: string | null
+    estado: string | null
+  }
+
+  export type EnderecoMaxAggregateOutputType = {
+    id: number | null
+    clienteId: string | null
+    endereco: string | null
+    cep: string | null
+    cidade: string | null
+    estado: string | null
+  }
+
+  export type EnderecoCountAggregateOutputType = {
+    id: number
+    clienteId: number
+    endereco: number
+    cep: number
+    cidade: number
+    estado: number
+    _all: number
+  }
+
+
+  export type EnderecoAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type EnderecoSumAggregateInputType = {
+    id?: true
+  }
+
+  export type EnderecoMinAggregateInputType = {
+    id?: true
+    clienteId?: true
+    endereco?: true
+    cep?: true
+    cidade?: true
+    estado?: true
+  }
+
+  export type EnderecoMaxAggregateInputType = {
+    id?: true
+    clienteId?: true
+    endereco?: true
+    cep?: true
+    cidade?: true
+    estado?: true
+  }
+
+  export type EnderecoCountAggregateInputType = {
+    id?: true
+    clienteId?: true
+    endereco?: true
+    cep?: true
+    cidade?: true
+    estado?: true
+    _all?: true
+  }
+
+  export type EnderecoAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Endereco to aggregate.
+     */
+    where?: EnderecoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Enderecos to fetch.
+     */
+    orderBy?: EnderecoOrderByWithRelationInput | EnderecoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EnderecoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Enderecos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Enderecos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Enderecos
+    **/
+    _count?: true | EnderecoCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: EnderecoAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: EnderecoSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EnderecoMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EnderecoMaxAggregateInputType
+  }
+
+  export type GetEnderecoAggregateType<T extends EnderecoAggregateArgs> = {
+        [P in keyof T & keyof AggregateEndereco]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEndereco[P]>
+      : GetScalarType<T[P], AggregateEndereco[P]>
+  }
+
+
+
+
+  export type EnderecoGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EnderecoWhereInput
+    orderBy?: EnderecoOrderByWithAggregationInput | EnderecoOrderByWithAggregationInput[]
+    by: EnderecoScalarFieldEnum[] | EnderecoScalarFieldEnum
+    having?: EnderecoScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EnderecoCountAggregateInputType | true
+    _avg?: EnderecoAvgAggregateInputType
+    _sum?: EnderecoSumAggregateInputType
+    _min?: EnderecoMinAggregateInputType
+    _max?: EnderecoMaxAggregateInputType
+  }
+
+  export type EnderecoGroupByOutputType = {
+    id: number
+    clienteId: string
+    endereco: string
+    cep: string
+    cidade: string
+    estado: string
+    _count: EnderecoCountAggregateOutputType | null
+    _avg: EnderecoAvgAggregateOutputType | null
+    _sum: EnderecoSumAggregateOutputType | null
+    _min: EnderecoMinAggregateOutputType | null
+    _max: EnderecoMaxAggregateOutputType | null
+  }
+
+  type GetEnderecoGroupByPayload<T extends EnderecoGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EnderecoGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EnderecoGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EnderecoGroupByOutputType[P]>
+            : GetScalarType<T[P], EnderecoGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EnderecoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    clienteId?: boolean
+    endereco?: boolean
+    cep?: boolean
+    cidade?: boolean
+    estado?: boolean
+    cliente?: boolean | ClienteDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["endereco"]>
+
+  export type EnderecoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    clienteId?: boolean
+    endereco?: boolean
+    cep?: boolean
+    cidade?: boolean
+    estado?: boolean
+    cliente?: boolean | ClienteDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["endereco"]>
+
+  export type EnderecoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    clienteId?: boolean
+    endereco?: boolean
+    cep?: boolean
+    cidade?: boolean
+    estado?: boolean
+    cliente?: boolean | ClienteDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["endereco"]>
+
+  export type EnderecoSelectScalar = {
+    id?: boolean
+    clienteId?: boolean
+    endereco?: boolean
+    cep?: boolean
+    cidade?: boolean
+    estado?: boolean
+  }
+
+  export type EnderecoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clienteId" | "endereco" | "cep" | "cidade" | "estado", ExtArgs["result"]["endereco"]>
+  export type EnderecoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    cliente?: boolean | ClienteDefaultArgs<ExtArgs>
+  }
+  export type EnderecoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    cliente?: boolean | ClienteDefaultArgs<ExtArgs>
+  }
+  export type EnderecoIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    cliente?: boolean | ClienteDefaultArgs<ExtArgs>
+  }
+
+  export type $EnderecoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Endereco"
+    objects: {
+      cliente: Prisma.$ClientePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      clienteId: string
+      endereco: string
+      cep: string
+      cidade: string
+      estado: string
+    }, ExtArgs["result"]["endereco"]>
+    composites: {}
+  }
+
+  type EnderecoGetPayload<S extends boolean | null | undefined | EnderecoDefaultArgs> = $Result.GetResult<Prisma.$EnderecoPayload, S>
+
+  type EnderecoCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EnderecoFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EnderecoCountAggregateInputType | true
+    }
+
+  export interface EnderecoDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Endereco'], meta: { name: 'Endereco' } }
+    /**
+     * Find zero or one Endereco that matches the filter.
+     * @param {EnderecoFindUniqueArgs} args - Arguments to find a Endereco
+     * @example
+     * // Get one Endereco
+     * const endereco = await prisma.endereco.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EnderecoFindUniqueArgs>(args: SelectSubset<T, EnderecoFindUniqueArgs<ExtArgs>>): Prisma__EnderecoClient<$Result.GetResult<Prisma.$EnderecoPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Endereco that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EnderecoFindUniqueOrThrowArgs} args - Arguments to find a Endereco
+     * @example
+     * // Get one Endereco
+     * const endereco = await prisma.endereco.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EnderecoFindUniqueOrThrowArgs>(args: SelectSubset<T, EnderecoFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EnderecoClient<$Result.GetResult<Prisma.$EnderecoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Endereco that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnderecoFindFirstArgs} args - Arguments to find a Endereco
+     * @example
+     * // Get one Endereco
+     * const endereco = await prisma.endereco.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EnderecoFindFirstArgs>(args?: SelectSubset<T, EnderecoFindFirstArgs<ExtArgs>>): Prisma__EnderecoClient<$Result.GetResult<Prisma.$EnderecoPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Endereco that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnderecoFindFirstOrThrowArgs} args - Arguments to find a Endereco
+     * @example
+     * // Get one Endereco
+     * const endereco = await prisma.endereco.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EnderecoFindFirstOrThrowArgs>(args?: SelectSubset<T, EnderecoFindFirstOrThrowArgs<ExtArgs>>): Prisma__EnderecoClient<$Result.GetResult<Prisma.$EnderecoPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Enderecos that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnderecoFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Enderecos
+     * const enderecos = await prisma.endereco.findMany()
+     * 
+     * // Get first 10 Enderecos
+     * const enderecos = await prisma.endereco.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const enderecoWithIdOnly = await prisma.endereco.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EnderecoFindManyArgs>(args?: SelectSubset<T, EnderecoFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnderecoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Endereco.
+     * @param {EnderecoCreateArgs} args - Arguments to create a Endereco.
+     * @example
+     * // Create one Endereco
+     * const Endereco = await prisma.endereco.create({
+     *   data: {
+     *     // ... data to create a Endereco
+     *   }
+     * })
+     * 
+     */
+    create<T extends EnderecoCreateArgs>(args: SelectSubset<T, EnderecoCreateArgs<ExtArgs>>): Prisma__EnderecoClient<$Result.GetResult<Prisma.$EnderecoPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Enderecos.
+     * @param {EnderecoCreateManyArgs} args - Arguments to create many Enderecos.
+     * @example
+     * // Create many Enderecos
+     * const endereco = await prisma.endereco.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EnderecoCreateManyArgs>(args?: SelectSubset<T, EnderecoCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Enderecos and returns the data saved in the database.
+     * @param {EnderecoCreateManyAndReturnArgs} args - Arguments to create many Enderecos.
+     * @example
+     * // Create many Enderecos
+     * const endereco = await prisma.endereco.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Enderecos and only return the `id`
+     * const enderecoWithIdOnly = await prisma.endereco.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EnderecoCreateManyAndReturnArgs>(args?: SelectSubset<T, EnderecoCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnderecoPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Endereco.
+     * @param {EnderecoDeleteArgs} args - Arguments to delete one Endereco.
+     * @example
+     * // Delete one Endereco
+     * const Endereco = await prisma.endereco.delete({
+     *   where: {
+     *     // ... filter to delete one Endereco
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EnderecoDeleteArgs>(args: SelectSubset<T, EnderecoDeleteArgs<ExtArgs>>): Prisma__EnderecoClient<$Result.GetResult<Prisma.$EnderecoPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Endereco.
+     * @param {EnderecoUpdateArgs} args - Arguments to update one Endereco.
+     * @example
+     * // Update one Endereco
+     * const endereco = await prisma.endereco.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EnderecoUpdateArgs>(args: SelectSubset<T, EnderecoUpdateArgs<ExtArgs>>): Prisma__EnderecoClient<$Result.GetResult<Prisma.$EnderecoPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Enderecos.
+     * @param {EnderecoDeleteManyArgs} args - Arguments to filter Enderecos to delete.
+     * @example
+     * // Delete a few Enderecos
+     * const { count } = await prisma.endereco.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EnderecoDeleteManyArgs>(args?: SelectSubset<T, EnderecoDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Enderecos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnderecoUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Enderecos
+     * const endereco = await prisma.endereco.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EnderecoUpdateManyArgs>(args: SelectSubset<T, EnderecoUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Enderecos and returns the data updated in the database.
+     * @param {EnderecoUpdateManyAndReturnArgs} args - Arguments to update many Enderecos.
+     * @example
+     * // Update many Enderecos
+     * const endereco = await prisma.endereco.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Enderecos and only return the `id`
+     * const enderecoWithIdOnly = await prisma.endereco.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends EnderecoUpdateManyAndReturnArgs>(args: SelectSubset<T, EnderecoUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnderecoPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Endereco.
+     * @param {EnderecoUpsertArgs} args - Arguments to update or create a Endereco.
+     * @example
+     * // Update or create a Endereco
+     * const endereco = await prisma.endereco.upsert({
+     *   create: {
+     *     // ... data to create a Endereco
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Endereco we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EnderecoUpsertArgs>(args: SelectSubset<T, EnderecoUpsertArgs<ExtArgs>>): Prisma__EnderecoClient<$Result.GetResult<Prisma.$EnderecoPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Enderecos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnderecoCountArgs} args - Arguments to filter Enderecos to count.
+     * @example
+     * // Count the number of Enderecos
+     * const count = await prisma.endereco.count({
+     *   where: {
+     *     // ... the filter for the Enderecos we want to count
+     *   }
+     * })
+    **/
+    count<T extends EnderecoCountArgs>(
+      args?: Subset<T, EnderecoCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EnderecoCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Endereco.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnderecoAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EnderecoAggregateArgs>(args: Subset<T, EnderecoAggregateArgs>): Prisma.PrismaPromise<GetEnderecoAggregateType<T>>
+
+    /**
+     * Group by Endereco.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnderecoGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EnderecoGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EnderecoGroupByArgs['orderBy'] }
+        : { orderBy?: EnderecoGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EnderecoGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEnderecoGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Endereco model
+   */
+  readonly fields: EnderecoFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Endereco.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EnderecoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    cliente<T extends ClienteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClienteDefaultArgs<ExtArgs>>): Prisma__ClienteClient<$Result.GetResult<Prisma.$ClientePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Endereco model
+   */
+  interface EnderecoFieldRefs {
+    readonly id: FieldRef<"Endereco", 'Int'>
+    readonly clienteId: FieldRef<"Endereco", 'String'>
+    readonly endereco: FieldRef<"Endereco", 'String'>
+    readonly cep: FieldRef<"Endereco", 'String'>
+    readonly cidade: FieldRef<"Endereco", 'String'>
+    readonly estado: FieldRef<"Endereco", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Endereco findUnique
+   */
+  export type EnderecoFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Endereco
+     */
+    select?: EnderecoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Endereco
+     */
+    omit?: EnderecoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnderecoInclude<ExtArgs> | null
+    /**
+     * Filter, which Endereco to fetch.
+     */
+    where: EnderecoWhereUniqueInput
+  }
+
+  /**
+   * Endereco findUniqueOrThrow
+   */
+  export type EnderecoFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Endereco
+     */
+    select?: EnderecoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Endereco
+     */
+    omit?: EnderecoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnderecoInclude<ExtArgs> | null
+    /**
+     * Filter, which Endereco to fetch.
+     */
+    where: EnderecoWhereUniqueInput
+  }
+
+  /**
+   * Endereco findFirst
+   */
+  export type EnderecoFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Endereco
+     */
+    select?: EnderecoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Endereco
+     */
+    omit?: EnderecoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnderecoInclude<ExtArgs> | null
+    /**
+     * Filter, which Endereco to fetch.
+     */
+    where?: EnderecoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Enderecos to fetch.
+     */
+    orderBy?: EnderecoOrderByWithRelationInput | EnderecoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Enderecos.
+     */
+    cursor?: EnderecoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Enderecos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Enderecos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Enderecos.
+     */
+    distinct?: EnderecoScalarFieldEnum | EnderecoScalarFieldEnum[]
+  }
+
+  /**
+   * Endereco findFirstOrThrow
+   */
+  export type EnderecoFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Endereco
+     */
+    select?: EnderecoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Endereco
+     */
+    omit?: EnderecoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnderecoInclude<ExtArgs> | null
+    /**
+     * Filter, which Endereco to fetch.
+     */
+    where?: EnderecoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Enderecos to fetch.
+     */
+    orderBy?: EnderecoOrderByWithRelationInput | EnderecoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Enderecos.
+     */
+    cursor?: EnderecoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Enderecos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Enderecos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Enderecos.
+     */
+    distinct?: EnderecoScalarFieldEnum | EnderecoScalarFieldEnum[]
+  }
+
+  /**
+   * Endereco findMany
+   */
+  export type EnderecoFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Endereco
+     */
+    select?: EnderecoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Endereco
+     */
+    omit?: EnderecoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnderecoInclude<ExtArgs> | null
+    /**
+     * Filter, which Enderecos to fetch.
+     */
+    where?: EnderecoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Enderecos to fetch.
+     */
+    orderBy?: EnderecoOrderByWithRelationInput | EnderecoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Enderecos.
+     */
+    cursor?: EnderecoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Enderecos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Enderecos.
+     */
+    skip?: number
+    distinct?: EnderecoScalarFieldEnum | EnderecoScalarFieldEnum[]
+  }
+
+  /**
+   * Endereco create
+   */
+  export type EnderecoCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Endereco
+     */
+    select?: EnderecoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Endereco
+     */
+    omit?: EnderecoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnderecoInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Endereco.
+     */
+    data: XOR<EnderecoCreateInput, EnderecoUncheckedCreateInput>
+  }
+
+  /**
+   * Endereco createMany
+   */
+  export type EnderecoCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Enderecos.
+     */
+    data: EnderecoCreateManyInput | EnderecoCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Endereco createManyAndReturn
+   */
+  export type EnderecoCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Endereco
+     */
+    select?: EnderecoSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Endereco
+     */
+    omit?: EnderecoOmit<ExtArgs> | null
+    /**
+     * The data used to create many Enderecos.
+     */
+    data: EnderecoCreateManyInput | EnderecoCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnderecoIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Endereco update
+   */
+  export type EnderecoUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Endereco
+     */
+    select?: EnderecoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Endereco
+     */
+    omit?: EnderecoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnderecoInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Endereco.
+     */
+    data: XOR<EnderecoUpdateInput, EnderecoUncheckedUpdateInput>
+    /**
+     * Choose, which Endereco to update.
+     */
+    where: EnderecoWhereUniqueInput
+  }
+
+  /**
+   * Endereco updateMany
+   */
+  export type EnderecoUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Enderecos.
+     */
+    data: XOR<EnderecoUpdateManyMutationInput, EnderecoUncheckedUpdateManyInput>
+    /**
+     * Filter which Enderecos to update
+     */
+    where?: EnderecoWhereInput
+    /**
+     * Limit how many Enderecos to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Endereco updateManyAndReturn
+   */
+  export type EnderecoUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Endereco
+     */
+    select?: EnderecoSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Endereco
+     */
+    omit?: EnderecoOmit<ExtArgs> | null
+    /**
+     * The data used to update Enderecos.
+     */
+    data: XOR<EnderecoUpdateManyMutationInput, EnderecoUncheckedUpdateManyInput>
+    /**
+     * Filter which Enderecos to update
+     */
+    where?: EnderecoWhereInput
+    /**
+     * Limit how many Enderecos to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnderecoIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Endereco upsert
+   */
+  export type EnderecoUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Endereco
+     */
+    select?: EnderecoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Endereco
+     */
+    omit?: EnderecoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnderecoInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Endereco to update in case it exists.
+     */
+    where: EnderecoWhereUniqueInput
+    /**
+     * In case the Endereco found by the `where` argument doesn't exist, create a new Endereco with this data.
+     */
+    create: XOR<EnderecoCreateInput, EnderecoUncheckedCreateInput>
+    /**
+     * In case the Endereco was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EnderecoUpdateInput, EnderecoUncheckedUpdateInput>
+  }
+
+  /**
+   * Endereco delete
+   */
+  export type EnderecoDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Endereco
+     */
+    select?: EnderecoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Endereco
+     */
+    omit?: EnderecoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnderecoInclude<ExtArgs> | null
+    /**
+     * Filter which Endereco to delete.
+     */
+    where: EnderecoWhereUniqueInput
+  }
+
+  /**
+   * Endereco deleteMany
+   */
+  export type EnderecoDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Enderecos to delete
+     */
+    where?: EnderecoWhereInput
+    /**
+     * Limit how many Enderecos to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Endereco without action
+   */
+  export type EnderecoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Endereco
+     */
+    select?: EnderecoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Endereco
+     */
+    omit?: EnderecoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnderecoInclude<ExtArgs> | null
   }
 
 
@@ -6976,6 +8209,18 @@ export namespace Prisma {
   export type FuncionarioScalarFieldEnum = (typeof FuncionarioScalarFieldEnum)[keyof typeof FuncionarioScalarFieldEnum]
 
 
+  export const EnderecoScalarFieldEnum: {
+    id: 'id',
+    clienteId: 'clienteId',
+    endereco: 'endereco',
+    cep: 'cep',
+    cidade: 'cidade',
+    estado: 'estado'
+  };
+
+  export type EnderecoScalarFieldEnum = (typeof EnderecoScalarFieldEnum)[keyof typeof EnderecoScalarFieldEnum]
+
+
   export const SalaScalarFieldEnum: {
     id: 'id',
     nome: 'nome',
@@ -7163,6 +8408,7 @@ export namespace Prisma {
     vencimento?: FloatFilter<"Cliente"> | number
     salas?: SalaListRelationFilter
     agendamentos?: AgendamentoListRelationFilter
+    enderecos?: EnderecoListRelationFilter
   }
 
   export type ClienteOrderByWithRelationInput = {
@@ -7175,6 +8421,7 @@ export namespace Prisma {
     vencimento?: SortOrder
     salas?: SalaOrderByRelationAggregateInput
     agendamentos?: AgendamentoOrderByRelationAggregateInput
+    enderecos?: EnderecoOrderByRelationAggregateInput
   }
 
   export type ClienteWhereUniqueInput = Prisma.AtLeast<{
@@ -7190,6 +8437,7 @@ export namespace Prisma {
     vencimento?: FloatFilter<"Cliente"> | number
     salas?: SalaListRelationFilter
     agendamentos?: AgendamentoListRelationFilter
+    enderecos?: EnderecoListRelationFilter
   }, "cpf">
 
   export type ClienteOrderByWithAggregationInput = {
@@ -7283,6 +8531,68 @@ export namespace Prisma {
     email?: StringWithAggregatesFilter<"Funcionario"> | string
     working?: BoolWithAggregatesFilter<"Funcionario"> | boolean
     funcao?: EnumFuncaoWithAggregatesFilter<"Funcionario"> | $Enums.Funcao
+  }
+
+  export type EnderecoWhereInput = {
+    AND?: EnderecoWhereInput | EnderecoWhereInput[]
+    OR?: EnderecoWhereInput[]
+    NOT?: EnderecoWhereInput | EnderecoWhereInput[]
+    id?: IntFilter<"Endereco"> | number
+    clienteId?: StringFilter<"Endereco"> | string
+    endereco?: StringFilter<"Endereco"> | string
+    cep?: StringFilter<"Endereco"> | string
+    cidade?: StringFilter<"Endereco"> | string
+    estado?: StringFilter<"Endereco"> | string
+    cliente?: XOR<ClienteScalarRelationFilter, ClienteWhereInput>
+  }
+
+  export type EnderecoOrderByWithRelationInput = {
+    id?: SortOrder
+    clienteId?: SortOrder
+    endereco?: SortOrder
+    cep?: SortOrder
+    cidade?: SortOrder
+    estado?: SortOrder
+    cliente?: ClienteOrderByWithRelationInput
+  }
+
+  export type EnderecoWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: EnderecoWhereInput | EnderecoWhereInput[]
+    OR?: EnderecoWhereInput[]
+    NOT?: EnderecoWhereInput | EnderecoWhereInput[]
+    clienteId?: StringFilter<"Endereco"> | string
+    endereco?: StringFilter<"Endereco"> | string
+    cep?: StringFilter<"Endereco"> | string
+    cidade?: StringFilter<"Endereco"> | string
+    estado?: StringFilter<"Endereco"> | string
+    cliente?: XOR<ClienteScalarRelationFilter, ClienteWhereInput>
+  }, "id">
+
+  export type EnderecoOrderByWithAggregationInput = {
+    id?: SortOrder
+    clienteId?: SortOrder
+    endereco?: SortOrder
+    cep?: SortOrder
+    cidade?: SortOrder
+    estado?: SortOrder
+    _count?: EnderecoCountOrderByAggregateInput
+    _avg?: EnderecoAvgOrderByAggregateInput
+    _max?: EnderecoMaxOrderByAggregateInput
+    _min?: EnderecoMinOrderByAggregateInput
+    _sum?: EnderecoSumOrderByAggregateInput
+  }
+
+  export type EnderecoScalarWhereWithAggregatesInput = {
+    AND?: EnderecoScalarWhereWithAggregatesInput | EnderecoScalarWhereWithAggregatesInput[]
+    OR?: EnderecoScalarWhereWithAggregatesInput[]
+    NOT?: EnderecoScalarWhereWithAggregatesInput | EnderecoScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Endereco"> | number
+    clienteId?: StringWithAggregatesFilter<"Endereco"> | string
+    endereco?: StringWithAggregatesFilter<"Endereco"> | string
+    cep?: StringWithAggregatesFilter<"Endereco"> | string
+    cidade?: StringWithAggregatesFilter<"Endereco"> | string
+    estado?: StringWithAggregatesFilter<"Endereco"> | string
   }
 
   export type SalaWhereInput = {
@@ -7462,6 +8772,7 @@ export namespace Prisma {
     vencimento: number
     salas?: SalaCreateNestedManyWithoutClienteInput
     agendamentos?: AgendamentoCreateNestedManyWithoutClienteInput
+    enderecos?: EnderecoCreateNestedManyWithoutClienteInput
   }
 
   export type ClienteUncheckedCreateInput = {
@@ -7474,6 +8785,7 @@ export namespace Prisma {
     vencimento: number
     salas?: SalaUncheckedCreateNestedManyWithoutClienteInput
     agendamentos?: AgendamentoUncheckedCreateNestedManyWithoutClienteInput
+    enderecos?: EnderecoUncheckedCreateNestedManyWithoutClienteInput
   }
 
   export type ClienteUpdateInput = {
@@ -7486,6 +8798,7 @@ export namespace Prisma {
     vencimento?: FloatFieldUpdateOperationsInput | number
     salas?: SalaUpdateManyWithoutClienteNestedInput
     agendamentos?: AgendamentoUpdateManyWithoutClienteNestedInput
+    enderecos?: EnderecoUpdateManyWithoutClienteNestedInput
   }
 
   export type ClienteUncheckedUpdateInput = {
@@ -7498,6 +8811,7 @@ export namespace Prisma {
     vencimento?: FloatFieldUpdateOperationsInput | number
     salas?: SalaUncheckedUpdateManyWithoutClienteNestedInput
     agendamentos?: AgendamentoUncheckedUpdateManyWithoutClienteNestedInput
+    enderecos?: EnderecoUncheckedUpdateManyWithoutClienteNestedInput
   }
 
   export type ClienteCreateManyInput = {
@@ -7602,6 +8916,65 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     working?: BoolFieldUpdateOperationsInput | boolean
     funcao?: EnumFuncaoFieldUpdateOperationsInput | $Enums.Funcao
+  }
+
+  export type EnderecoCreateInput = {
+    endereco: string
+    cep: string
+    cidade: string
+    estado: string
+    cliente: ClienteCreateNestedOneWithoutEnderecosInput
+  }
+
+  export type EnderecoUncheckedCreateInput = {
+    id?: number
+    clienteId: string
+    endereco: string
+    cep: string
+    cidade: string
+    estado: string
+  }
+
+  export type EnderecoUpdateInput = {
+    endereco?: StringFieldUpdateOperationsInput | string
+    cep?: StringFieldUpdateOperationsInput | string
+    cidade?: StringFieldUpdateOperationsInput | string
+    estado?: StringFieldUpdateOperationsInput | string
+    cliente?: ClienteUpdateOneRequiredWithoutEnderecosNestedInput
+  }
+
+  export type EnderecoUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    clienteId?: StringFieldUpdateOperationsInput | string
+    endereco?: StringFieldUpdateOperationsInput | string
+    cep?: StringFieldUpdateOperationsInput | string
+    cidade?: StringFieldUpdateOperationsInput | string
+    estado?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type EnderecoCreateManyInput = {
+    id?: number
+    clienteId: string
+    endereco: string
+    cep: string
+    cidade: string
+    estado: string
+  }
+
+  export type EnderecoUpdateManyMutationInput = {
+    endereco?: StringFieldUpdateOperationsInput | string
+    cep?: StringFieldUpdateOperationsInput | string
+    cidade?: StringFieldUpdateOperationsInput | string
+    estado?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type EnderecoUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    clienteId?: StringFieldUpdateOperationsInput | string
+    endereco?: StringFieldUpdateOperationsInput | string
+    cep?: StringFieldUpdateOperationsInput | string
+    cidade?: StringFieldUpdateOperationsInput | string
+    estado?: StringFieldUpdateOperationsInput | string
   }
 
   export type SalaCreateInput = {
@@ -7794,11 +9167,21 @@ export namespace Prisma {
     none?: AgendamentoWhereInput
   }
 
+  export type EnderecoListRelationFilter = {
+    every?: EnderecoWhereInput
+    some?: EnderecoWhereInput
+    none?: EnderecoWhereInput
+  }
+
   export type SalaOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type AgendamentoOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type EnderecoOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -7955,16 +9338,67 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type ClienteScalarRelationFilter = {
+    is?: ClienteWhereInput
+    isNot?: ClienteWhereInput
+  }
+
+  export type EnderecoCountOrderByAggregateInput = {
+    id?: SortOrder
+    clienteId?: SortOrder
+    endereco?: SortOrder
+    cep?: SortOrder
+    cidade?: SortOrder
+    estado?: SortOrder
+  }
+
+  export type EnderecoAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type EnderecoMaxOrderByAggregateInput = {
+    id?: SortOrder
+    clienteId?: SortOrder
+    endereco?: SortOrder
+    cep?: SortOrder
+    cidade?: SortOrder
+    estado?: SortOrder
+  }
+
+  export type EnderecoMinOrderByAggregateInput = {
+    id?: SortOrder
+    clienteId?: SortOrder
+    endereco?: SortOrder
+    cep?: SortOrder
+    cidade?: SortOrder
+    estado?: SortOrder
+  }
+
+  export type EnderecoSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
   export type EnumStatusSalaFilter<$PrismaModel = never> = {
     equals?: $Enums.StatusSala | EnumStatusSalaFieldRefInput<$PrismaModel>
     in?: $Enums.StatusSala[] | ListEnumStatusSalaFieldRefInput<$PrismaModel>
     notIn?: $Enums.StatusSala[] | ListEnumStatusSalaFieldRefInput<$PrismaModel>
     not?: NestedEnumStatusSalaFilter<$PrismaModel> | $Enums.StatusSala
-  }
-
-  export type ClienteScalarRelationFilter = {
-    is?: ClienteWhereInput
-    isNot?: ClienteWhereInput
   }
 
   export type FuncionarioScalarRelationFilter = {
@@ -8012,22 +9446,6 @@ export namespace Prisma {
 
   export type SalaSumOrderByAggregateInput = {
     id?: SortOrder
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type EnumStatusSalaWithAggregatesFilter<$PrismaModel = never> = {
@@ -8161,6 +9579,13 @@ export namespace Prisma {
     connect?: AgendamentoWhereUniqueInput | AgendamentoWhereUniqueInput[]
   }
 
+  export type EnderecoCreateNestedManyWithoutClienteInput = {
+    create?: XOR<EnderecoCreateWithoutClienteInput, EnderecoUncheckedCreateWithoutClienteInput> | EnderecoCreateWithoutClienteInput[] | EnderecoUncheckedCreateWithoutClienteInput[]
+    connectOrCreate?: EnderecoCreateOrConnectWithoutClienteInput | EnderecoCreateOrConnectWithoutClienteInput[]
+    createMany?: EnderecoCreateManyClienteInputEnvelope
+    connect?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
+  }
+
   export type SalaUncheckedCreateNestedManyWithoutClienteInput = {
     create?: XOR<SalaCreateWithoutClienteInput, SalaUncheckedCreateWithoutClienteInput> | SalaCreateWithoutClienteInput[] | SalaUncheckedCreateWithoutClienteInput[]
     connectOrCreate?: SalaCreateOrConnectWithoutClienteInput | SalaCreateOrConnectWithoutClienteInput[]
@@ -8173,6 +9598,13 @@ export namespace Prisma {
     connectOrCreate?: AgendamentoCreateOrConnectWithoutClienteInput | AgendamentoCreateOrConnectWithoutClienteInput[]
     createMany?: AgendamentoCreateManyClienteInputEnvelope
     connect?: AgendamentoWhereUniqueInput | AgendamentoWhereUniqueInput[]
+  }
+
+  export type EnderecoUncheckedCreateNestedManyWithoutClienteInput = {
+    create?: XOR<EnderecoCreateWithoutClienteInput, EnderecoUncheckedCreateWithoutClienteInput> | EnderecoCreateWithoutClienteInput[] | EnderecoUncheckedCreateWithoutClienteInput[]
+    connectOrCreate?: EnderecoCreateOrConnectWithoutClienteInput | EnderecoCreateOrConnectWithoutClienteInput[]
+    createMany?: EnderecoCreateManyClienteInputEnvelope
+    connect?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -8219,6 +9651,20 @@ export namespace Prisma {
     deleteMany?: AgendamentoScalarWhereInput | AgendamentoScalarWhereInput[]
   }
 
+  export type EnderecoUpdateManyWithoutClienteNestedInput = {
+    create?: XOR<EnderecoCreateWithoutClienteInput, EnderecoUncheckedCreateWithoutClienteInput> | EnderecoCreateWithoutClienteInput[] | EnderecoUncheckedCreateWithoutClienteInput[]
+    connectOrCreate?: EnderecoCreateOrConnectWithoutClienteInput | EnderecoCreateOrConnectWithoutClienteInput[]
+    upsert?: EnderecoUpsertWithWhereUniqueWithoutClienteInput | EnderecoUpsertWithWhereUniqueWithoutClienteInput[]
+    createMany?: EnderecoCreateManyClienteInputEnvelope
+    set?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
+    disconnect?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
+    delete?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
+    connect?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
+    update?: EnderecoUpdateWithWhereUniqueWithoutClienteInput | EnderecoUpdateWithWhereUniqueWithoutClienteInput[]
+    updateMany?: EnderecoUpdateManyWithWhereWithoutClienteInput | EnderecoUpdateManyWithWhereWithoutClienteInput[]
+    deleteMany?: EnderecoScalarWhereInput | EnderecoScalarWhereInput[]
+  }
+
   export type SalaUncheckedUpdateManyWithoutClienteNestedInput = {
     create?: XOR<SalaCreateWithoutClienteInput, SalaUncheckedCreateWithoutClienteInput> | SalaCreateWithoutClienteInput[] | SalaUncheckedCreateWithoutClienteInput[]
     connectOrCreate?: SalaCreateOrConnectWithoutClienteInput | SalaCreateOrConnectWithoutClienteInput[]
@@ -8245,6 +9691,20 @@ export namespace Prisma {
     update?: AgendamentoUpdateWithWhereUniqueWithoutClienteInput | AgendamentoUpdateWithWhereUniqueWithoutClienteInput[]
     updateMany?: AgendamentoUpdateManyWithWhereWithoutClienteInput | AgendamentoUpdateManyWithWhereWithoutClienteInput[]
     deleteMany?: AgendamentoScalarWhereInput | AgendamentoScalarWhereInput[]
+  }
+
+  export type EnderecoUncheckedUpdateManyWithoutClienteNestedInput = {
+    create?: XOR<EnderecoCreateWithoutClienteInput, EnderecoUncheckedCreateWithoutClienteInput> | EnderecoCreateWithoutClienteInput[] | EnderecoUncheckedCreateWithoutClienteInput[]
+    connectOrCreate?: EnderecoCreateOrConnectWithoutClienteInput | EnderecoCreateOrConnectWithoutClienteInput[]
+    upsert?: EnderecoUpsertWithWhereUniqueWithoutClienteInput | EnderecoUpsertWithWhereUniqueWithoutClienteInput[]
+    createMany?: EnderecoCreateManyClienteInputEnvelope
+    set?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
+    disconnect?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
+    delete?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
+    connect?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
+    update?: EnderecoUpdateWithWhereUniqueWithoutClienteInput | EnderecoUpdateWithWhereUniqueWithoutClienteInput[]
+    updateMany?: EnderecoUpdateManyWithWhereWithoutClienteInput | EnderecoUpdateManyWithWhereWithoutClienteInput[]
+    deleteMany?: EnderecoScalarWhereInput | EnderecoScalarWhereInput[]
   }
 
   export type SalaCreateNestedManyWithoutFuncionarioInput = {
@@ -8295,6 +9755,28 @@ export namespace Prisma {
     update?: SalaUpdateWithWhereUniqueWithoutFuncionarioInput | SalaUpdateWithWhereUniqueWithoutFuncionarioInput[]
     updateMany?: SalaUpdateManyWithWhereWithoutFuncionarioInput | SalaUpdateManyWithWhereWithoutFuncionarioInput[]
     deleteMany?: SalaScalarWhereInput | SalaScalarWhereInput[]
+  }
+
+  export type ClienteCreateNestedOneWithoutEnderecosInput = {
+    create?: XOR<ClienteCreateWithoutEnderecosInput, ClienteUncheckedCreateWithoutEnderecosInput>
+    connectOrCreate?: ClienteCreateOrConnectWithoutEnderecosInput
+    connect?: ClienteWhereUniqueInput
+  }
+
+  export type ClienteUpdateOneRequiredWithoutEnderecosNestedInput = {
+    create?: XOR<ClienteCreateWithoutEnderecosInput, ClienteUncheckedCreateWithoutEnderecosInput>
+    connectOrCreate?: ClienteCreateOrConnectWithoutEnderecosInput
+    upsert?: ClienteUpsertWithoutEnderecosInput
+    connect?: ClienteWhereUniqueInput
+    update?: XOR<XOR<ClienteUpdateToOneWithWhereWithoutEnderecosInput, ClienteUpdateWithoutEnderecosInput>, ClienteUncheckedUpdateWithoutEnderecosInput>
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type ClienteCreateNestedOneWithoutSalasInput = {
@@ -8355,14 +9837,6 @@ export namespace Prisma {
     update?: MensagemUpdateWithWhereUniqueWithoutSalaInput | MensagemUpdateWithWhereUniqueWithoutSalaInput[]
     updateMany?: MensagemUpdateManyWithWhereWithoutSalaInput | MensagemUpdateManyWithWhereWithoutSalaInput[]
     deleteMany?: MensagemScalarWhereInput | MensagemScalarWhereInput[]
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type MensagemUncheckedUpdateManyWithoutSalaNestedInput = {
@@ -8531,13 +10005,6 @@ export namespace Prisma {
     _max?: NestedEnumFuncaoFilter<$PrismaModel>
   }
 
-  export type NestedEnumStatusSalaFilter<$PrismaModel = never> = {
-    equals?: $Enums.StatusSala | EnumStatusSalaFieldRefInput<$PrismaModel>
-    in?: $Enums.StatusSala[] | ListEnumStatusSalaFieldRefInput<$PrismaModel>
-    notIn?: $Enums.StatusSala[] | ListEnumStatusSalaFieldRefInput<$PrismaModel>
-    not?: NestedEnumStatusSalaFilter<$PrismaModel> | $Enums.StatusSala
-  }
-
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -8552,6 +10019,13 @@ export namespace Prisma {
     _sum?: NestedIntFilter<$PrismaModel>
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedEnumStatusSalaFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusSala | EnumStatusSalaFieldRefInput<$PrismaModel>
+    in?: $Enums.StatusSala[] | ListEnumStatusSalaFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatusSala[] | ListEnumStatusSalaFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusSalaFilter<$PrismaModel> | $Enums.StatusSala
   }
 
   export type NestedEnumStatusSalaWithAggregatesFilter<$PrismaModel = never> = {
@@ -8654,6 +10128,31 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type EnderecoCreateWithoutClienteInput = {
+    endereco: string
+    cep: string
+    cidade: string
+    estado: string
+  }
+
+  export type EnderecoUncheckedCreateWithoutClienteInput = {
+    id?: number
+    endereco: string
+    cep: string
+    cidade: string
+    estado: string
+  }
+
+  export type EnderecoCreateOrConnectWithoutClienteInput = {
+    where: EnderecoWhereUniqueInput
+    create: XOR<EnderecoCreateWithoutClienteInput, EnderecoUncheckedCreateWithoutClienteInput>
+  }
+
+  export type EnderecoCreateManyClienteInputEnvelope = {
+    data: EnderecoCreateManyClienteInput | EnderecoCreateManyClienteInput[]
+    skipDuplicates?: boolean
+  }
+
   export type SalaUpsertWithWhereUniqueWithoutClienteInput = {
     where: SalaWhereUniqueInput
     update: XOR<SalaUpdateWithoutClienteInput, SalaUncheckedUpdateWithoutClienteInput>
@@ -8708,6 +10207,34 @@ export namespace Prisma {
     status?: EnumStatusFilter<"Agendamento"> | $Enums.Status
   }
 
+  export type EnderecoUpsertWithWhereUniqueWithoutClienteInput = {
+    where: EnderecoWhereUniqueInput
+    update: XOR<EnderecoUpdateWithoutClienteInput, EnderecoUncheckedUpdateWithoutClienteInput>
+    create: XOR<EnderecoCreateWithoutClienteInput, EnderecoUncheckedCreateWithoutClienteInput>
+  }
+
+  export type EnderecoUpdateWithWhereUniqueWithoutClienteInput = {
+    where: EnderecoWhereUniqueInput
+    data: XOR<EnderecoUpdateWithoutClienteInput, EnderecoUncheckedUpdateWithoutClienteInput>
+  }
+
+  export type EnderecoUpdateManyWithWhereWithoutClienteInput = {
+    where: EnderecoScalarWhereInput
+    data: XOR<EnderecoUpdateManyMutationInput, EnderecoUncheckedUpdateManyWithoutClienteInput>
+  }
+
+  export type EnderecoScalarWhereInput = {
+    AND?: EnderecoScalarWhereInput | EnderecoScalarWhereInput[]
+    OR?: EnderecoScalarWhereInput[]
+    NOT?: EnderecoScalarWhereInput | EnderecoScalarWhereInput[]
+    id?: IntFilter<"Endereco"> | number
+    clienteId?: StringFilter<"Endereco"> | string
+    endereco?: StringFilter<"Endereco"> | string
+    cep?: StringFilter<"Endereco"> | string
+    cidade?: StringFilter<"Endereco"> | string
+    estado?: StringFilter<"Endereco"> | string
+  }
+
   export type SalaCreateWithoutFuncionarioInput = {
     nome: string
     status: $Enums.StatusSala
@@ -8749,6 +10276,70 @@ export namespace Prisma {
     data: XOR<SalaUpdateManyMutationInput, SalaUncheckedUpdateManyWithoutFuncionarioInput>
   }
 
+  export type ClienteCreateWithoutEnderecosInput = {
+    cpf: string
+    senha: string
+    nome: string
+    tel: string
+    email: string
+    plano: $Enums.Plano
+    vencimento: number
+    salas?: SalaCreateNestedManyWithoutClienteInput
+    agendamentos?: AgendamentoCreateNestedManyWithoutClienteInput
+  }
+
+  export type ClienteUncheckedCreateWithoutEnderecosInput = {
+    cpf: string
+    senha: string
+    nome: string
+    tel: string
+    email: string
+    plano: $Enums.Plano
+    vencimento: number
+    salas?: SalaUncheckedCreateNestedManyWithoutClienteInput
+    agendamentos?: AgendamentoUncheckedCreateNestedManyWithoutClienteInput
+  }
+
+  export type ClienteCreateOrConnectWithoutEnderecosInput = {
+    where: ClienteWhereUniqueInput
+    create: XOR<ClienteCreateWithoutEnderecosInput, ClienteUncheckedCreateWithoutEnderecosInput>
+  }
+
+  export type ClienteUpsertWithoutEnderecosInput = {
+    update: XOR<ClienteUpdateWithoutEnderecosInput, ClienteUncheckedUpdateWithoutEnderecosInput>
+    create: XOR<ClienteCreateWithoutEnderecosInput, ClienteUncheckedCreateWithoutEnderecosInput>
+    where?: ClienteWhereInput
+  }
+
+  export type ClienteUpdateToOneWithWhereWithoutEnderecosInput = {
+    where?: ClienteWhereInput
+    data: XOR<ClienteUpdateWithoutEnderecosInput, ClienteUncheckedUpdateWithoutEnderecosInput>
+  }
+
+  export type ClienteUpdateWithoutEnderecosInput = {
+    cpf?: StringFieldUpdateOperationsInput | string
+    senha?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    tel?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    plano?: EnumPlanoFieldUpdateOperationsInput | $Enums.Plano
+    vencimento?: FloatFieldUpdateOperationsInput | number
+    salas?: SalaUpdateManyWithoutClienteNestedInput
+    agendamentos?: AgendamentoUpdateManyWithoutClienteNestedInput
+  }
+
+  export type ClienteUncheckedUpdateWithoutEnderecosInput = {
+    cpf?: StringFieldUpdateOperationsInput | string
+    senha?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    tel?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    plano?: EnumPlanoFieldUpdateOperationsInput | $Enums.Plano
+    vencimento?: FloatFieldUpdateOperationsInput | number
+    salas?: SalaUncheckedUpdateManyWithoutClienteNestedInput
+    agendamentos?: AgendamentoUncheckedUpdateManyWithoutClienteNestedInput
+  }
+
   export type ClienteCreateWithoutSalasInput = {
     cpf: string
     senha: string
@@ -8758,6 +10349,7 @@ export namespace Prisma {
     plano: $Enums.Plano
     vencimento: number
     agendamentos?: AgendamentoCreateNestedManyWithoutClienteInput
+    enderecos?: EnderecoCreateNestedManyWithoutClienteInput
   }
 
   export type ClienteUncheckedCreateWithoutSalasInput = {
@@ -8769,6 +10361,7 @@ export namespace Prisma {
     plano: $Enums.Plano
     vencimento: number
     agendamentos?: AgendamentoUncheckedCreateNestedManyWithoutClienteInput
+    enderecos?: EnderecoUncheckedCreateNestedManyWithoutClienteInput
   }
 
   export type ClienteCreateOrConnectWithoutSalasInput = {
@@ -8840,6 +10433,7 @@ export namespace Prisma {
     plano?: EnumPlanoFieldUpdateOperationsInput | $Enums.Plano
     vencimento?: FloatFieldUpdateOperationsInput | number
     agendamentos?: AgendamentoUpdateManyWithoutClienteNestedInput
+    enderecos?: EnderecoUpdateManyWithoutClienteNestedInput
   }
 
   export type ClienteUncheckedUpdateWithoutSalasInput = {
@@ -8851,6 +10445,7 @@ export namespace Prisma {
     plano?: EnumPlanoFieldUpdateOperationsInput | $Enums.Plano
     vencimento?: FloatFieldUpdateOperationsInput | number
     agendamentos?: AgendamentoUncheckedUpdateManyWithoutClienteNestedInput
+    enderecos?: EnderecoUncheckedUpdateManyWithoutClienteNestedInput
   }
 
   export type FuncionarioUpsertWithoutSalasInput = {
@@ -8964,6 +10559,7 @@ export namespace Prisma {
     plano: $Enums.Plano
     vencimento: number
     salas?: SalaCreateNestedManyWithoutClienteInput
+    enderecos?: EnderecoCreateNestedManyWithoutClienteInput
   }
 
   export type ClienteUncheckedCreateWithoutAgendamentosInput = {
@@ -8975,6 +10571,7 @@ export namespace Prisma {
     plano: $Enums.Plano
     vencimento: number
     salas?: SalaUncheckedCreateNestedManyWithoutClienteInput
+    enderecos?: EnderecoUncheckedCreateNestedManyWithoutClienteInput
   }
 
   export type ClienteCreateOrConnectWithoutAgendamentosInput = {
@@ -9002,6 +10599,7 @@ export namespace Prisma {
     plano?: EnumPlanoFieldUpdateOperationsInput | $Enums.Plano
     vencimento?: FloatFieldUpdateOperationsInput | number
     salas?: SalaUpdateManyWithoutClienteNestedInput
+    enderecos?: EnderecoUpdateManyWithoutClienteNestedInput
   }
 
   export type ClienteUncheckedUpdateWithoutAgendamentosInput = {
@@ -9013,6 +10611,7 @@ export namespace Prisma {
     plano?: EnumPlanoFieldUpdateOperationsInput | $Enums.Plano
     vencimento?: FloatFieldUpdateOperationsInput | number
     salas?: SalaUncheckedUpdateManyWithoutClienteNestedInput
+    enderecos?: EnderecoUncheckedUpdateManyWithoutClienteNestedInput
   }
 
   export type SalaCreateManyClienteInput = {
@@ -9027,6 +10626,14 @@ export namespace Prisma {
     data: Date | string
     descricao: string
     status?: $Enums.Status
+  }
+
+  export type EnderecoCreateManyClienteInput = {
+    id?: number
+    endereco: string
+    cep: string
+    cidade: string
+    estado: string
   }
 
   export type SalaUpdateWithoutClienteInput = {
@@ -9069,6 +10676,29 @@ export namespace Prisma {
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     descricao?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+  }
+
+  export type EnderecoUpdateWithoutClienteInput = {
+    endereco?: StringFieldUpdateOperationsInput | string
+    cep?: StringFieldUpdateOperationsInput | string
+    cidade?: StringFieldUpdateOperationsInput | string
+    estado?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type EnderecoUncheckedUpdateWithoutClienteInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    endereco?: StringFieldUpdateOperationsInput | string
+    cep?: StringFieldUpdateOperationsInput | string
+    cidade?: StringFieldUpdateOperationsInput | string
+    estado?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type EnderecoUncheckedUpdateManyWithoutClienteInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    endereco?: StringFieldUpdateOperationsInput | string
+    cep?: StringFieldUpdateOperationsInput | string
+    cidade?: StringFieldUpdateOperationsInput | string
+    estado?: StringFieldUpdateOperationsInput | string
   }
 
   export type SalaCreateManyFuncionarioInput = {

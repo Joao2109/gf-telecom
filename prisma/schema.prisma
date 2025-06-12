@@ -19,6 +19,7 @@ model Cliente {
   vencimento   Float
   salas        Sala[]
   agendamentos Agendamento[]
+  enderecos     Endereco[]
 }
 
 model Funcionario {
@@ -30,6 +31,16 @@ model Funcionario {
   working Boolean @default(false)
   funcao  Funcao
   salas   Sala[]
+}
+
+model Endereco {
+  id      Int    @id @default(autoincrement())
+  clienteId String
+  cliente   Cliente @relation(fields: [clienteId], references: [cpf])
+  endereco String
+  cep     String
+  cidade  String
+  estado  String
 }
 
 model Sala {

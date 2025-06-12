@@ -2,13 +2,11 @@
 import AgendamentoForm from "@/components/agendamento-form";
 import { FormEvent } from "react";
 import { useAppSelector } from "@/lib/hooks";
-const AgendamentoPage = ({
-  searchParams,
-}: {
-  searchParams: { plano?: string };
-}) => {
+import { useSearchParams } from "next/navigation";
+const AgendamentoPage = () => {
   const { currentUser: user } = useAppSelector((state) => state.user);
-  const { plano } = searchParams;
+  const searchParams = useSearchParams();
+  const plano = searchParams.get("plano");
   const horarios = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
