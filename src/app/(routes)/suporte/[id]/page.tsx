@@ -3,10 +3,12 @@ import { useRouter } from "next/navigation";
 import { useAppSelector } from "@/lib/hooks";
 import ChatSuporte from "@/components/suporte/chat-suporte";
 import { useEffect } from "react";
+import { useParams } from "next/navigation";
 // import { redirect } from "next/navigation";
-const SuportePage = ({ params }: { params: { id: string } }) => {
+const SuportePage = () => {
+  const { id }: { id: string } = useParams();
+  console.log(id);
   const { currentUser: user } = useAppSelector((state) => state.user);
-  const { id } = params;
   const router = useRouter();
   useEffect(() => {
     if (!user) {
