@@ -5,15 +5,16 @@ interface AgendamentoFormProps {
   submit: (e: FormEvent<HTMLFormElement>) => void;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   user: any;
-  plano: string | null;
+  params: URLSearchParams;
   horarios: number[];
 }
 const AgendamentoForm = ({
   submit,
   user,
-  plano,
+  params,
   horarios,
 }: AgendamentoFormProps) => {
+  const plano = params.get("plano");
   const [nome, setNome] = useState("");
   const [cpf, setCpf] = useState("");
   const [endereco, setEndereco] = useState("");

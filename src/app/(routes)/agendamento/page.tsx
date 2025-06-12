@@ -7,7 +7,6 @@ import { Suspense } from "react";
 const AgendamentoPage = () => {
   const { currentUser: user } = useAppSelector((state) => state.user);
   const searchParams = useSearchParams();
-  const plano = searchParams.get("plano");
   const horarios = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -21,7 +20,7 @@ const AgendamentoPage = () => {
         <AgendamentoForm
           submit={submit}
           user={user}
-          plano={plano}
+          params={searchParams}
           horarios={horarios}
         />
       </Suspense>
