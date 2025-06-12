@@ -16,16 +16,12 @@ const AgendamentoPage = () => {
   };
   return (
     <div className="w-full min-h-[calc(100dvh-104px)] flex justify-center items-center bg-muted">
-      {user ? (
-        <AgendamentoForm
-          submit={submit}
-          user={user}
-          plano={plano}
-          horarios={horarios}
-        />
-      ) : (
-        <p>Faça login para agendar</p>
-      )}
+      <AgendamentoForm
+        submit={submit}
+        user={user}
+        plano={plano}
+        horarios={horarios}
+      />
     </div>
   );
 };
