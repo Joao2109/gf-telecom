@@ -2,11 +2,9 @@
 import AgendamentoForm from "@/components/agendamento-form";
 import { FormEvent } from "react";
 import { useAppSelector } from "@/lib/hooks";
-import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 const AgendamentoPage = () => {
   const { currentUser: user } = useAppSelector((state) => state.user);
-  const searchParams = useSearchParams();
   const horarios = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -20,7 +18,6 @@ const AgendamentoPage = () => {
         <AgendamentoForm
           submit={submit}
           user={user}
-          params={searchParams}
           horarios={horarios}
         />
       </Suspense>

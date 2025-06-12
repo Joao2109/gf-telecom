@@ -1,20 +1,16 @@
 import { FormEvent, useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import AgendamentoDescricao from "./agendamento-descricao";
+import { useSearchParams } from "next/navigation";
 interface AgendamentoFormProps {
   submit: (e: FormEvent<HTMLFormElement>) => void;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   user: any;
-  params: URLSearchParams;
   horarios: number[];
 }
-const AgendamentoForm = ({
-  submit,
-  user,
-  params,
-  horarios,
-}: AgendamentoFormProps) => {
-  const plano = params.get("plano");
+const AgendamentoForm = ({ submit, user, horarios }: AgendamentoFormProps) => {
+  const searchParams = useSearchParams();
+  const plano = searchParams.get("plano");
   const [nome, setNome] = useState("");
   const [cpf, setCpf] = useState("");
   const [endereco, setEndereco] = useState("");
