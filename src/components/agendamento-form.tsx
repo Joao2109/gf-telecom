@@ -29,15 +29,19 @@ const AgendamentoForm = ({
   >([]);
   const [telefone, setTelefone] = useState("");
   useEffect(() => {
-    console.log(user);
     if (user) {
       setNome(user.nome ?? "");
       setCpf(user.id ?? "");
       setEndereco(user.endereco ?? "");
       setTelefone(user.tel ?? "");
-      fetch("/api/enderecos", { method: "POST", body: user.id }).then(
-        async (res) => setEnderecos(await res.json())
-      );
+      fetch("/api/enderecos", {
+        method: "POST",
+        body: JSON.stringify(user.id),
+      }).then(async (res) => {
+        const data = await res.json();
+        console.log(data);
+        setEnderecos(data);
+      });
     }
   }, [user]);
   return (
