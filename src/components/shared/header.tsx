@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { usePathname } from "next/navigation";
@@ -13,12 +12,9 @@ const Header = () => {
   return (
     <header className="w-full h-auto bg-accent px-0 sm:px-4 py-4">
       <div className="flex items-center justify-center sm:justify-between mb-2">
-        <div className="items-center hidden sm:flex">
-          <div className="w-20 h-8 relative">
-            <Image src="/public/images/logo.png" alt="Logo" fill />
-          </div>
-          <h2 className="text-white text-2xl font-semibold">GF Telecom</h2>
-        </div>
+        <h2 className="text-white text-2xl font-semibold hidden sm:flex">
+          GF Telecom
+        </h2>
         <div className="flex items-center gap-2">
           {user ? (
             <>

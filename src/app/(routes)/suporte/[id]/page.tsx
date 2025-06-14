@@ -7,7 +7,6 @@ import { useParams } from "next/navigation";
 // import { redirect } from "next/navigation";
 const SuportePage = () => {
   const { id }: { id: string } = useParams();
-  console.log(id);
   const { currentUser: user } = useAppSelector((state) => state.user);
   const router = useRouter();
   useEffect(() => {
@@ -15,13 +14,17 @@ const SuportePage = () => {
       router.push("/auth/sign-in");
     }
   }, [user]);
+
   return (
-    <main className="w-full min-h-[calc(100dvh-104px)]">
-      <ChatSuporte
-        clientId={Math.random().toString(36).substring(2, 9)}
-        roomId={id}
-      />
-    </main>
+    <>
+      {/* @ts-expect-error user-id-does-in-fact-exist */}
+      {user && user.id && (
+        <main className="w-full min-h-[calc(100dvh-104px)]">
+          {/* @ts-expect-error user-id-does-in-fact-exist */}
+          <ChatSuporte clientId={user.id} roomId={id} />
+        </main>
+      )}
+    </>
   );
 };
 

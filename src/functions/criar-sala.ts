@@ -36,7 +36,7 @@ export const criarSala = async (type: "padrão" | "emergencial", user: User) => 
   try {
     const sala = await prisma.sala.create({
       data: {
-        nome: "New Sala",
+        nome: "Sala",
         cliente: {
           connect: {
             cpf: user.id,

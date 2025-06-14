@@ -82,6 +82,14 @@ export const StatusSala: {
 
 export type StatusSala = (typeof StatusSala)[keyof typeof StatusSala]
 
+
+export const MessageType: {
+  TEXT: 'TEXT',
+  IMAGE: 'IMAGE'
+};
+
+export type MessageType = (typeof MessageType)[keyof typeof MessageType]
+
 }
 
 export type Plano = $Enums.Plano
@@ -99,6 +107,10 @@ export const Status: typeof $Enums.Status
 export type StatusSala = $Enums.StatusSala
 
 export const StatusSala: typeof $Enums.StatusSala
+
+export type MessageType = $Enums.MessageType
+
+export const MessageType: typeof $Enums.MessageType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -1380,15 +1392,15 @@ export namespace Prisma {
    */
 
   export type ClienteCountOutputType = {
-    salas: number
     agendamentos: number
     enderecos: number
+    salas: number
   }
 
   export type ClienteCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    salas?: boolean | ClienteCountOutputTypeCountSalasArgs
     agendamentos?: boolean | ClienteCountOutputTypeCountAgendamentosArgs
     enderecos?: boolean | ClienteCountOutputTypeCountEnderecosArgs
+    salas?: boolean | ClienteCountOutputTypeCountSalasArgs
   }
 
   // Custom InputTypes
@@ -1405,13 +1417,6 @@ export namespace Prisma {
   /**
    * ClienteCountOutputType without action
    */
-  export type ClienteCountOutputTypeCountSalasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SalaWhereInput
-  }
-
-  /**
-   * ClienteCountOutputType without action
-   */
   export type ClienteCountOutputTypeCountAgendamentosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AgendamentoWhereInput
   }
@@ -1421,6 +1426,13 @@ export namespace Prisma {
    */
   export type ClienteCountOutputTypeCountEnderecosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: EnderecoWhereInput
+  }
+
+  /**
+   * ClienteCountOutputType without action
+   */
+  export type ClienteCountOutputTypeCountSalasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SalaWhereInput
   }
 
 
@@ -1704,9 +1716,9 @@ export namespace Prisma {
     email?: boolean
     plano?: boolean
     vencimento?: boolean
-    salas?: boolean | Cliente$salasArgs<ExtArgs>
     agendamentos?: boolean | Cliente$agendamentosArgs<ExtArgs>
     enderecos?: boolean | Cliente$enderecosArgs<ExtArgs>
+    salas?: boolean | Cliente$salasArgs<ExtArgs>
     _count?: boolean | ClienteCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["cliente"]>
 
@@ -1742,9 +1754,9 @@ export namespace Prisma {
 
   export type ClienteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"cpf" | "senha" | "nome" | "tel" | "email" | "plano" | "vencimento", ExtArgs["result"]["cliente"]>
   export type ClienteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    salas?: boolean | Cliente$salasArgs<ExtArgs>
     agendamentos?: boolean | Cliente$agendamentosArgs<ExtArgs>
     enderecos?: boolean | Cliente$enderecosArgs<ExtArgs>
+    salas?: boolean | Cliente$salasArgs<ExtArgs>
     _count?: boolean | ClienteCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ClienteIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1753,9 +1765,9 @@ export namespace Prisma {
   export type $ClientePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Cliente"
     objects: {
-      salas: Prisma.$SalaPayload<ExtArgs>[]
       agendamentos: Prisma.$AgendamentoPayload<ExtArgs>[]
       enderecos: Prisma.$EnderecoPayload<ExtArgs>[]
+      salas: Prisma.$SalaPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       cpf: string
@@ -2159,9 +2171,9 @@ export namespace Prisma {
    */
   export interface Prisma__ClienteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    salas<T extends Cliente$salasArgs<ExtArgs> = {}>(args?: Subset<T, Cliente$salasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SalaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     agendamentos<T extends Cliente$agendamentosArgs<ExtArgs> = {}>(args?: Subset<T, Cliente$agendamentosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AgendamentoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     enderecos<T extends Cliente$enderecosArgs<ExtArgs> = {}>(args?: Subset<T, Cliente$enderecosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnderecoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    salas<T extends Cliente$salasArgs<ExtArgs> = {}>(args?: Subset<T, Cliente$salasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SalaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2586,30 +2598,6 @@ export namespace Prisma {
   }
 
   /**
-   * Cliente.salas
-   */
-  export type Cliente$salasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Sala
-     */
-    select?: SalaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Sala
-     */
-    omit?: SalaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SalaInclude<ExtArgs> | null
-    where?: SalaWhereInput
-    orderBy?: SalaOrderByWithRelationInput | SalaOrderByWithRelationInput[]
-    cursor?: SalaWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: SalaScalarFieldEnum | SalaScalarFieldEnum[]
-  }
-
-  /**
    * Cliente.agendamentos
    */
   export type Cliente$agendamentosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2658,6 +2646,30 @@ export namespace Prisma {
   }
 
   /**
+   * Cliente.salas
+   */
+  export type Cliente$salasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sala
+     */
+    select?: SalaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sala
+     */
+    omit?: SalaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SalaInclude<ExtArgs> | null
+    where?: SalaWhereInput
+    orderBy?: SalaOrderByWithRelationInput | SalaOrderByWithRelationInput[]
+    cursor?: SalaWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SalaScalarFieldEnum | SalaScalarFieldEnum[]
+  }
+
+  /**
    * Cliente without action
    */
   export type ClienteDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2692,8 +2704,8 @@ export namespace Prisma {
     nome: string | null
     tel: string | null
     email: string | null
-    working: boolean | null
     funcao: $Enums.Funcao | null
+    working: boolean | null
   }
 
   export type FuncionarioMaxAggregateOutputType = {
@@ -2702,8 +2714,8 @@ export namespace Prisma {
     nome: string | null
     tel: string | null
     email: string | null
-    working: boolean | null
     funcao: $Enums.Funcao | null
+    working: boolean | null
   }
 
   export type FuncionarioCountAggregateOutputType = {
@@ -2712,8 +2724,8 @@ export namespace Prisma {
     nome: number
     tel: number
     email: number
-    working: number
     funcao: number
+    working: number
     _all: number
   }
 
@@ -2724,8 +2736,8 @@ export namespace Prisma {
     nome?: true
     tel?: true
     email?: true
-    working?: true
     funcao?: true
+    working?: true
   }
 
   export type FuncionarioMaxAggregateInputType = {
@@ -2734,8 +2746,8 @@ export namespace Prisma {
     nome?: true
     tel?: true
     email?: true
-    working?: true
     funcao?: true
+    working?: true
   }
 
   export type FuncionarioCountAggregateInputType = {
@@ -2744,8 +2756,8 @@ export namespace Prisma {
     nome?: true
     tel?: true
     email?: true
-    working?: true
     funcao?: true
+    working?: true
     _all?: true
   }
 
@@ -2827,8 +2839,8 @@ export namespace Prisma {
     nome: string
     tel: string
     email: string
-    working: boolean
     funcao: $Enums.Funcao
+    working: boolean
     _count: FuncionarioCountAggregateOutputType | null
     _min: FuncionarioMinAggregateOutputType | null
     _max: FuncionarioMaxAggregateOutputType | null
@@ -2854,8 +2866,8 @@ export namespace Prisma {
     nome?: boolean
     tel?: boolean
     email?: boolean
-    working?: boolean
     funcao?: boolean
+    working?: boolean
     salas?: boolean | Funcionario$salasArgs<ExtArgs>
     _count?: boolean | FuncionarioCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["funcionario"]>
@@ -2866,8 +2878,8 @@ export namespace Prisma {
     nome?: boolean
     tel?: boolean
     email?: boolean
-    working?: boolean
     funcao?: boolean
+    working?: boolean
   }, ExtArgs["result"]["funcionario"]>
 
   export type FuncionarioSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2876,8 +2888,8 @@ export namespace Prisma {
     nome?: boolean
     tel?: boolean
     email?: boolean
-    working?: boolean
     funcao?: boolean
+    working?: boolean
   }, ExtArgs["result"]["funcionario"]>
 
   export type FuncionarioSelectScalar = {
@@ -2886,11 +2898,11 @@ export namespace Prisma {
     nome?: boolean
     tel?: boolean
     email?: boolean
-    working?: boolean
     funcao?: boolean
+    working?: boolean
   }
 
-  export type FuncionarioOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"cpf" | "senha" | "nome" | "tel" | "email" | "working" | "funcao", ExtArgs["result"]["funcionario"]>
+  export type FuncionarioOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"cpf" | "senha" | "nome" | "tel" | "email" | "funcao" | "working", ExtArgs["result"]["funcionario"]>
   export type FuncionarioInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     salas?: boolean | Funcionario$salasArgs<ExtArgs>
     _count?: boolean | FuncionarioCountOutputTypeDefaultArgs<ExtArgs>
@@ -2909,8 +2921,8 @@ export namespace Prisma {
       nome: string
       tel: string
       email: string
-      working: boolean
       funcao: $Enums.Funcao
+      working: boolean
     }, ExtArgs["result"]["funcionario"]>
     composites: {}
   }
@@ -3340,8 +3352,8 @@ export namespace Prisma {
     readonly nome: FieldRef<"Funcionario", 'String'>
     readonly tel: FieldRef<"Funcionario", 'String'>
     readonly email: FieldRef<"Funcionario", 'String'>
-    readonly working: FieldRef<"Funcionario", 'Boolean'>
     readonly funcao: FieldRef<"Funcionario", 'Funcao'>
+    readonly working: FieldRef<"Funcionario", 'Boolean'>
   }
     
 
@@ -5075,9 +5087,9 @@ export namespace Prisma {
     clienteId?: boolean
     funcionarioId?: boolean
     status?: boolean
+    mensagens?: boolean | Sala$mensagensArgs<ExtArgs>
     cliente?: boolean | ClienteDefaultArgs<ExtArgs>
     funcionario?: boolean | FuncionarioDefaultArgs<ExtArgs>
-    mensagens?: boolean | Sala$mensagensArgs<ExtArgs>
     _count?: boolean | SalaCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["sala"]>
 
@@ -5111,9 +5123,9 @@ export namespace Prisma {
 
   export type SalaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "clienteId" | "funcionarioId" | "status", ExtArgs["result"]["sala"]>
   export type SalaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    mensagens?: boolean | Sala$mensagensArgs<ExtArgs>
     cliente?: boolean | ClienteDefaultArgs<ExtArgs>
     funcionario?: boolean | FuncionarioDefaultArgs<ExtArgs>
-    mensagens?: boolean | Sala$mensagensArgs<ExtArgs>
     _count?: boolean | SalaCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type SalaIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5128,9 +5140,9 @@ export namespace Prisma {
   export type $SalaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Sala"
     objects: {
+      mensagens: Prisma.$MensagemPayload<ExtArgs>[]
       cliente: Prisma.$ClientePayload<ExtArgs>
       funcionario: Prisma.$FuncionarioPayload<ExtArgs>
-      mensagens: Prisma.$MensagemPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -5532,9 +5544,9 @@ export namespace Prisma {
    */
   export interface Prisma__SalaClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    mensagens<T extends Sala$mensagensArgs<ExtArgs> = {}>(args?: Subset<T, Sala$mensagensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MensagemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     cliente<T extends ClienteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClienteDefaultArgs<ExtArgs>>): Prisma__ClienteClient<$Result.GetResult<Prisma.$ClientePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     funcionario<T extends FuncionarioDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FuncionarioDefaultArgs<ExtArgs>>): Prisma__FuncionarioClient<$Result.GetResult<Prisma.$FuncionarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    mensagens<T extends Sala$mensagensArgs<ExtArgs> = {}>(args?: Subset<T, Sala$mensagensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MensagemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6033,18 +6045,27 @@ export namespace Prisma {
     id: number | null
     msg: string | null
     salaId: number | null
+    senderId: string | null
+    timestamp: Date | null
+    type: $Enums.MessageType | null
   }
 
   export type MensagemMaxAggregateOutputType = {
     id: number | null
     msg: string | null
     salaId: number | null
+    senderId: string | null
+    timestamp: Date | null
+    type: $Enums.MessageType | null
   }
 
   export type MensagemCountAggregateOutputType = {
     id: number
     msg: number
     salaId: number
+    senderId: number
+    timestamp: number
+    type: number
     _all: number
   }
 
@@ -6063,18 +6084,27 @@ export namespace Prisma {
     id?: true
     msg?: true
     salaId?: true
+    senderId?: true
+    timestamp?: true
+    type?: true
   }
 
   export type MensagemMaxAggregateInputType = {
     id?: true
     msg?: true
     salaId?: true
+    senderId?: true
+    timestamp?: true
+    type?: true
   }
 
   export type MensagemCountAggregateInputType = {
     id?: true
     msg?: true
     salaId?: true
+    senderId?: true
+    timestamp?: true
+    type?: true
     _all?: true
   }
 
@@ -6168,6 +6198,9 @@ export namespace Prisma {
     id: number
     msg: string
     salaId: number
+    senderId: string
+    timestamp: Date
+    type: $Enums.MessageType
     _count: MensagemCountAggregateOutputType | null
     _avg: MensagemAvgAggregateOutputType | null
     _sum: MensagemSumAggregateOutputType | null
@@ -6193,6 +6226,9 @@ export namespace Prisma {
     id?: boolean
     msg?: boolean
     salaId?: boolean
+    senderId?: boolean
+    timestamp?: boolean
+    type?: boolean
     sala?: boolean | SalaDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["mensagem"]>
 
@@ -6200,6 +6236,9 @@ export namespace Prisma {
     id?: boolean
     msg?: boolean
     salaId?: boolean
+    senderId?: boolean
+    timestamp?: boolean
+    type?: boolean
     sala?: boolean | SalaDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["mensagem"]>
 
@@ -6207,6 +6246,9 @@ export namespace Prisma {
     id?: boolean
     msg?: boolean
     salaId?: boolean
+    senderId?: boolean
+    timestamp?: boolean
+    type?: boolean
     sala?: boolean | SalaDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["mensagem"]>
 
@@ -6214,9 +6256,12 @@ export namespace Prisma {
     id?: boolean
     msg?: boolean
     salaId?: boolean
+    senderId?: boolean
+    timestamp?: boolean
+    type?: boolean
   }
 
-  export type MensagemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "msg" | "salaId", ExtArgs["result"]["mensagem"]>
+  export type MensagemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "msg" | "salaId" | "senderId" | "timestamp" | "type", ExtArgs["result"]["mensagem"]>
   export type MensagemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sala?: boolean | SalaDefaultArgs<ExtArgs>
   }
@@ -6236,6 +6281,9 @@ export namespace Prisma {
       id: number
       msg: string
       salaId: number
+      senderId: string
+      timestamp: Date
+      type: $Enums.MessageType
     }, ExtArgs["result"]["mensagem"]>
     composites: {}
   }
@@ -6663,6 +6711,9 @@ export namespace Prisma {
     readonly id: FieldRef<"Mensagem", 'Int'>
     readonly msg: FieldRef<"Mensagem", 'String'>
     readonly salaId: FieldRef<"Mensagem", 'Int'>
+    readonly senderId: FieldRef<"Mensagem", 'String'>
+    readonly timestamp: FieldRef<"Mensagem", 'DateTime'>
+    readonly type: FieldRef<"Mensagem", 'MessageType'>
   }
     
 
@@ -8202,8 +8253,8 @@ export namespace Prisma {
     nome: 'nome',
     tel: 'tel',
     email: 'email',
-    working: 'working',
-    funcao: 'funcao'
+    funcao: 'funcao',
+    working: 'working'
   };
 
   export type FuncionarioScalarFieldEnum = (typeof FuncionarioScalarFieldEnum)[keyof typeof FuncionarioScalarFieldEnum]
@@ -8235,7 +8286,10 @@ export namespace Prisma {
   export const MensagemScalarFieldEnum: {
     id: 'id',
     msg: 'msg',
-    salaId: 'salaId'
+    salaId: 'salaId',
+    senderId: 'senderId',
+    timestamp: 'timestamp',
+    type: 'type'
   };
 
   export type MensagemScalarFieldEnum = (typeof MensagemScalarFieldEnum)[keyof typeof MensagemScalarFieldEnum]
@@ -8316,13 +8370,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
-    
-
-
-  /**
    * Reference to a field of type 'Funcao'
    */
   export type EnumFuncaoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Funcao'>
@@ -8333,6 +8380,13 @@ export namespace Prisma {
    * Reference to a field of type 'Funcao[]'
    */
   export type ListEnumFuncaoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Funcao[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -8379,6 +8433,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'MessageType'
+   */
+  export type EnumMessageTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MessageType'>
+    
+
+
+  /**
+   * Reference to a field of type 'MessageType[]'
+   */
+  export type ListEnumMessageTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MessageType[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Status'
    */
   export type EnumStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Status'>
@@ -8406,9 +8474,9 @@ export namespace Prisma {
     email?: StringFilter<"Cliente"> | string
     plano?: EnumPlanoFilter<"Cliente"> | $Enums.Plano
     vencimento?: FloatFilter<"Cliente"> | number
-    salas?: SalaListRelationFilter
     agendamentos?: AgendamentoListRelationFilter
     enderecos?: EnderecoListRelationFilter
+    salas?: SalaListRelationFilter
   }
 
   export type ClienteOrderByWithRelationInput = {
@@ -8419,9 +8487,9 @@ export namespace Prisma {
     email?: SortOrder
     plano?: SortOrder
     vencimento?: SortOrder
-    salas?: SalaOrderByRelationAggregateInput
     agendamentos?: AgendamentoOrderByRelationAggregateInput
     enderecos?: EnderecoOrderByRelationAggregateInput
+    salas?: SalaOrderByRelationAggregateInput
   }
 
   export type ClienteWhereUniqueInput = Prisma.AtLeast<{
@@ -8435,9 +8503,9 @@ export namespace Prisma {
     email?: StringFilter<"Cliente"> | string
     plano?: EnumPlanoFilter<"Cliente"> | $Enums.Plano
     vencimento?: FloatFilter<"Cliente"> | number
-    salas?: SalaListRelationFilter
     agendamentos?: AgendamentoListRelationFilter
     enderecos?: EnderecoListRelationFilter
+    salas?: SalaListRelationFilter
   }, "cpf">
 
   export type ClienteOrderByWithAggregationInput = {
@@ -8477,8 +8545,8 @@ export namespace Prisma {
     nome?: StringFilter<"Funcionario"> | string
     tel?: StringFilter<"Funcionario"> | string
     email?: StringFilter<"Funcionario"> | string
-    working?: BoolFilter<"Funcionario"> | boolean
     funcao?: EnumFuncaoFilter<"Funcionario"> | $Enums.Funcao
+    working?: BoolFilter<"Funcionario"> | boolean
     salas?: SalaListRelationFilter
   }
 
@@ -8488,8 +8556,8 @@ export namespace Prisma {
     nome?: SortOrder
     tel?: SortOrder
     email?: SortOrder
-    working?: SortOrder
     funcao?: SortOrder
+    working?: SortOrder
     salas?: SalaOrderByRelationAggregateInput
   }
 
@@ -8502,8 +8570,8 @@ export namespace Prisma {
     nome?: StringFilter<"Funcionario"> | string
     tel?: StringFilter<"Funcionario"> | string
     email?: StringFilter<"Funcionario"> | string
-    working?: BoolFilter<"Funcionario"> | boolean
     funcao?: EnumFuncaoFilter<"Funcionario"> | $Enums.Funcao
+    working?: BoolFilter<"Funcionario"> | boolean
     salas?: SalaListRelationFilter
   }, "cpf">
 
@@ -8513,8 +8581,8 @@ export namespace Prisma {
     nome?: SortOrder
     tel?: SortOrder
     email?: SortOrder
-    working?: SortOrder
     funcao?: SortOrder
+    working?: SortOrder
     _count?: FuncionarioCountOrderByAggregateInput
     _max?: FuncionarioMaxOrderByAggregateInput
     _min?: FuncionarioMinOrderByAggregateInput
@@ -8529,8 +8597,8 @@ export namespace Prisma {
     nome?: StringWithAggregatesFilter<"Funcionario"> | string
     tel?: StringWithAggregatesFilter<"Funcionario"> | string
     email?: StringWithAggregatesFilter<"Funcionario"> | string
-    working?: BoolWithAggregatesFilter<"Funcionario"> | boolean
     funcao?: EnumFuncaoWithAggregatesFilter<"Funcionario"> | $Enums.Funcao
+    working?: BoolWithAggregatesFilter<"Funcionario"> | boolean
   }
 
   export type EnderecoWhereInput = {
@@ -8604,9 +8672,9 @@ export namespace Prisma {
     clienteId?: StringFilter<"Sala"> | string
     funcionarioId?: StringFilter<"Sala"> | string
     status?: EnumStatusSalaFilter<"Sala"> | $Enums.StatusSala
+    mensagens?: MensagemListRelationFilter
     cliente?: XOR<ClienteScalarRelationFilter, ClienteWhereInput>
     funcionario?: XOR<FuncionarioScalarRelationFilter, FuncionarioWhereInput>
-    mensagens?: MensagemListRelationFilter
   }
 
   export type SalaOrderByWithRelationInput = {
@@ -8615,9 +8683,9 @@ export namespace Prisma {
     clienteId?: SortOrder
     funcionarioId?: SortOrder
     status?: SortOrder
+    mensagens?: MensagemOrderByRelationAggregateInput
     cliente?: ClienteOrderByWithRelationInput
     funcionario?: FuncionarioOrderByWithRelationInput
-    mensagens?: MensagemOrderByRelationAggregateInput
   }
 
   export type SalaWhereUniqueInput = Prisma.AtLeast<{
@@ -8629,9 +8697,9 @@ export namespace Prisma {
     clienteId?: StringFilter<"Sala"> | string
     funcionarioId?: StringFilter<"Sala"> | string
     status?: EnumStatusSalaFilter<"Sala"> | $Enums.StatusSala
+    mensagens?: MensagemListRelationFilter
     cliente?: XOR<ClienteScalarRelationFilter, ClienteWhereInput>
     funcionario?: XOR<FuncionarioScalarRelationFilter, FuncionarioWhereInput>
-    mensagens?: MensagemListRelationFilter
   }, "id">
 
   export type SalaOrderByWithAggregationInput = {
@@ -8665,6 +8733,9 @@ export namespace Prisma {
     id?: IntFilter<"Mensagem"> | number
     msg?: StringFilter<"Mensagem"> | string
     salaId?: IntFilter<"Mensagem"> | number
+    senderId?: StringFilter<"Mensagem"> | string
+    timestamp?: DateTimeFilter<"Mensagem"> | Date | string
+    type?: EnumMessageTypeFilter<"Mensagem"> | $Enums.MessageType
     sala?: XOR<SalaScalarRelationFilter, SalaWhereInput>
   }
 
@@ -8672,6 +8743,9 @@ export namespace Prisma {
     id?: SortOrder
     msg?: SortOrder
     salaId?: SortOrder
+    senderId?: SortOrder
+    timestamp?: SortOrder
+    type?: SortOrder
     sala?: SalaOrderByWithRelationInput
   }
 
@@ -8682,6 +8756,9 @@ export namespace Prisma {
     NOT?: MensagemWhereInput | MensagemWhereInput[]
     msg?: StringFilter<"Mensagem"> | string
     salaId?: IntFilter<"Mensagem"> | number
+    senderId?: StringFilter<"Mensagem"> | string
+    timestamp?: DateTimeFilter<"Mensagem"> | Date | string
+    type?: EnumMessageTypeFilter<"Mensagem"> | $Enums.MessageType
     sala?: XOR<SalaScalarRelationFilter, SalaWhereInput>
   }, "id">
 
@@ -8689,6 +8766,9 @@ export namespace Prisma {
     id?: SortOrder
     msg?: SortOrder
     salaId?: SortOrder
+    senderId?: SortOrder
+    timestamp?: SortOrder
+    type?: SortOrder
     _count?: MensagemCountOrderByAggregateInput
     _avg?: MensagemAvgOrderByAggregateInput
     _max?: MensagemMaxOrderByAggregateInput
@@ -8703,6 +8783,9 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Mensagem"> | number
     msg?: StringWithAggregatesFilter<"Mensagem"> | string
     salaId?: IntWithAggregatesFilter<"Mensagem"> | number
+    senderId?: StringWithAggregatesFilter<"Mensagem"> | string
+    timestamp?: DateTimeWithAggregatesFilter<"Mensagem"> | Date | string
+    type?: EnumMessageTypeWithAggregatesFilter<"Mensagem"> | $Enums.MessageType
   }
 
   export type AgendamentoWhereInput = {
@@ -8770,9 +8853,9 @@ export namespace Prisma {
     email: string
     plano: $Enums.Plano
     vencimento: number
-    salas?: SalaCreateNestedManyWithoutClienteInput
     agendamentos?: AgendamentoCreateNestedManyWithoutClienteInput
     enderecos?: EnderecoCreateNestedManyWithoutClienteInput
+    salas?: SalaCreateNestedManyWithoutClienteInput
   }
 
   export type ClienteUncheckedCreateInput = {
@@ -8783,9 +8866,9 @@ export namespace Prisma {
     email: string
     plano: $Enums.Plano
     vencimento: number
-    salas?: SalaUncheckedCreateNestedManyWithoutClienteInput
     agendamentos?: AgendamentoUncheckedCreateNestedManyWithoutClienteInput
     enderecos?: EnderecoUncheckedCreateNestedManyWithoutClienteInput
+    salas?: SalaUncheckedCreateNestedManyWithoutClienteInput
   }
 
   export type ClienteUpdateInput = {
@@ -8796,9 +8879,9 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     plano?: EnumPlanoFieldUpdateOperationsInput | $Enums.Plano
     vencimento?: FloatFieldUpdateOperationsInput | number
-    salas?: SalaUpdateManyWithoutClienteNestedInput
     agendamentos?: AgendamentoUpdateManyWithoutClienteNestedInput
     enderecos?: EnderecoUpdateManyWithoutClienteNestedInput
+    salas?: SalaUpdateManyWithoutClienteNestedInput
   }
 
   export type ClienteUncheckedUpdateInput = {
@@ -8809,9 +8892,9 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     plano?: EnumPlanoFieldUpdateOperationsInput | $Enums.Plano
     vencimento?: FloatFieldUpdateOperationsInput | number
-    salas?: SalaUncheckedUpdateManyWithoutClienteNestedInput
     agendamentos?: AgendamentoUncheckedUpdateManyWithoutClienteNestedInput
     enderecos?: EnderecoUncheckedUpdateManyWithoutClienteNestedInput
+    salas?: SalaUncheckedUpdateManyWithoutClienteNestedInput
   }
 
   export type ClienteCreateManyInput = {
@@ -8850,8 +8933,8 @@ export namespace Prisma {
     nome: string
     tel: string
     email: string
-    working?: boolean
     funcao: $Enums.Funcao
+    working?: boolean
     salas?: SalaCreateNestedManyWithoutFuncionarioInput
   }
 
@@ -8861,8 +8944,8 @@ export namespace Prisma {
     nome: string
     tel: string
     email: string
-    working?: boolean
     funcao: $Enums.Funcao
+    working?: boolean
     salas?: SalaUncheckedCreateNestedManyWithoutFuncionarioInput
   }
 
@@ -8872,8 +8955,8 @@ export namespace Prisma {
     nome?: StringFieldUpdateOperationsInput | string
     tel?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    working?: BoolFieldUpdateOperationsInput | boolean
     funcao?: EnumFuncaoFieldUpdateOperationsInput | $Enums.Funcao
+    working?: BoolFieldUpdateOperationsInput | boolean
     salas?: SalaUpdateManyWithoutFuncionarioNestedInput
   }
 
@@ -8883,8 +8966,8 @@ export namespace Prisma {
     nome?: StringFieldUpdateOperationsInput | string
     tel?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    working?: BoolFieldUpdateOperationsInput | boolean
     funcao?: EnumFuncaoFieldUpdateOperationsInput | $Enums.Funcao
+    working?: BoolFieldUpdateOperationsInput | boolean
     salas?: SalaUncheckedUpdateManyWithoutFuncionarioNestedInput
   }
 
@@ -8894,8 +8977,8 @@ export namespace Prisma {
     nome: string
     tel: string
     email: string
-    working?: boolean
     funcao: $Enums.Funcao
+    working?: boolean
   }
 
   export type FuncionarioUpdateManyMutationInput = {
@@ -8904,8 +8987,8 @@ export namespace Prisma {
     nome?: StringFieldUpdateOperationsInput | string
     tel?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    working?: BoolFieldUpdateOperationsInput | boolean
     funcao?: EnumFuncaoFieldUpdateOperationsInput | $Enums.Funcao
+    working?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type FuncionarioUncheckedUpdateManyInput = {
@@ -8914,8 +8997,8 @@ export namespace Prisma {
     nome?: StringFieldUpdateOperationsInput | string
     tel?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    working?: BoolFieldUpdateOperationsInput | boolean
     funcao?: EnumFuncaoFieldUpdateOperationsInput | $Enums.Funcao
+    working?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type EnderecoCreateInput = {
@@ -8980,9 +9063,9 @@ export namespace Prisma {
   export type SalaCreateInput = {
     nome: string
     status: $Enums.StatusSala
+    mensagens?: MensagemCreateNestedManyWithoutSalaInput
     cliente: ClienteCreateNestedOneWithoutSalasInput
     funcionario: FuncionarioCreateNestedOneWithoutSalasInput
-    mensagens?: MensagemCreateNestedManyWithoutSalaInput
   }
 
   export type SalaUncheckedCreateInput = {
@@ -8997,9 +9080,9 @@ export namespace Prisma {
   export type SalaUpdateInput = {
     nome?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusSalaFieldUpdateOperationsInput | $Enums.StatusSala
+    mensagens?: MensagemUpdateManyWithoutSalaNestedInput
     cliente?: ClienteUpdateOneRequiredWithoutSalasNestedInput
     funcionario?: FuncionarioUpdateOneRequiredWithoutSalasNestedInput
-    mensagens?: MensagemUpdateManyWithoutSalaNestedInput
   }
 
   export type SalaUncheckedUpdateInput = {
@@ -9034,6 +9117,9 @@ export namespace Prisma {
 
   export type MensagemCreateInput = {
     msg: string
+    senderId: string
+    timestamp?: Date | string
+    type: $Enums.MessageType
     sala: SalaCreateNestedOneWithoutMensagensInput
   }
 
@@ -9041,10 +9127,16 @@ export namespace Prisma {
     id?: number
     msg: string
     salaId: number
+    senderId: string
+    timestamp?: Date | string
+    type: $Enums.MessageType
   }
 
   export type MensagemUpdateInput = {
     msg?: StringFieldUpdateOperationsInput | string
+    senderId?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    type?: EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
     sala?: SalaUpdateOneRequiredWithoutMensagensNestedInput
   }
 
@@ -9052,22 +9144,34 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     msg?: StringFieldUpdateOperationsInput | string
     salaId?: IntFieldUpdateOperationsInput | number
+    senderId?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    type?: EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
   }
 
   export type MensagemCreateManyInput = {
     id?: number
     msg: string
     salaId: number
+    senderId: string
+    timestamp?: Date | string
+    type: $Enums.MessageType
   }
 
   export type MensagemUpdateManyMutationInput = {
     msg?: StringFieldUpdateOperationsInput | string
+    senderId?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    type?: EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
   }
 
   export type MensagemUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     msg?: StringFieldUpdateOperationsInput | string
     salaId?: IntFieldUpdateOperationsInput | number
+    senderId?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    type?: EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
   }
 
   export type AgendamentoCreateInput = {
@@ -9155,12 +9259,6 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
-  export type SalaListRelationFilter = {
-    every?: SalaWhereInput
-    some?: SalaWhereInput
-    none?: SalaWhereInput
-  }
-
   export type AgendamentoListRelationFilter = {
     every?: AgendamentoWhereInput
     some?: AgendamentoWhereInput
@@ -9173,8 +9271,10 @@ export namespace Prisma {
     none?: EnderecoWhereInput
   }
 
-  export type SalaOrderByRelationAggregateInput = {
-    _count?: SortOrder
+  export type SalaListRelationFilter = {
+    every?: SalaWhereInput
+    some?: SalaWhereInput
+    none?: SalaWhereInput
   }
 
   export type AgendamentoOrderByRelationAggregateInput = {
@@ -9182,6 +9282,10 @@ export namespace Prisma {
   }
 
   export type EnderecoOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SalaOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -9267,16 +9371,16 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type EnumFuncaoFilter<$PrismaModel = never> = {
     equals?: $Enums.Funcao | EnumFuncaoFieldRefInput<$PrismaModel>
     in?: $Enums.Funcao[] | ListEnumFuncaoFieldRefInput<$PrismaModel>
     notIn?: $Enums.Funcao[] | ListEnumFuncaoFieldRefInput<$PrismaModel>
     not?: NestedEnumFuncaoFilter<$PrismaModel> | $Enums.Funcao
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type FuncionarioCountOrderByAggregateInput = {
@@ -9285,8 +9389,8 @@ export namespace Prisma {
     nome?: SortOrder
     tel?: SortOrder
     email?: SortOrder
-    working?: SortOrder
     funcao?: SortOrder
+    working?: SortOrder
   }
 
   export type FuncionarioMaxOrderByAggregateInput = {
@@ -9295,8 +9399,8 @@ export namespace Prisma {
     nome?: SortOrder
     tel?: SortOrder
     email?: SortOrder
-    working?: SortOrder
     funcao?: SortOrder
+    working?: SortOrder
   }
 
   export type FuncionarioMinOrderByAggregateInput = {
@@ -9305,16 +9409,8 @@ export namespace Prisma {
     nome?: SortOrder
     tel?: SortOrder
     email?: SortOrder
-    working?: SortOrder
     funcao?: SortOrder
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
+    working?: SortOrder
   }
 
   export type EnumFuncaoWithAggregatesFilter<$PrismaModel = never> = {
@@ -9325,6 +9421,14 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumFuncaoFilter<$PrismaModel>
     _max?: NestedEnumFuncaoFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -9401,15 +9505,15 @@ export namespace Prisma {
     not?: NestedEnumStatusSalaFilter<$PrismaModel> | $Enums.StatusSala
   }
 
-  export type FuncionarioScalarRelationFilter = {
-    is?: FuncionarioWhereInput
-    isNot?: FuncionarioWhereInput
-  }
-
   export type MensagemListRelationFilter = {
     every?: MensagemWhereInput
     some?: MensagemWhereInput
     none?: MensagemWhereInput
+  }
+
+  export type FuncionarioScalarRelationFilter = {
+    is?: FuncionarioWhereInput
+    isNot?: FuncionarioWhereInput
   }
 
   export type MensagemOrderByRelationAggregateInput = {
@@ -9458,6 +9562,24 @@ export namespace Prisma {
     _max?: NestedEnumStatusSalaFilter<$PrismaModel>
   }
 
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type EnumMessageTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.MessageType | EnumMessageTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.MessageType[] | ListEnumMessageTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MessageType[] | ListEnumMessageTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumMessageTypeFilter<$PrismaModel> | $Enums.MessageType
+  }
+
   export type SalaScalarRelationFilter = {
     is?: SalaWhereInput
     isNot?: SalaWhereInput
@@ -9467,6 +9589,9 @@ export namespace Prisma {
     id?: SortOrder
     msg?: SortOrder
     salaId?: SortOrder
+    senderId?: SortOrder
+    timestamp?: SortOrder
+    type?: SortOrder
   }
 
   export type MensagemAvgOrderByAggregateInput = {
@@ -9478,12 +9603,18 @@ export namespace Prisma {
     id?: SortOrder
     msg?: SortOrder
     salaId?: SortOrder
+    senderId?: SortOrder
+    timestamp?: SortOrder
+    type?: SortOrder
   }
 
   export type MensagemMinOrderByAggregateInput = {
     id?: SortOrder
     msg?: SortOrder
     salaId?: SortOrder
+    senderId?: SortOrder
+    timestamp?: SortOrder
+    type?: SortOrder
   }
 
   export type MensagemSumOrderByAggregateInput = {
@@ -9491,7 +9622,7 @@ export namespace Prisma {
     salaId?: SortOrder
   }
 
-  export type DateTimeFilter<$PrismaModel = never> = {
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
     notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -9499,7 +9630,20 @@ export namespace Prisma {
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type EnumMessageTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MessageType | EnumMessageTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.MessageType[] | ListEnumMessageTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MessageType[] | ListEnumMessageTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumMessageTypeWithAggregatesFilter<$PrismaModel> | $Enums.MessageType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMessageTypeFilter<$PrismaModel>
+    _max?: NestedEnumMessageTypeFilter<$PrismaModel>
   }
 
   export type EnumStatusFilter<$PrismaModel = never> = {
@@ -9541,20 +9685,6 @@ export namespace Prisma {
     id?: SortOrder
   }
 
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
   export type EnumStatusWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
     in?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
@@ -9563,13 +9693,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumStatusFilter<$PrismaModel>
     _max?: NestedEnumStatusFilter<$PrismaModel>
-  }
-
-  export type SalaCreateNestedManyWithoutClienteInput = {
-    create?: XOR<SalaCreateWithoutClienteInput, SalaUncheckedCreateWithoutClienteInput> | SalaCreateWithoutClienteInput[] | SalaUncheckedCreateWithoutClienteInput[]
-    connectOrCreate?: SalaCreateOrConnectWithoutClienteInput | SalaCreateOrConnectWithoutClienteInput[]
-    createMany?: SalaCreateManyClienteInputEnvelope
-    connect?: SalaWhereUniqueInput | SalaWhereUniqueInput[]
   }
 
   export type AgendamentoCreateNestedManyWithoutClienteInput = {
@@ -9586,7 +9709,7 @@ export namespace Prisma {
     connect?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
   }
 
-  export type SalaUncheckedCreateNestedManyWithoutClienteInput = {
+  export type SalaCreateNestedManyWithoutClienteInput = {
     create?: XOR<SalaCreateWithoutClienteInput, SalaUncheckedCreateWithoutClienteInput> | SalaCreateWithoutClienteInput[] | SalaUncheckedCreateWithoutClienteInput[]
     connectOrCreate?: SalaCreateOrConnectWithoutClienteInput | SalaCreateOrConnectWithoutClienteInput[]
     createMany?: SalaCreateManyClienteInputEnvelope
@@ -9607,6 +9730,13 @@ export namespace Prisma {
     connect?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
   }
 
+  export type SalaUncheckedCreateNestedManyWithoutClienteInput = {
+    create?: XOR<SalaCreateWithoutClienteInput, SalaUncheckedCreateWithoutClienteInput> | SalaCreateWithoutClienteInput[] | SalaUncheckedCreateWithoutClienteInput[]
+    connectOrCreate?: SalaCreateOrConnectWithoutClienteInput | SalaCreateOrConnectWithoutClienteInput[]
+    createMany?: SalaCreateManyClienteInputEnvelope
+    connect?: SalaWhereUniqueInput | SalaWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -9621,20 +9751,6 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
-  }
-
-  export type SalaUpdateManyWithoutClienteNestedInput = {
-    create?: XOR<SalaCreateWithoutClienteInput, SalaUncheckedCreateWithoutClienteInput> | SalaCreateWithoutClienteInput[] | SalaUncheckedCreateWithoutClienteInput[]
-    connectOrCreate?: SalaCreateOrConnectWithoutClienteInput | SalaCreateOrConnectWithoutClienteInput[]
-    upsert?: SalaUpsertWithWhereUniqueWithoutClienteInput | SalaUpsertWithWhereUniqueWithoutClienteInput[]
-    createMany?: SalaCreateManyClienteInputEnvelope
-    set?: SalaWhereUniqueInput | SalaWhereUniqueInput[]
-    disconnect?: SalaWhereUniqueInput | SalaWhereUniqueInput[]
-    delete?: SalaWhereUniqueInput | SalaWhereUniqueInput[]
-    connect?: SalaWhereUniqueInput | SalaWhereUniqueInput[]
-    update?: SalaUpdateWithWhereUniqueWithoutClienteInput | SalaUpdateWithWhereUniqueWithoutClienteInput[]
-    updateMany?: SalaUpdateManyWithWhereWithoutClienteInput | SalaUpdateManyWithWhereWithoutClienteInput[]
-    deleteMany?: SalaScalarWhereInput | SalaScalarWhereInput[]
   }
 
   export type AgendamentoUpdateManyWithoutClienteNestedInput = {
@@ -9665,7 +9781,7 @@ export namespace Prisma {
     deleteMany?: EnderecoScalarWhereInput | EnderecoScalarWhereInput[]
   }
 
-  export type SalaUncheckedUpdateManyWithoutClienteNestedInput = {
+  export type SalaUpdateManyWithoutClienteNestedInput = {
     create?: XOR<SalaCreateWithoutClienteInput, SalaUncheckedCreateWithoutClienteInput> | SalaCreateWithoutClienteInput[] | SalaUncheckedCreateWithoutClienteInput[]
     connectOrCreate?: SalaCreateOrConnectWithoutClienteInput | SalaCreateOrConnectWithoutClienteInput[]
     upsert?: SalaUpsertWithWhereUniqueWithoutClienteInput | SalaUpsertWithWhereUniqueWithoutClienteInput[]
@@ -9707,6 +9823,20 @@ export namespace Prisma {
     deleteMany?: EnderecoScalarWhereInput | EnderecoScalarWhereInput[]
   }
 
+  export type SalaUncheckedUpdateManyWithoutClienteNestedInput = {
+    create?: XOR<SalaCreateWithoutClienteInput, SalaUncheckedCreateWithoutClienteInput> | SalaCreateWithoutClienteInput[] | SalaUncheckedCreateWithoutClienteInput[]
+    connectOrCreate?: SalaCreateOrConnectWithoutClienteInput | SalaCreateOrConnectWithoutClienteInput[]
+    upsert?: SalaUpsertWithWhereUniqueWithoutClienteInput | SalaUpsertWithWhereUniqueWithoutClienteInput[]
+    createMany?: SalaCreateManyClienteInputEnvelope
+    set?: SalaWhereUniqueInput | SalaWhereUniqueInput[]
+    disconnect?: SalaWhereUniqueInput | SalaWhereUniqueInput[]
+    delete?: SalaWhereUniqueInput | SalaWhereUniqueInput[]
+    connect?: SalaWhereUniqueInput | SalaWhereUniqueInput[]
+    update?: SalaUpdateWithWhereUniqueWithoutClienteInput | SalaUpdateWithWhereUniqueWithoutClienteInput[]
+    updateMany?: SalaUpdateManyWithWhereWithoutClienteInput | SalaUpdateManyWithWhereWithoutClienteInput[]
+    deleteMany?: SalaScalarWhereInput | SalaScalarWhereInput[]
+  }
+
   export type SalaCreateNestedManyWithoutFuncionarioInput = {
     create?: XOR<SalaCreateWithoutFuncionarioInput, SalaUncheckedCreateWithoutFuncionarioInput> | SalaCreateWithoutFuncionarioInput[] | SalaUncheckedCreateWithoutFuncionarioInput[]
     connectOrCreate?: SalaCreateOrConnectWithoutFuncionarioInput | SalaCreateOrConnectWithoutFuncionarioInput[]
@@ -9721,12 +9851,12 @@ export namespace Prisma {
     connect?: SalaWhereUniqueInput | SalaWhereUniqueInput[]
   }
 
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
-  }
-
   export type EnumFuncaoFieldUpdateOperationsInput = {
     set?: $Enums.Funcao
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
   export type SalaUpdateManyWithoutFuncionarioNestedInput = {
@@ -9779,6 +9909,13 @@ export namespace Prisma {
     divide?: number
   }
 
+  export type MensagemCreateNestedManyWithoutSalaInput = {
+    create?: XOR<MensagemCreateWithoutSalaInput, MensagemUncheckedCreateWithoutSalaInput> | MensagemCreateWithoutSalaInput[] | MensagemUncheckedCreateWithoutSalaInput[]
+    connectOrCreate?: MensagemCreateOrConnectWithoutSalaInput | MensagemCreateOrConnectWithoutSalaInput[]
+    createMany?: MensagemCreateManySalaInputEnvelope
+    connect?: MensagemWhereUniqueInput | MensagemWhereUniqueInput[]
+  }
+
   export type ClienteCreateNestedOneWithoutSalasInput = {
     create?: XOR<ClienteCreateWithoutSalasInput, ClienteUncheckedCreateWithoutSalasInput>
     connectOrCreate?: ClienteCreateOrConnectWithoutSalasInput
@@ -9791,13 +9928,6 @@ export namespace Prisma {
     connect?: FuncionarioWhereUniqueInput
   }
 
-  export type MensagemCreateNestedManyWithoutSalaInput = {
-    create?: XOR<MensagemCreateWithoutSalaInput, MensagemUncheckedCreateWithoutSalaInput> | MensagemCreateWithoutSalaInput[] | MensagemUncheckedCreateWithoutSalaInput[]
-    connectOrCreate?: MensagemCreateOrConnectWithoutSalaInput | MensagemCreateOrConnectWithoutSalaInput[]
-    createMany?: MensagemCreateManySalaInputEnvelope
-    connect?: MensagemWhereUniqueInput | MensagemWhereUniqueInput[]
-  }
-
   export type MensagemUncheckedCreateNestedManyWithoutSalaInput = {
     create?: XOR<MensagemCreateWithoutSalaInput, MensagemUncheckedCreateWithoutSalaInput> | MensagemCreateWithoutSalaInput[] | MensagemUncheckedCreateWithoutSalaInput[]
     connectOrCreate?: MensagemCreateOrConnectWithoutSalaInput | MensagemCreateOrConnectWithoutSalaInput[]
@@ -9807,6 +9937,20 @@ export namespace Prisma {
 
   export type EnumStatusSalaFieldUpdateOperationsInput = {
     set?: $Enums.StatusSala
+  }
+
+  export type MensagemUpdateManyWithoutSalaNestedInput = {
+    create?: XOR<MensagemCreateWithoutSalaInput, MensagemUncheckedCreateWithoutSalaInput> | MensagemCreateWithoutSalaInput[] | MensagemUncheckedCreateWithoutSalaInput[]
+    connectOrCreate?: MensagemCreateOrConnectWithoutSalaInput | MensagemCreateOrConnectWithoutSalaInput[]
+    upsert?: MensagemUpsertWithWhereUniqueWithoutSalaInput | MensagemUpsertWithWhereUniqueWithoutSalaInput[]
+    createMany?: MensagemCreateManySalaInputEnvelope
+    set?: MensagemWhereUniqueInput | MensagemWhereUniqueInput[]
+    disconnect?: MensagemWhereUniqueInput | MensagemWhereUniqueInput[]
+    delete?: MensagemWhereUniqueInput | MensagemWhereUniqueInput[]
+    connect?: MensagemWhereUniqueInput | MensagemWhereUniqueInput[]
+    update?: MensagemUpdateWithWhereUniqueWithoutSalaInput | MensagemUpdateWithWhereUniqueWithoutSalaInput[]
+    updateMany?: MensagemUpdateManyWithWhereWithoutSalaInput | MensagemUpdateManyWithWhereWithoutSalaInput[]
+    deleteMany?: MensagemScalarWhereInput | MensagemScalarWhereInput[]
   }
 
   export type ClienteUpdateOneRequiredWithoutSalasNestedInput = {
@@ -9823,20 +9967,6 @@ export namespace Prisma {
     upsert?: FuncionarioUpsertWithoutSalasInput
     connect?: FuncionarioWhereUniqueInput
     update?: XOR<XOR<FuncionarioUpdateToOneWithWhereWithoutSalasInput, FuncionarioUpdateWithoutSalasInput>, FuncionarioUncheckedUpdateWithoutSalasInput>
-  }
-
-  export type MensagemUpdateManyWithoutSalaNestedInput = {
-    create?: XOR<MensagemCreateWithoutSalaInput, MensagemUncheckedCreateWithoutSalaInput> | MensagemCreateWithoutSalaInput[] | MensagemUncheckedCreateWithoutSalaInput[]
-    connectOrCreate?: MensagemCreateOrConnectWithoutSalaInput | MensagemCreateOrConnectWithoutSalaInput[]
-    upsert?: MensagemUpsertWithWhereUniqueWithoutSalaInput | MensagemUpsertWithWhereUniqueWithoutSalaInput[]
-    createMany?: MensagemCreateManySalaInputEnvelope
-    set?: MensagemWhereUniqueInput | MensagemWhereUniqueInput[]
-    disconnect?: MensagemWhereUniqueInput | MensagemWhereUniqueInput[]
-    delete?: MensagemWhereUniqueInput | MensagemWhereUniqueInput[]
-    connect?: MensagemWhereUniqueInput | MensagemWhereUniqueInput[]
-    update?: MensagemUpdateWithWhereUniqueWithoutSalaInput | MensagemUpdateWithWhereUniqueWithoutSalaInput[]
-    updateMany?: MensagemUpdateManyWithWhereWithoutSalaInput | MensagemUpdateManyWithWhereWithoutSalaInput[]
-    deleteMany?: MensagemScalarWhereInput | MensagemScalarWhereInput[]
   }
 
   export type MensagemUncheckedUpdateManyWithoutSalaNestedInput = {
@@ -9859,6 +9989,14 @@ export namespace Prisma {
     connect?: SalaWhereUniqueInput
   }
 
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
+  export type EnumMessageTypeFieldUpdateOperationsInput = {
+    set?: $Enums.MessageType
+  }
+
   export type SalaUpdateOneRequiredWithoutMensagensNestedInput = {
     create?: XOR<SalaCreateWithoutMensagensInput, SalaUncheckedCreateWithoutMensagensInput>
     connectOrCreate?: SalaCreateOrConnectWithoutMensagensInput
@@ -9871,10 +10009,6 @@ export namespace Prisma {
     create?: XOR<ClienteCreateWithoutAgendamentosInput, ClienteUncheckedCreateWithoutAgendamentosInput>
     connectOrCreate?: ClienteCreateOrConnectWithoutAgendamentosInput
     connect?: ClienteWhereUniqueInput
-  }
-
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
   }
 
   export type EnumStatusFieldUpdateOperationsInput = {
@@ -9975,11 +10109,6 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type NestedEnumFuncaoFilter<$PrismaModel = never> = {
     equals?: $Enums.Funcao | EnumFuncaoFieldRefInput<$PrismaModel>
     in?: $Enums.Funcao[] | ListEnumFuncaoFieldRefInput<$PrismaModel>
@@ -9987,12 +10116,9 @@ export namespace Prisma {
     not?: NestedEnumFuncaoFilter<$PrismaModel> | $Enums.Funcao
   }
 
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+  export type NestedBoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type NestedEnumFuncaoWithAggregatesFilter<$PrismaModel = never> = {
@@ -10003,6 +10129,14 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumFuncaoFilter<$PrismaModel>
     _max?: NestedEnumFuncaoFilter<$PrismaModel>
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -10049,11 +10183,11 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type NestedEnumStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumStatusFilter<$PrismaModel> | $Enums.Status
+  export type NestedEnumMessageTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.MessageType | EnumMessageTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.MessageType[] | ListEnumMessageTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MessageType[] | ListEnumMessageTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumMessageTypeFilter<$PrismaModel> | $Enums.MessageType
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -10070,6 +10204,23 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedEnumMessageTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MessageType | EnumMessageTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.MessageType[] | ListEnumMessageTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MessageType[] | ListEnumMessageTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumMessageTypeWithAggregatesFilter<$PrismaModel> | $Enums.MessageType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMessageTypeFilter<$PrismaModel>
+    _max?: NestedEnumMessageTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusFilter<$PrismaModel> | $Enums.Status
+  }
+
   export type NestedEnumStatusWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
     in?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
@@ -10078,31 +10229,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumStatusFilter<$PrismaModel>
     _max?: NestedEnumStatusFilter<$PrismaModel>
-  }
-
-  export type SalaCreateWithoutClienteInput = {
-    nome: string
-    status: $Enums.StatusSala
-    funcionario: FuncionarioCreateNestedOneWithoutSalasInput
-    mensagens?: MensagemCreateNestedManyWithoutSalaInput
-  }
-
-  export type SalaUncheckedCreateWithoutClienteInput = {
-    id?: number
-    nome: string
-    funcionarioId: string
-    status: $Enums.StatusSala
-    mensagens?: MensagemUncheckedCreateNestedManyWithoutSalaInput
-  }
-
-  export type SalaCreateOrConnectWithoutClienteInput = {
-    where: SalaWhereUniqueInput
-    create: XOR<SalaCreateWithoutClienteInput, SalaUncheckedCreateWithoutClienteInput>
-  }
-
-  export type SalaCreateManyClienteInputEnvelope = {
-    data: SalaCreateManyClienteInput | SalaCreateManyClienteInput[]
-    skipDuplicates?: boolean
   }
 
   export type AgendamentoCreateWithoutClienteInput = {
@@ -10153,31 +10279,29 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type SalaUpsertWithWhereUniqueWithoutClienteInput = {
+  export type SalaCreateWithoutClienteInput = {
+    nome: string
+    status: $Enums.StatusSala
+    mensagens?: MensagemCreateNestedManyWithoutSalaInput
+    funcionario: FuncionarioCreateNestedOneWithoutSalasInput
+  }
+
+  export type SalaUncheckedCreateWithoutClienteInput = {
+    id?: number
+    nome: string
+    funcionarioId: string
+    status: $Enums.StatusSala
+    mensagens?: MensagemUncheckedCreateNestedManyWithoutSalaInput
+  }
+
+  export type SalaCreateOrConnectWithoutClienteInput = {
     where: SalaWhereUniqueInput
-    update: XOR<SalaUpdateWithoutClienteInput, SalaUncheckedUpdateWithoutClienteInput>
     create: XOR<SalaCreateWithoutClienteInput, SalaUncheckedCreateWithoutClienteInput>
   }
 
-  export type SalaUpdateWithWhereUniqueWithoutClienteInput = {
-    where: SalaWhereUniqueInput
-    data: XOR<SalaUpdateWithoutClienteInput, SalaUncheckedUpdateWithoutClienteInput>
-  }
-
-  export type SalaUpdateManyWithWhereWithoutClienteInput = {
-    where: SalaScalarWhereInput
-    data: XOR<SalaUpdateManyMutationInput, SalaUncheckedUpdateManyWithoutClienteInput>
-  }
-
-  export type SalaScalarWhereInput = {
-    AND?: SalaScalarWhereInput | SalaScalarWhereInput[]
-    OR?: SalaScalarWhereInput[]
-    NOT?: SalaScalarWhereInput | SalaScalarWhereInput[]
-    id?: IntFilter<"Sala"> | number
-    nome?: StringFilter<"Sala"> | string
-    clienteId?: StringFilter<"Sala"> | string
-    funcionarioId?: StringFilter<"Sala"> | string
-    status?: EnumStatusSalaFilter<"Sala"> | $Enums.StatusSala
+  export type SalaCreateManyClienteInputEnvelope = {
+    data: SalaCreateManyClienteInput | SalaCreateManyClienteInput[]
+    skipDuplicates?: boolean
   }
 
   export type AgendamentoUpsertWithWhereUniqueWithoutClienteInput = {
@@ -10235,11 +10359,38 @@ export namespace Prisma {
     estado?: StringFilter<"Endereco"> | string
   }
 
+  export type SalaUpsertWithWhereUniqueWithoutClienteInput = {
+    where: SalaWhereUniqueInput
+    update: XOR<SalaUpdateWithoutClienteInput, SalaUncheckedUpdateWithoutClienteInput>
+    create: XOR<SalaCreateWithoutClienteInput, SalaUncheckedCreateWithoutClienteInput>
+  }
+
+  export type SalaUpdateWithWhereUniqueWithoutClienteInput = {
+    where: SalaWhereUniqueInput
+    data: XOR<SalaUpdateWithoutClienteInput, SalaUncheckedUpdateWithoutClienteInput>
+  }
+
+  export type SalaUpdateManyWithWhereWithoutClienteInput = {
+    where: SalaScalarWhereInput
+    data: XOR<SalaUpdateManyMutationInput, SalaUncheckedUpdateManyWithoutClienteInput>
+  }
+
+  export type SalaScalarWhereInput = {
+    AND?: SalaScalarWhereInput | SalaScalarWhereInput[]
+    OR?: SalaScalarWhereInput[]
+    NOT?: SalaScalarWhereInput | SalaScalarWhereInput[]
+    id?: IntFilter<"Sala"> | number
+    nome?: StringFilter<"Sala"> | string
+    clienteId?: StringFilter<"Sala"> | string
+    funcionarioId?: StringFilter<"Sala"> | string
+    status?: EnumStatusSalaFilter<"Sala"> | $Enums.StatusSala
+  }
+
   export type SalaCreateWithoutFuncionarioInput = {
     nome: string
     status: $Enums.StatusSala
-    cliente: ClienteCreateNestedOneWithoutSalasInput
     mensagens?: MensagemCreateNestedManyWithoutSalaInput
+    cliente: ClienteCreateNestedOneWithoutSalasInput
   }
 
   export type SalaUncheckedCreateWithoutFuncionarioInput = {
@@ -10284,8 +10435,8 @@ export namespace Prisma {
     email: string
     plano: $Enums.Plano
     vencimento: number
-    salas?: SalaCreateNestedManyWithoutClienteInput
     agendamentos?: AgendamentoCreateNestedManyWithoutClienteInput
+    salas?: SalaCreateNestedManyWithoutClienteInput
   }
 
   export type ClienteUncheckedCreateWithoutEnderecosInput = {
@@ -10296,8 +10447,8 @@ export namespace Prisma {
     email: string
     plano: $Enums.Plano
     vencimento: number
-    salas?: SalaUncheckedCreateNestedManyWithoutClienteInput
     agendamentos?: AgendamentoUncheckedCreateNestedManyWithoutClienteInput
+    salas?: SalaUncheckedCreateNestedManyWithoutClienteInput
   }
 
   export type ClienteCreateOrConnectWithoutEnderecosInput = {
@@ -10324,8 +10475,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     plano?: EnumPlanoFieldUpdateOperationsInput | $Enums.Plano
     vencimento?: FloatFieldUpdateOperationsInput | number
-    salas?: SalaUpdateManyWithoutClienteNestedInput
     agendamentos?: AgendamentoUpdateManyWithoutClienteNestedInput
+    salas?: SalaUpdateManyWithoutClienteNestedInput
   }
 
   export type ClienteUncheckedUpdateWithoutEnderecosInput = {
@@ -10336,8 +10487,33 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     plano?: EnumPlanoFieldUpdateOperationsInput | $Enums.Plano
     vencimento?: FloatFieldUpdateOperationsInput | number
-    salas?: SalaUncheckedUpdateManyWithoutClienteNestedInput
     agendamentos?: AgendamentoUncheckedUpdateManyWithoutClienteNestedInput
+    salas?: SalaUncheckedUpdateManyWithoutClienteNestedInput
+  }
+
+  export type MensagemCreateWithoutSalaInput = {
+    msg: string
+    senderId: string
+    timestamp?: Date | string
+    type: $Enums.MessageType
+  }
+
+  export type MensagemUncheckedCreateWithoutSalaInput = {
+    id?: number
+    msg: string
+    senderId: string
+    timestamp?: Date | string
+    type: $Enums.MessageType
+  }
+
+  export type MensagemCreateOrConnectWithoutSalaInput = {
+    where: MensagemWhereUniqueInput
+    create: XOR<MensagemCreateWithoutSalaInput, MensagemUncheckedCreateWithoutSalaInput>
+  }
+
+  export type MensagemCreateManySalaInputEnvelope = {
+    data: MensagemCreateManySalaInput | MensagemCreateManySalaInput[]
+    skipDuplicates?: boolean
   }
 
   export type ClienteCreateWithoutSalasInput = {
@@ -10375,8 +10551,8 @@ export namespace Prisma {
     nome: string
     tel: string
     email: string
-    working?: boolean
     funcao: $Enums.Funcao
+    working?: boolean
   }
 
   export type FuncionarioUncheckedCreateWithoutSalasInput = {
@@ -10385,8 +10561,8 @@ export namespace Prisma {
     nome: string
     tel: string
     email: string
-    working?: boolean
     funcao: $Enums.Funcao
+    working?: boolean
   }
 
   export type FuncionarioCreateOrConnectWithoutSalasInput = {
@@ -10394,23 +10570,32 @@ export namespace Prisma {
     create: XOR<FuncionarioCreateWithoutSalasInput, FuncionarioUncheckedCreateWithoutSalasInput>
   }
 
-  export type MensagemCreateWithoutSalaInput = {
-    msg: string
-  }
-
-  export type MensagemUncheckedCreateWithoutSalaInput = {
-    id?: number
-    msg: string
-  }
-
-  export type MensagemCreateOrConnectWithoutSalaInput = {
+  export type MensagemUpsertWithWhereUniqueWithoutSalaInput = {
     where: MensagemWhereUniqueInput
+    update: XOR<MensagemUpdateWithoutSalaInput, MensagemUncheckedUpdateWithoutSalaInput>
     create: XOR<MensagemCreateWithoutSalaInput, MensagemUncheckedCreateWithoutSalaInput>
   }
 
-  export type MensagemCreateManySalaInputEnvelope = {
-    data: MensagemCreateManySalaInput | MensagemCreateManySalaInput[]
-    skipDuplicates?: boolean
+  export type MensagemUpdateWithWhereUniqueWithoutSalaInput = {
+    where: MensagemWhereUniqueInput
+    data: XOR<MensagemUpdateWithoutSalaInput, MensagemUncheckedUpdateWithoutSalaInput>
+  }
+
+  export type MensagemUpdateManyWithWhereWithoutSalaInput = {
+    where: MensagemScalarWhereInput
+    data: XOR<MensagemUpdateManyMutationInput, MensagemUncheckedUpdateManyWithoutSalaInput>
+  }
+
+  export type MensagemScalarWhereInput = {
+    AND?: MensagemScalarWhereInput | MensagemScalarWhereInput[]
+    OR?: MensagemScalarWhereInput[]
+    NOT?: MensagemScalarWhereInput | MensagemScalarWhereInput[]
+    id?: IntFilter<"Mensagem"> | number
+    msg?: StringFilter<"Mensagem"> | string
+    salaId?: IntFilter<"Mensagem"> | number
+    senderId?: StringFilter<"Mensagem"> | string
+    timestamp?: DateTimeFilter<"Mensagem"> | Date | string
+    type?: EnumMessageTypeFilter<"Mensagem"> | $Enums.MessageType
   }
 
   export type ClienteUpsertWithoutSalasInput = {
@@ -10465,8 +10650,8 @@ export namespace Prisma {
     nome?: StringFieldUpdateOperationsInput | string
     tel?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    working?: BoolFieldUpdateOperationsInput | boolean
     funcao?: EnumFuncaoFieldUpdateOperationsInput | $Enums.Funcao
+    working?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type FuncionarioUncheckedUpdateWithoutSalasInput = {
@@ -10475,33 +10660,8 @@ export namespace Prisma {
     nome?: StringFieldUpdateOperationsInput | string
     tel?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    working?: BoolFieldUpdateOperationsInput | boolean
     funcao?: EnumFuncaoFieldUpdateOperationsInput | $Enums.Funcao
-  }
-
-  export type MensagemUpsertWithWhereUniqueWithoutSalaInput = {
-    where: MensagemWhereUniqueInput
-    update: XOR<MensagemUpdateWithoutSalaInput, MensagemUncheckedUpdateWithoutSalaInput>
-    create: XOR<MensagemCreateWithoutSalaInput, MensagemUncheckedCreateWithoutSalaInput>
-  }
-
-  export type MensagemUpdateWithWhereUniqueWithoutSalaInput = {
-    where: MensagemWhereUniqueInput
-    data: XOR<MensagemUpdateWithoutSalaInput, MensagemUncheckedUpdateWithoutSalaInput>
-  }
-
-  export type MensagemUpdateManyWithWhereWithoutSalaInput = {
-    where: MensagemScalarWhereInput
-    data: XOR<MensagemUpdateManyMutationInput, MensagemUncheckedUpdateManyWithoutSalaInput>
-  }
-
-  export type MensagemScalarWhereInput = {
-    AND?: MensagemScalarWhereInput | MensagemScalarWhereInput[]
-    OR?: MensagemScalarWhereInput[]
-    NOT?: MensagemScalarWhereInput | MensagemScalarWhereInput[]
-    id?: IntFilter<"Mensagem"> | number
-    msg?: StringFilter<"Mensagem"> | string
-    salaId?: IntFilter<"Mensagem"> | number
+    working?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type SalaCreateWithoutMensagensInput = {
@@ -10558,8 +10718,8 @@ export namespace Prisma {
     email: string
     plano: $Enums.Plano
     vencimento: number
-    salas?: SalaCreateNestedManyWithoutClienteInput
     enderecos?: EnderecoCreateNestedManyWithoutClienteInput
+    salas?: SalaCreateNestedManyWithoutClienteInput
   }
 
   export type ClienteUncheckedCreateWithoutAgendamentosInput = {
@@ -10570,8 +10730,8 @@ export namespace Prisma {
     email: string
     plano: $Enums.Plano
     vencimento: number
-    salas?: SalaUncheckedCreateNestedManyWithoutClienteInput
     enderecos?: EnderecoUncheckedCreateNestedManyWithoutClienteInput
+    salas?: SalaUncheckedCreateNestedManyWithoutClienteInput
   }
 
   export type ClienteCreateOrConnectWithoutAgendamentosInput = {
@@ -10598,8 +10758,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     plano?: EnumPlanoFieldUpdateOperationsInput | $Enums.Plano
     vencimento?: FloatFieldUpdateOperationsInput | number
-    salas?: SalaUpdateManyWithoutClienteNestedInput
     enderecos?: EnderecoUpdateManyWithoutClienteNestedInput
+    salas?: SalaUpdateManyWithoutClienteNestedInput
   }
 
   export type ClienteUncheckedUpdateWithoutAgendamentosInput = {
@@ -10610,15 +10770,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     plano?: EnumPlanoFieldUpdateOperationsInput | $Enums.Plano
     vencimento?: FloatFieldUpdateOperationsInput | number
-    salas?: SalaUncheckedUpdateManyWithoutClienteNestedInput
     enderecos?: EnderecoUncheckedUpdateManyWithoutClienteNestedInput
-  }
-
-  export type SalaCreateManyClienteInput = {
-    id?: number
-    nome: string
-    funcionarioId: string
-    status: $Enums.StatusSala
+    salas?: SalaUncheckedUpdateManyWithoutClienteNestedInput
   }
 
   export type AgendamentoCreateManyClienteInput = {
@@ -10636,26 +10789,11 @@ export namespace Prisma {
     estado: string
   }
 
-  export type SalaUpdateWithoutClienteInput = {
-    nome?: StringFieldUpdateOperationsInput | string
-    status?: EnumStatusSalaFieldUpdateOperationsInput | $Enums.StatusSala
-    funcionario?: FuncionarioUpdateOneRequiredWithoutSalasNestedInput
-    mensagens?: MensagemUpdateManyWithoutSalaNestedInput
-  }
-
-  export type SalaUncheckedUpdateWithoutClienteInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    nome?: StringFieldUpdateOperationsInput | string
-    funcionarioId?: StringFieldUpdateOperationsInput | string
-    status?: EnumStatusSalaFieldUpdateOperationsInput | $Enums.StatusSala
-    mensagens?: MensagemUncheckedUpdateManyWithoutSalaNestedInput
-  }
-
-  export type SalaUncheckedUpdateManyWithoutClienteInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    nome?: StringFieldUpdateOperationsInput | string
-    funcionarioId?: StringFieldUpdateOperationsInput | string
-    status?: EnumStatusSalaFieldUpdateOperationsInput | $Enums.StatusSala
+  export type SalaCreateManyClienteInput = {
+    id?: number
+    nome: string
+    funcionarioId: string
+    status: $Enums.StatusSala
   }
 
   export type AgendamentoUpdateWithoutClienteInput = {
@@ -10701,6 +10839,28 @@ export namespace Prisma {
     estado?: StringFieldUpdateOperationsInput | string
   }
 
+  export type SalaUpdateWithoutClienteInput = {
+    nome?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusSalaFieldUpdateOperationsInput | $Enums.StatusSala
+    mensagens?: MensagemUpdateManyWithoutSalaNestedInput
+    funcionario?: FuncionarioUpdateOneRequiredWithoutSalasNestedInput
+  }
+
+  export type SalaUncheckedUpdateWithoutClienteInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nome?: StringFieldUpdateOperationsInput | string
+    funcionarioId?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusSalaFieldUpdateOperationsInput | $Enums.StatusSala
+    mensagens?: MensagemUncheckedUpdateManyWithoutSalaNestedInput
+  }
+
+  export type SalaUncheckedUpdateManyWithoutClienteInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nome?: StringFieldUpdateOperationsInput | string
+    funcionarioId?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusSalaFieldUpdateOperationsInput | $Enums.StatusSala
+  }
+
   export type SalaCreateManyFuncionarioInput = {
     id?: number
     nome: string
@@ -10711,8 +10871,8 @@ export namespace Prisma {
   export type SalaUpdateWithoutFuncionarioInput = {
     nome?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusSalaFieldUpdateOperationsInput | $Enums.StatusSala
-    cliente?: ClienteUpdateOneRequiredWithoutSalasNestedInput
     mensagens?: MensagemUpdateManyWithoutSalaNestedInput
+    cliente?: ClienteUpdateOneRequiredWithoutSalasNestedInput
   }
 
   export type SalaUncheckedUpdateWithoutFuncionarioInput = {
@@ -10733,20 +10893,32 @@ export namespace Prisma {
   export type MensagemCreateManySalaInput = {
     id?: number
     msg: string
+    senderId: string
+    timestamp?: Date | string
+    type: $Enums.MessageType
   }
 
   export type MensagemUpdateWithoutSalaInput = {
     msg?: StringFieldUpdateOperationsInput | string
+    senderId?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    type?: EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
   }
 
   export type MensagemUncheckedUpdateWithoutSalaInput = {
     id?: IntFieldUpdateOperationsInput | number
     msg?: StringFieldUpdateOperationsInput | string
+    senderId?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    type?: EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
   }
 
   export type MensagemUncheckedUpdateManyWithoutSalaInput = {
     id?: IntFieldUpdateOperationsInput | number
     msg?: StringFieldUpdateOperationsInput | string
+    senderId?: StringFieldUpdateOperationsInput | string
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    type?: EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
   }
 
 

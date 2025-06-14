@@ -4,7 +4,7 @@ const AgendamentoDescricao = ({ plano }: { plano: string | null }) => {
   const [descricao, setDescricao] = useState("");
   useEffect(() => {
     if (plano) {
-      setDescricao(`Instalação do plano de ${plano}Mb`);
+      setDescricao(`Instalação do plano de ${plano}MB`);
     }
   }, [plano]);
   return (

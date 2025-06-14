@@ -1,0 +1,102 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Agendamento {
+  id         Int      @id @default(autoincrement())
+  data       DateTime
+  descricao  String
+  clienteCpf String
+  status     Status   @default(AGENDADO)
+  Cliente    Cliente  @relation(fields: [clienteCpf], references: [cpf])
+}
+
+model Cliente {
+  cpf         String        @id
+  senha       String
+  nome        String
+  tel         String
+  email       String
+  plano       Plano
+  vencimento  Float
+  Agendamento Agendamento[]
+  Endereco    Endereco[]
+  Sala        Sala[]
+}
+
+model Endereco {
+  id        Int     @id @default(autoincrement())
+  clienteId String
+  endereco  String
+  cep       String
+  cidade    String
+  estado    String
+  Cliente   Cliente @relation(fields: [clienteId], references: [cpf])
+}
+
+model Funcionario {
+  cpf     String  @id
+  senha   String
+  nome    String
+  tel     String
+  email   String
+  funcao  Funcao
+  working Boolean @default(false)
+  Sala    Sala[]
+}
+
+model Mensagem {
+  id        Int         @id @default(autoincrement())
+  msg       String
+  salaId    Int
+  senderId  String
+  timestamp DateTime    @default(now())
+  type      MessageType
+  Sala      Sala        @relation(fields: [salaId], references: [id])
+}
+
+model Sala {
+  id            Int         @id @default(autoincrement())
+  nome          String
+  clienteId     String
+  funcionarioId String
+  status        StatusSala
+  Mensagem      Mensagem[]
+  Cliente       Cliente     @relation(fields: [clienteId], references: [cpf])
+  Funcionario   Funcionario @relation(fields: [funcionarioId], references: [cpf])
+}
+
+enum Funcao {
+  ADMINISTRATIVO
+  TECNICO
+  GERENTE
+}
+
+enum MessageType {
+  TEXT
+  IMAGE
+}
+
+enum Plano {
+  MB100
+  MB300
+  MB500
+}
+
+enum Status {
+  AGENDADO
+  CONCLUIDO
+  CANCELADO
+}
+
+enum StatusSala {
+  ABERTA
+  FECHADA
+}

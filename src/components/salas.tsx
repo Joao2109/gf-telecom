@@ -20,7 +20,7 @@ const Salas = ({ salas }: { salas: Sala[] }) => {
               className="block text-center odd:bg-zinc-500/10 even:bg-zinc-500/20"
               key={sala.id}
             >
-              {sala.nome}
+              {`${sala.nome} ${sala.id}`}
             </Link>
           ))}
         </div>

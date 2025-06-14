@@ -1,6 +1,8 @@
-export interface message {
+export interface Message {
+  id: number;
+  msg: string;
   senderId: string;
-  type: "text" | "image";
-  data: string;
+  salaId: number;
+  type: "TEXT" | "IMAGE";
   timestamp: string;
 }

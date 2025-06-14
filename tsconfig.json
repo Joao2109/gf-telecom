@@ -29,7 +29,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/app/api/websocket/route.ts"
+    "src/app/api/websocket/route.ts",
+    "websocket/prisma.js"
   ],
   "exclude": ["node_modules"]
 }

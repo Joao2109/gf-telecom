@@ -136,8 +136,8 @@ exports.Prisma.FuncionarioScalarFieldEnum = {
   nome: 'nome',
   tel: 'tel',
   email: 'email',
-  working: 'working',
-  funcao: 'funcao'
+  funcao: 'funcao',
+  working: 'working'
 };
 
 exports.Prisma.EnderecoScalarFieldEnum = {
@@ -160,7 +160,10 @@ exports.Prisma.SalaScalarFieldEnum = {
 exports.Prisma.MensagemScalarFieldEnum = {
   id: 'id',
   msg: 'msg',
-  salaId: 'salaId'
+  salaId: 'salaId',
+  senderId: 'senderId',
+  timestamp: 'timestamp',
+  type: 'type'
 };
 
 exports.Prisma.AgendamentoScalarFieldEnum = {
@@ -195,6 +198,11 @@ exports.Funcao = exports.$Enums.Funcao = {
 exports.StatusSala = exports.$Enums.StatusSala = {
   ABERTA: 'ABERTA',
   FECHADA: 'FECHADA'
+};
+
+exports.MessageType = exports.$Enums.MessageType = {
+  TEXT: 'TEXT',
+  IMAGE: 'IMAGE'
 };
 
 exports.Status = exports.$Enums.Status = {

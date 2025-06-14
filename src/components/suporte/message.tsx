@@ -1,20 +1,20 @@
 import Image from "next/image";
-import { message } from "@/types/message";
-const Message = ({
+import { Message } from "@/types/message";
+const MessageComponent = ({
   message,
   clientId,
 }: {
-  message: message;
+  message: Message;
   clientId: string;
 }) => {
   const messageRender = () => {
     switch (message.type) {
-      case "text":
-        return <p>{message.data}</p>;
-      case "image":
+      case "TEXT":
+        return <p>{message.msg}</p>;
+      case "IMAGE":
         return (
           <div>
-            <Image src={message.data} alt="Imagem" width={200} height={200} />
+            <Image src={message.msg} alt="Imagem" width={200} height={200} />
           </div>
         );
       default:
@@ -35,9 +35,18 @@ const Message = ({
         }`}
       >
         {messageRender()}
-        <span className="text-xs text-[#cccccc]">{message.timestamp}</span>
+        <span className="text-xs text-[#cccccc]">
+          {new Intl.DateTimeFormat("pt-BR", {
+            timeZone: "UTC",
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+          }).format(new Date(message.timestamp))}
+        </span>
       </div>
     </div>
   );
 };
-export default Message;
+export default MessageComponent;

@@ -19,16 +19,28 @@ model Cliente {
   vencimento   Float
   salas        Sala[]
   agendamentos Agendamento[]
+  enderecos    Endereco[]
 }
 
 model Funcionario {
-  cpf    String @id
-  senha  String
-  nome   String
-  tel    String
-  email  String
-  funcao Funcao
-  salas  Sala[]
+  cpf     String  @id
+  senha   String
+  nome    String
+  tel     String
+  email   String
+  working Boolean @default(false)
+  funcao  Funcao
+  salas   Sala[]
+}
+
+model Endereco {
+  id        Int     @id @default(autoincrement())
+  clienteId String
+  cliente   Cliente @relation(fields: [clienteId], references: [cpf])
+  endereco  String
+  cep       String
+  cidade    String
+  estado    String
 }
 
 model Sala {
@@ -38,14 +50,16 @@ model Sala {
   funcionario   Funcionario @relation(fields: [funcionarioId], references: [cpf])
   clienteId     String
   funcionarioId String
+  status        StatusSala
   mensagens     Mensagem[]
 }
 
 model Mensagem {
-  id     Int    @id @default(autoincrement())
-  msg    String
-  salaId Int
-  sala   Sala   @relation(fields: [salaId], references: [id])
+  id       Int    @id @default(autoincrement())
+  msg      String
+  senderId String
+  salaId   Int
+  sala     Sala   @relation(fields: [salaId], references: [id])
 }
 
 model Agendamento {
@@ -73,4 +87,9 @@ enum Status {
   AGENDADO
   CONCLUIDO
   CANCELADO
+}
+
+enum StatusSala {
+  ABERTA
+  FECHADA
 }

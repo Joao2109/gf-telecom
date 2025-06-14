@@ -1,6 +1,7 @@
 "use client";
 import { Button } from "../ui/button";
 import { Send, Upload } from "lucide-react";
+import { MessageType } from "@root/prisma/generated";
 interface ChatInputProps extends React.ComponentProps<"form"> {
   sendMessage: (message: string, type: string) => void;
 }
@@ -10,7 +11,7 @@ const ChatInput = ({ sendMessage, ...props }: ChatInputProps) => {
       className="w-full flex border border-primary bg-white"
       onSubmit={(e) => {
         e.preventDefault();
-        sendMessage(e.currentTarget.text.value, "text");
+        sendMessage(e.currentTarget.text.value, MessageType.TEXT);
         e.currentTarget.text.value = "";
       }}
       {...props}

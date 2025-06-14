@@ -1,8 +1,7 @@
-"use client";
 import { useEffect, useState, useRef } from "react";
 import ChatInput from "./chat-input";
 import ChatDisplay from "./chat-display";
-import { message } from "@/types/message";
+import { Message } from "@/types/message";
 const ChatSuporte = ({
   clientId,
   roomId,
@@ -10,12 +9,17 @@ const ChatSuporte = ({
   clientId: string;
   roomId: string;
 }) => {
-  const [messages, setMessages] = useState<message[]>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const ws = useRef<WebSocket | null>(null);
   useEffect(() => {
-    ws.current = new WebSocket(
-      "https://websocket-bitter-rain-9314.fly.dev/" + roomId
-    );
+    fetch("/api/mensagens", {
+      method: "POST",
+      body: JSON.stringify({ roomId }),
+    }).then(async (res) => {
+      const data = await res.json();
+      setMessages(data);
+    });
+    ws.current = new WebSocket("http://localhost:3001/" + roomId);
     ws.current.addEventListener("message", async (event) => {
       parseInt(roomId);
       setMessages((prevMessages) => [...prevMessages, JSON.parse(event.data)]);
@@ -25,7 +29,8 @@ const ChatSuporte = ({
     };
   }, [roomId]);
   const sendMessage = async (message: string, type: string) => {
-    const msg = { senderId: clientId, type, data: message };
+    if (!ws.current || !roomId || !clientId) return;
+    const msg = { senderId: clientId, type, msg: message };
     ws.current?.send(JSON.stringify(msg));
   };
   return (

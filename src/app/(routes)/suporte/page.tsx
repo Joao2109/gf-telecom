@@ -28,7 +28,6 @@ const Suporte = () => {
     })
       .then(async (res) => {
         const data = await res.json();
-        console.log(data);
         setSalas(data);
       })
       .catch((err) => console.log(err));

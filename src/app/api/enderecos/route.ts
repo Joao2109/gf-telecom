@@ -1,5 +1,4 @@
 import { prisma } from "@root/prisma";
-//eslint-disable-next-line
 export const POST = async (req: Request) => {
   const { userId } = await req.json();
   if (!userId) {

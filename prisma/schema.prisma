@@ -17,9 +17,9 @@ model Cliente {
   email        String
   plano        Plano
   vencimento   Float
-  salas        Sala[]
   agendamentos Agendamento[]
-  enderecos     Endereco[]
+  enderecos    Endereco[]
+  salas        Sala[]
 }
 
 model Funcionario {
@@ -28,37 +28,40 @@ model Funcionario {
   nome    String
   tel     String
   email   String
-  working Boolean @default(false)
   funcao  Funcao
+  working Boolean @default(false)
   salas   Sala[]
 }
 
 model Endereco {
-  id      Int    @id @default(autoincrement())
+  id        Int     @id @default(autoincrement())
   clienteId String
+  endereco  String
+  cep       String
+  cidade    String
+  estado    String
   cliente   Cliente @relation(fields: [clienteId], references: [cpf])
-  endereco String
-  cep     String
-  cidade  String
-  estado  String
 }
 
 model Sala {
   id            Int         @id @default(autoincrement())
   nome          String
-  cliente       Cliente     @relation(fields: [clienteId], references: [cpf])
-  funcionario   Funcionario @relation(fields: [funcionarioId], references: [cpf])
   clienteId     String
   funcionarioId String
   status        StatusSala
   mensagens     Mensagem[]
+  cliente       Cliente     @relation(fields: [clienteId], references: [cpf])
+  funcionario   Funcionario @relation(fields: [funcionarioId], references: [cpf])
 }
 
 model Mensagem {
-  id     Int    @id @default(autoincrement())
-  msg    String
-  salaId Int
-  sala   Sala   @relation(fields: [salaId], references: [id])
+  id        Int         @id @default(autoincrement())
+  msg       String
+  salaId    Int
+  senderId  String
+  timestamp DateTime    @default(now())
+  type      MessageType
+  sala      Sala        @relation(fields: [salaId], references: [id])
 }
 
 model Agendamento {
@@ -66,8 +69,8 @@ model Agendamento {
   data       DateTime
   descricao  String
   clienteCpf String
-  cliente    Cliente  @relation(fields: [clienteCpf], references: [cpf])
   status     Status   @default(AGENDADO)
+  cliente    Cliente  @relation(fields: [clienteCpf], references: [cpf])
 }
 
 enum Plano {
@@ -91,4 +94,9 @@ enum Status {
 enum StatusSala {
   ABERTA
   FECHADA
+}
+
+enum MessageType {
+  TEXT
+  IMAGE
 }
