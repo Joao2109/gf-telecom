@@ -15,6 +15,9 @@ export default function RootLayout({
   const pathname = usePathname();
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <title>GF Telecom</title>
+      </head>
       <body>
         <StoreProvider>
           <SessionProvider>

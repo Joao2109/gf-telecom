@@ -20,7 +20,7 @@ const ChatSuporte = ({
       setMessages(data);
     });
     ws.current = new WebSocket(
-      "https://websocket-bitter-rain-9314.fly.dev" + roomId
+      "https://websocket-bitter-rain-9314.fly.dev/" + roomId
     );
     ws.current.addEventListener("message", async (event) => {
       parseInt(roomId);
