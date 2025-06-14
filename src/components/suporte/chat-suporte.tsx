@@ -19,7 +19,9 @@ const ChatSuporte = ({
       const data = await res.json();
       setMessages(data);
     });
-    ws.current = new WebSocket("http://localhost:3001/" + roomId);
+    ws.current = new WebSocket(
+      "https://websocket-bitter-rain-9314.fly.dev" + roomId
+    );
     ws.current.addEventListener("message", async (event) => {
       parseInt(roomId);
       setMessages((prevMessages) => [...prevMessages, JSON.parse(event.data)]);
