@@ -16,6 +16,5 @@ export const POST = async (data: Request) => {
       });
       break;
   }
-  console.log(agendamentos);
   return new Response(JSON.stringify(agendamentos), { status: 200 });
 };
