@@ -70,8 +70,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           throw new Error("Usuario nao encontrado.");
         }
         if (
-          /*compareSync(*/ (credentials.senha as string,
-          user.senha as string) /*)*/
+          /*compareSync(*/ (credentials.senha as string) ===
+          (user.senha as string) /*)*/
         ) {
           return user;
         } else {

@@ -1,14 +1,14 @@
 import { signIn } from "next-auth/react";
 import { Button } from "./ui/button";
 import { redirect } from "next/navigation";
-import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 import { useState } from "react";
-import { AlertTriangle } from "lucide-react";
 import { useAppDispatch } from "@/lib/hooks";
 import { login } from "@/lib/features/user/user-slice";
+import { Alert } from "./alert";
 export const SignIn = () => {
   const [alert, setAlert] = useState<string | null>(null);
   const [error, setError] = useState<string | undefined>(undefined);
+  const [open, setOpen] = useState(false);
   const dispatch = useAppDispatch();
   return (
     <>
@@ -21,6 +21,7 @@ export const SignIn = () => {
           const senha = formData.get("senha")?.toString();
           if (!cpf || !senha) {
             setAlert("Preencha todos os campos.");
+            setOpen(true);
             return;
           }
           const res = await signIn("credentials", {
@@ -29,6 +30,7 @@ export const SignIn = () => {
           });
           if (res?.error || res == undefined) {
             setError("Ocorreu um erro, por favor, verifique suas credenciais.");
+            setOpen(true);
           } else {
             fetch("/api/auth/get-user", { method: "GET" }).then(async (r) => {
               const user = await r.json();
@@ -56,27 +58,12 @@ export const SignIn = () => {
         </label>
         <Button variant={"outline"}>Sign In</Button>
       </form>
-      {(alert || error) && (
-        <div
-          className="w-screen h-screen fixed bg-black/50 flex justify-center items-center"
-          onClick={() => {
-            setAlert(null);
-            setError(undefined);
-          }}
-        >
-          <Alert className="w-full max-w-[700px] p-6">
-            <AlertTitle className="flex justify-center pb-2">
-              <AlertTriangle
-                className={`${
-                  alert ? "stroke-yellow-500" : error ? "stroke-red-500" : ""
-                }`}
-              />
-            </AlertTitle>
-            <AlertDescription className="flex justify-center pt-4 border-t-2">
-              <h2 className="text-2xl text-center">{alert || error}</h2>
-            </AlertDescription>
-          </Alert>
-        </div>
+      {open && (
+        <Alert
+          message={alert || error!}
+          type={alert ? "alert" : error ? "error" : "error"}
+          setOpen={setOpen}
+        />
       )}
     </>
   );

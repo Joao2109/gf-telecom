@@ -30,6 +30,7 @@ model Funcionario {
   email   String
   funcao  Funcao
   working Boolean @default(false)
+  agendamentos Agendamento[]
   salas   Sala[]
 }
 
@@ -37,9 +38,9 @@ model Endereco {
   id        Int     @id @default(autoincrement())
   clienteId String
   endereco  String
-  cep       String
-  cidade    String
-  estado    String
+  cep       String  
+  cidade    String  @default("Salvador")
+  estado    String  @default("BA")
   cliente   Cliente @relation(fields: [clienteId], references: [cpf])
 }
 
@@ -69,8 +70,11 @@ model Agendamento {
   data       DateTime
   descricao  String
   clienteCpf String
+  funcionarioCpf String
+  endereco   String
   status     Status   @default(AGENDADO)
   cliente    Cliente  @relation(fields: [clienteCpf], references: [cpf])
+  funcionario Funcionario @relation(fields: [funcionarioCpf], references: [cpf])
 }
 
 enum Plano {

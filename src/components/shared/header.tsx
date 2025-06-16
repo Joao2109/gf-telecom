@@ -75,12 +75,12 @@ const Header = () => {
               size="sm"
               asChild
               className={
-                pathname === "/planos"
+                pathname.includes("/planos")
                   ? `bg-primary`
                   : `bg-black/30 sm:bg-transparent hover:bg-primary`
               }
             >
-              {pathname === "/planos" ? (
+              {pathname.includes("/planos") ? (
                 <p className="w-full sm:w-auto text-white rounded-none sm:rounded-sm">
                   Planos
                 </p>
@@ -99,12 +99,12 @@ const Header = () => {
               size="sm"
               asChild
               className={
-                pathname === "/agendamento"
+                pathname.includes("/agendamento")
                   ? `bg-primary`
                   : `bg-black/30 sm:bg-transparent hover:bg-primary`
               }
             >
-              {pathname === "/agendamento" ? (
+              {pathname.includes("/agendamento") ? (
                 <p className="w-full sm:w-auto text-white rounded-none sm:rounded-sm">
                   Agendamento
                 </p>
@@ -123,12 +123,12 @@ const Header = () => {
               size="sm"
               asChild
               className={
-                pathname === "/suporte"
+                pathname.includes("/suporte")
                   ? `bg-primary`
                   : `bg-black/30 sm:bg-transparent hover:bg-primary`
               }
             >
-              {pathname === "/suporte" ? (
+              {pathname.includes("/suporte") ? (
                 <p className="w-full sm:w-auto text-white rounded-none sm:rounded-sm">
                   Suporte Remoto
                 </p>

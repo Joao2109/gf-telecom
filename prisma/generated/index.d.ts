@@ -1441,10 +1441,12 @@ export namespace Prisma {
    */
 
   export type FuncionarioCountOutputType = {
+    agendamentos: number
     salas: number
   }
 
   export type FuncionarioCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    agendamentos?: boolean | FuncionarioCountOutputTypeCountAgendamentosArgs
     salas?: boolean | FuncionarioCountOutputTypeCountSalasArgs
   }
 
@@ -1457,6 +1459,13 @@ export namespace Prisma {
      * Select specific fields to fetch from the FuncionarioCountOutputType
      */
     select?: FuncionarioCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * FuncionarioCountOutputType without action
+   */
+  export type FuncionarioCountOutputTypeCountAgendamentosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AgendamentoWhereInput
   }
 
   /**
@@ -2868,6 +2877,7 @@ export namespace Prisma {
     email?: boolean
     funcao?: boolean
     working?: boolean
+    agendamentos?: boolean | Funcionario$agendamentosArgs<ExtArgs>
     salas?: boolean | Funcionario$salasArgs<ExtArgs>
     _count?: boolean | FuncionarioCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["funcionario"]>
@@ -2904,6 +2914,7 @@ export namespace Prisma {
 
   export type FuncionarioOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"cpf" | "senha" | "nome" | "tel" | "email" | "funcao" | "working", ExtArgs["result"]["funcionario"]>
   export type FuncionarioInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    agendamentos?: boolean | Funcionario$agendamentosArgs<ExtArgs>
     salas?: boolean | Funcionario$salasArgs<ExtArgs>
     _count?: boolean | FuncionarioCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -2913,6 +2924,7 @@ export namespace Prisma {
   export type $FuncionarioPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Funcionario"
     objects: {
+      agendamentos: Prisma.$AgendamentoPayload<ExtArgs>[]
       salas: Prisma.$SalaPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -3317,6 +3329,7 @@ export namespace Prisma {
    */
   export interface Prisma__FuncionarioClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    agendamentos<T extends Funcionario$agendamentosArgs<ExtArgs> = {}>(args?: Subset<T, Funcionario$agendamentosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AgendamentoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     salas<T extends Funcionario$salasArgs<ExtArgs> = {}>(args?: Subset<T, Funcionario$salasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SalaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3739,6 +3752,30 @@ export namespace Prisma {
      * Limit how many Funcionarios to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Funcionario.agendamentos
+   */
+  export type Funcionario$agendamentosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Agendamento
+     */
+    select?: AgendamentoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Agendamento
+     */
+    omit?: AgendamentoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AgendamentoInclude<ExtArgs> | null
+    where?: AgendamentoWhereInput
+    orderBy?: AgendamentoOrderByWithRelationInput | AgendamentoOrderByWithRelationInput[]
+    cursor?: AgendamentoWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AgendamentoScalarFieldEnum | AgendamentoScalarFieldEnum[]
   }
 
   /**
@@ -7153,6 +7190,8 @@ export namespace Prisma {
     data: Date | null
     descricao: string | null
     clienteCpf: string | null
+    funcionarioCpf: string | null
+    endereco: string | null
     status: $Enums.Status | null
   }
 
@@ -7161,6 +7200,8 @@ export namespace Prisma {
     data: Date | null
     descricao: string | null
     clienteCpf: string | null
+    funcionarioCpf: string | null
+    endereco: string | null
     status: $Enums.Status | null
   }
 
@@ -7169,6 +7210,8 @@ export namespace Prisma {
     data: number
     descricao: number
     clienteCpf: number
+    funcionarioCpf: number
+    endereco: number
     status: number
     _all: number
   }
@@ -7187,6 +7230,8 @@ export namespace Prisma {
     data?: true
     descricao?: true
     clienteCpf?: true
+    funcionarioCpf?: true
+    endereco?: true
     status?: true
   }
 
@@ -7195,6 +7240,8 @@ export namespace Prisma {
     data?: true
     descricao?: true
     clienteCpf?: true
+    funcionarioCpf?: true
+    endereco?: true
     status?: true
   }
 
@@ -7203,6 +7250,8 @@ export namespace Prisma {
     data?: true
     descricao?: true
     clienteCpf?: true
+    funcionarioCpf?: true
+    endereco?: true
     status?: true
     _all?: true
   }
@@ -7298,6 +7347,8 @@ export namespace Prisma {
     data: Date
     descricao: string
     clienteCpf: string
+    funcionarioCpf: string
+    endereco: string
     status: $Enums.Status
     _count: AgendamentoCountAggregateOutputType | null
     _avg: AgendamentoAvgAggregateOutputType | null
@@ -7325,8 +7376,11 @@ export namespace Prisma {
     data?: boolean
     descricao?: boolean
     clienteCpf?: boolean
+    funcionarioCpf?: boolean
+    endereco?: boolean
     status?: boolean
     cliente?: boolean | ClienteDefaultArgs<ExtArgs>
+    funcionario?: boolean | FuncionarioDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["agendamento"]>
 
   export type AgendamentoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7334,8 +7388,11 @@ export namespace Prisma {
     data?: boolean
     descricao?: boolean
     clienteCpf?: boolean
+    funcionarioCpf?: boolean
+    endereco?: boolean
     status?: boolean
     cliente?: boolean | ClienteDefaultArgs<ExtArgs>
+    funcionario?: boolean | FuncionarioDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["agendamento"]>
 
   export type AgendamentoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7343,8 +7400,11 @@ export namespace Prisma {
     data?: boolean
     descricao?: boolean
     clienteCpf?: boolean
+    funcionarioCpf?: boolean
+    endereco?: boolean
     status?: boolean
     cliente?: boolean | ClienteDefaultArgs<ExtArgs>
+    funcionario?: boolean | FuncionarioDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["agendamento"]>
 
   export type AgendamentoSelectScalar = {
@@ -7352,30 +7412,38 @@ export namespace Prisma {
     data?: boolean
     descricao?: boolean
     clienteCpf?: boolean
+    funcionarioCpf?: boolean
+    endereco?: boolean
     status?: boolean
   }
 
-  export type AgendamentoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "data" | "descricao" | "clienteCpf" | "status", ExtArgs["result"]["agendamento"]>
+  export type AgendamentoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "data" | "descricao" | "clienteCpf" | "funcionarioCpf" | "endereco" | "status", ExtArgs["result"]["agendamento"]>
   export type AgendamentoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     cliente?: boolean | ClienteDefaultArgs<ExtArgs>
+    funcionario?: boolean | FuncionarioDefaultArgs<ExtArgs>
   }
   export type AgendamentoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     cliente?: boolean | ClienteDefaultArgs<ExtArgs>
+    funcionario?: boolean | FuncionarioDefaultArgs<ExtArgs>
   }
   export type AgendamentoIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     cliente?: boolean | ClienteDefaultArgs<ExtArgs>
+    funcionario?: boolean | FuncionarioDefaultArgs<ExtArgs>
   }
 
   export type $AgendamentoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Agendamento"
     objects: {
       cliente: Prisma.$ClientePayload<ExtArgs>
+      funcionario: Prisma.$FuncionarioPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       data: Date
       descricao: string
       clienteCpf: string
+      funcionarioCpf: string
+      endereco: string
       status: $Enums.Status
     }, ExtArgs["result"]["agendamento"]>
     composites: {}
@@ -7772,6 +7840,7 @@ export namespace Prisma {
   export interface Prisma__AgendamentoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     cliente<T extends ClienteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClienteDefaultArgs<ExtArgs>>): Prisma__ClienteClient<$Result.GetResult<Prisma.$ClientePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    funcionario<T extends FuncionarioDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FuncionarioDefaultArgs<ExtArgs>>): Prisma__FuncionarioClient<$Result.GetResult<Prisma.$FuncionarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7805,6 +7874,8 @@ export namespace Prisma {
     readonly data: FieldRef<"Agendamento", 'DateTime'>
     readonly descricao: FieldRef<"Agendamento", 'String'>
     readonly clienteCpf: FieldRef<"Agendamento", 'String'>
+    readonly funcionarioCpf: FieldRef<"Agendamento", 'String'>
+    readonly endereco: FieldRef<"Agendamento", 'String'>
     readonly status: FieldRef<"Agendamento", 'Status'>
   }
     
@@ -8300,6 +8371,8 @@ export namespace Prisma {
     data: 'data',
     descricao: 'descricao',
     clienteCpf: 'clienteCpf',
+    funcionarioCpf: 'funcionarioCpf',
+    endereco: 'endereco',
     status: 'status'
   };
 
@@ -8547,6 +8620,7 @@ export namespace Prisma {
     email?: StringFilter<"Funcionario"> | string
     funcao?: EnumFuncaoFilter<"Funcionario"> | $Enums.Funcao
     working?: BoolFilter<"Funcionario"> | boolean
+    agendamentos?: AgendamentoListRelationFilter
     salas?: SalaListRelationFilter
   }
 
@@ -8558,6 +8632,7 @@ export namespace Prisma {
     email?: SortOrder
     funcao?: SortOrder
     working?: SortOrder
+    agendamentos?: AgendamentoOrderByRelationAggregateInput
     salas?: SalaOrderByRelationAggregateInput
   }
 
@@ -8572,6 +8647,7 @@ export namespace Prisma {
     email?: StringFilter<"Funcionario"> | string
     funcao?: EnumFuncaoFilter<"Funcionario"> | $Enums.Funcao
     working?: BoolFilter<"Funcionario"> | boolean
+    agendamentos?: AgendamentoListRelationFilter
     salas?: SalaListRelationFilter
   }, "cpf">
 
@@ -8796,8 +8872,11 @@ export namespace Prisma {
     data?: DateTimeFilter<"Agendamento"> | Date | string
     descricao?: StringFilter<"Agendamento"> | string
     clienteCpf?: StringFilter<"Agendamento"> | string
+    funcionarioCpf?: StringFilter<"Agendamento"> | string
+    endereco?: StringFilter<"Agendamento"> | string
     status?: EnumStatusFilter<"Agendamento"> | $Enums.Status
     cliente?: XOR<ClienteScalarRelationFilter, ClienteWhereInput>
+    funcionario?: XOR<FuncionarioScalarRelationFilter, FuncionarioWhereInput>
   }
 
   export type AgendamentoOrderByWithRelationInput = {
@@ -8805,8 +8884,11 @@ export namespace Prisma {
     data?: SortOrder
     descricao?: SortOrder
     clienteCpf?: SortOrder
+    funcionarioCpf?: SortOrder
+    endereco?: SortOrder
     status?: SortOrder
     cliente?: ClienteOrderByWithRelationInput
+    funcionario?: FuncionarioOrderByWithRelationInput
   }
 
   export type AgendamentoWhereUniqueInput = Prisma.AtLeast<{
@@ -8817,8 +8899,11 @@ export namespace Prisma {
     data?: DateTimeFilter<"Agendamento"> | Date | string
     descricao?: StringFilter<"Agendamento"> | string
     clienteCpf?: StringFilter<"Agendamento"> | string
+    funcionarioCpf?: StringFilter<"Agendamento"> | string
+    endereco?: StringFilter<"Agendamento"> | string
     status?: EnumStatusFilter<"Agendamento"> | $Enums.Status
     cliente?: XOR<ClienteScalarRelationFilter, ClienteWhereInput>
+    funcionario?: XOR<FuncionarioScalarRelationFilter, FuncionarioWhereInput>
   }, "id">
 
   export type AgendamentoOrderByWithAggregationInput = {
@@ -8826,6 +8911,8 @@ export namespace Prisma {
     data?: SortOrder
     descricao?: SortOrder
     clienteCpf?: SortOrder
+    funcionarioCpf?: SortOrder
+    endereco?: SortOrder
     status?: SortOrder
     _count?: AgendamentoCountOrderByAggregateInput
     _avg?: AgendamentoAvgOrderByAggregateInput
@@ -8842,6 +8929,8 @@ export namespace Prisma {
     data?: DateTimeWithAggregatesFilter<"Agendamento"> | Date | string
     descricao?: StringWithAggregatesFilter<"Agendamento"> | string
     clienteCpf?: StringWithAggregatesFilter<"Agendamento"> | string
+    funcionarioCpf?: StringWithAggregatesFilter<"Agendamento"> | string
+    endereco?: StringWithAggregatesFilter<"Agendamento"> | string
     status?: EnumStatusWithAggregatesFilter<"Agendamento"> | $Enums.Status
   }
 
@@ -8935,6 +9024,7 @@ export namespace Prisma {
     email: string
     funcao: $Enums.Funcao
     working?: boolean
+    agendamentos?: AgendamentoCreateNestedManyWithoutFuncionarioInput
     salas?: SalaCreateNestedManyWithoutFuncionarioInput
   }
 
@@ -8946,6 +9036,7 @@ export namespace Prisma {
     email: string
     funcao: $Enums.Funcao
     working?: boolean
+    agendamentos?: AgendamentoUncheckedCreateNestedManyWithoutFuncionarioInput
     salas?: SalaUncheckedCreateNestedManyWithoutFuncionarioInput
   }
 
@@ -8957,6 +9048,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     funcao?: EnumFuncaoFieldUpdateOperationsInput | $Enums.Funcao
     working?: BoolFieldUpdateOperationsInput | boolean
+    agendamentos?: AgendamentoUpdateManyWithoutFuncionarioNestedInput
     salas?: SalaUpdateManyWithoutFuncionarioNestedInput
   }
 
@@ -8968,6 +9060,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     funcao?: EnumFuncaoFieldUpdateOperationsInput | $Enums.Funcao
     working?: BoolFieldUpdateOperationsInput | boolean
+    agendamentos?: AgendamentoUncheckedUpdateManyWithoutFuncionarioNestedInput
     salas?: SalaUncheckedUpdateManyWithoutFuncionarioNestedInput
   }
 
@@ -9004,8 +9097,8 @@ export namespace Prisma {
   export type EnderecoCreateInput = {
     endereco: string
     cep: string
-    cidade: string
-    estado: string
+    cidade?: string
+    estado?: string
     cliente: ClienteCreateNestedOneWithoutEnderecosInput
   }
 
@@ -9014,8 +9107,8 @@ export namespace Prisma {
     clienteId: string
     endereco: string
     cep: string
-    cidade: string
-    estado: string
+    cidade?: string
+    estado?: string
   }
 
   export type EnderecoUpdateInput = {
@@ -9040,8 +9133,8 @@ export namespace Prisma {
     clienteId: string
     endereco: string
     cep: string
-    cidade: string
-    estado: string
+    cidade?: string
+    estado?: string
   }
 
   export type EnderecoUpdateManyMutationInput = {
@@ -9177,8 +9270,10 @@ export namespace Prisma {
   export type AgendamentoCreateInput = {
     data: Date | string
     descricao: string
+    endereco: string
     status?: $Enums.Status
     cliente: ClienteCreateNestedOneWithoutAgendamentosInput
+    funcionario: FuncionarioCreateNestedOneWithoutAgendamentosInput
   }
 
   export type AgendamentoUncheckedCreateInput = {
@@ -9186,14 +9281,18 @@ export namespace Prisma {
     data: Date | string
     descricao: string
     clienteCpf: string
+    funcionarioCpf: string
+    endereco: string
     status?: $Enums.Status
   }
 
   export type AgendamentoUpdateInput = {
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     descricao?: StringFieldUpdateOperationsInput | string
+    endereco?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     cliente?: ClienteUpdateOneRequiredWithoutAgendamentosNestedInput
+    funcionario?: FuncionarioUpdateOneRequiredWithoutAgendamentosNestedInput
   }
 
   export type AgendamentoUncheckedUpdateInput = {
@@ -9201,6 +9300,8 @@ export namespace Prisma {
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     descricao?: StringFieldUpdateOperationsInput | string
     clienteCpf?: StringFieldUpdateOperationsInput | string
+    funcionarioCpf?: StringFieldUpdateOperationsInput | string
+    endereco?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
   }
 
@@ -9209,12 +9310,15 @@ export namespace Prisma {
     data: Date | string
     descricao: string
     clienteCpf: string
+    funcionarioCpf: string
+    endereco: string
     status?: $Enums.Status
   }
 
   export type AgendamentoUpdateManyMutationInput = {
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     descricao?: StringFieldUpdateOperationsInput | string
+    endereco?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
   }
 
@@ -9223,6 +9327,8 @@ export namespace Prisma {
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     descricao?: StringFieldUpdateOperationsInput | string
     clienteCpf?: StringFieldUpdateOperationsInput | string
+    funcionarioCpf?: StringFieldUpdateOperationsInput | string
+    endereco?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
   }
 
@@ -9658,6 +9764,8 @@ export namespace Prisma {
     data?: SortOrder
     descricao?: SortOrder
     clienteCpf?: SortOrder
+    funcionarioCpf?: SortOrder
+    endereco?: SortOrder
     status?: SortOrder
   }
 
@@ -9670,6 +9778,8 @@ export namespace Prisma {
     data?: SortOrder
     descricao?: SortOrder
     clienteCpf?: SortOrder
+    funcionarioCpf?: SortOrder
+    endereco?: SortOrder
     status?: SortOrder
   }
 
@@ -9678,6 +9788,8 @@ export namespace Prisma {
     data?: SortOrder
     descricao?: SortOrder
     clienteCpf?: SortOrder
+    funcionarioCpf?: SortOrder
+    endereco?: SortOrder
     status?: SortOrder
   }
 
@@ -9837,11 +9949,25 @@ export namespace Prisma {
     deleteMany?: SalaScalarWhereInput | SalaScalarWhereInput[]
   }
 
+  export type AgendamentoCreateNestedManyWithoutFuncionarioInput = {
+    create?: XOR<AgendamentoCreateWithoutFuncionarioInput, AgendamentoUncheckedCreateWithoutFuncionarioInput> | AgendamentoCreateWithoutFuncionarioInput[] | AgendamentoUncheckedCreateWithoutFuncionarioInput[]
+    connectOrCreate?: AgendamentoCreateOrConnectWithoutFuncionarioInput | AgendamentoCreateOrConnectWithoutFuncionarioInput[]
+    createMany?: AgendamentoCreateManyFuncionarioInputEnvelope
+    connect?: AgendamentoWhereUniqueInput | AgendamentoWhereUniqueInput[]
+  }
+
   export type SalaCreateNestedManyWithoutFuncionarioInput = {
     create?: XOR<SalaCreateWithoutFuncionarioInput, SalaUncheckedCreateWithoutFuncionarioInput> | SalaCreateWithoutFuncionarioInput[] | SalaUncheckedCreateWithoutFuncionarioInput[]
     connectOrCreate?: SalaCreateOrConnectWithoutFuncionarioInput | SalaCreateOrConnectWithoutFuncionarioInput[]
     createMany?: SalaCreateManyFuncionarioInputEnvelope
     connect?: SalaWhereUniqueInput | SalaWhereUniqueInput[]
+  }
+
+  export type AgendamentoUncheckedCreateNestedManyWithoutFuncionarioInput = {
+    create?: XOR<AgendamentoCreateWithoutFuncionarioInput, AgendamentoUncheckedCreateWithoutFuncionarioInput> | AgendamentoCreateWithoutFuncionarioInput[] | AgendamentoUncheckedCreateWithoutFuncionarioInput[]
+    connectOrCreate?: AgendamentoCreateOrConnectWithoutFuncionarioInput | AgendamentoCreateOrConnectWithoutFuncionarioInput[]
+    createMany?: AgendamentoCreateManyFuncionarioInputEnvelope
+    connect?: AgendamentoWhereUniqueInput | AgendamentoWhereUniqueInput[]
   }
 
   export type SalaUncheckedCreateNestedManyWithoutFuncionarioInput = {
@@ -9859,6 +9985,20 @@ export namespace Prisma {
     set?: boolean
   }
 
+  export type AgendamentoUpdateManyWithoutFuncionarioNestedInput = {
+    create?: XOR<AgendamentoCreateWithoutFuncionarioInput, AgendamentoUncheckedCreateWithoutFuncionarioInput> | AgendamentoCreateWithoutFuncionarioInput[] | AgendamentoUncheckedCreateWithoutFuncionarioInput[]
+    connectOrCreate?: AgendamentoCreateOrConnectWithoutFuncionarioInput | AgendamentoCreateOrConnectWithoutFuncionarioInput[]
+    upsert?: AgendamentoUpsertWithWhereUniqueWithoutFuncionarioInput | AgendamentoUpsertWithWhereUniqueWithoutFuncionarioInput[]
+    createMany?: AgendamentoCreateManyFuncionarioInputEnvelope
+    set?: AgendamentoWhereUniqueInput | AgendamentoWhereUniqueInput[]
+    disconnect?: AgendamentoWhereUniqueInput | AgendamentoWhereUniqueInput[]
+    delete?: AgendamentoWhereUniqueInput | AgendamentoWhereUniqueInput[]
+    connect?: AgendamentoWhereUniqueInput | AgendamentoWhereUniqueInput[]
+    update?: AgendamentoUpdateWithWhereUniqueWithoutFuncionarioInput | AgendamentoUpdateWithWhereUniqueWithoutFuncionarioInput[]
+    updateMany?: AgendamentoUpdateManyWithWhereWithoutFuncionarioInput | AgendamentoUpdateManyWithWhereWithoutFuncionarioInput[]
+    deleteMany?: AgendamentoScalarWhereInput | AgendamentoScalarWhereInput[]
+  }
+
   export type SalaUpdateManyWithoutFuncionarioNestedInput = {
     create?: XOR<SalaCreateWithoutFuncionarioInput, SalaUncheckedCreateWithoutFuncionarioInput> | SalaCreateWithoutFuncionarioInput[] | SalaUncheckedCreateWithoutFuncionarioInput[]
     connectOrCreate?: SalaCreateOrConnectWithoutFuncionarioInput | SalaCreateOrConnectWithoutFuncionarioInput[]
@@ -9871,6 +10011,20 @@ export namespace Prisma {
     update?: SalaUpdateWithWhereUniqueWithoutFuncionarioInput | SalaUpdateWithWhereUniqueWithoutFuncionarioInput[]
     updateMany?: SalaUpdateManyWithWhereWithoutFuncionarioInput | SalaUpdateManyWithWhereWithoutFuncionarioInput[]
     deleteMany?: SalaScalarWhereInput | SalaScalarWhereInput[]
+  }
+
+  export type AgendamentoUncheckedUpdateManyWithoutFuncionarioNestedInput = {
+    create?: XOR<AgendamentoCreateWithoutFuncionarioInput, AgendamentoUncheckedCreateWithoutFuncionarioInput> | AgendamentoCreateWithoutFuncionarioInput[] | AgendamentoUncheckedCreateWithoutFuncionarioInput[]
+    connectOrCreate?: AgendamentoCreateOrConnectWithoutFuncionarioInput | AgendamentoCreateOrConnectWithoutFuncionarioInput[]
+    upsert?: AgendamentoUpsertWithWhereUniqueWithoutFuncionarioInput | AgendamentoUpsertWithWhereUniqueWithoutFuncionarioInput[]
+    createMany?: AgendamentoCreateManyFuncionarioInputEnvelope
+    set?: AgendamentoWhereUniqueInput | AgendamentoWhereUniqueInput[]
+    disconnect?: AgendamentoWhereUniqueInput | AgendamentoWhereUniqueInput[]
+    delete?: AgendamentoWhereUniqueInput | AgendamentoWhereUniqueInput[]
+    connect?: AgendamentoWhereUniqueInput | AgendamentoWhereUniqueInput[]
+    update?: AgendamentoUpdateWithWhereUniqueWithoutFuncionarioInput | AgendamentoUpdateWithWhereUniqueWithoutFuncionarioInput[]
+    updateMany?: AgendamentoUpdateManyWithWhereWithoutFuncionarioInput | AgendamentoUpdateManyWithWhereWithoutFuncionarioInput[]
+    deleteMany?: AgendamentoScalarWhereInput | AgendamentoScalarWhereInput[]
   }
 
   export type SalaUncheckedUpdateManyWithoutFuncionarioNestedInput = {
@@ -10011,6 +10165,12 @@ export namespace Prisma {
     connect?: ClienteWhereUniqueInput
   }
 
+  export type FuncionarioCreateNestedOneWithoutAgendamentosInput = {
+    create?: XOR<FuncionarioCreateWithoutAgendamentosInput, FuncionarioUncheckedCreateWithoutAgendamentosInput>
+    connectOrCreate?: FuncionarioCreateOrConnectWithoutAgendamentosInput
+    connect?: FuncionarioWhereUniqueInput
+  }
+
   export type EnumStatusFieldUpdateOperationsInput = {
     set?: $Enums.Status
   }
@@ -10021,6 +10181,14 @@ export namespace Prisma {
     upsert?: ClienteUpsertWithoutAgendamentosInput
     connect?: ClienteWhereUniqueInput
     update?: XOR<XOR<ClienteUpdateToOneWithWhereWithoutAgendamentosInput, ClienteUpdateWithoutAgendamentosInput>, ClienteUncheckedUpdateWithoutAgendamentosInput>
+  }
+
+  export type FuncionarioUpdateOneRequiredWithoutAgendamentosNestedInput = {
+    create?: XOR<FuncionarioCreateWithoutAgendamentosInput, FuncionarioUncheckedCreateWithoutAgendamentosInput>
+    connectOrCreate?: FuncionarioCreateOrConnectWithoutAgendamentosInput
+    upsert?: FuncionarioUpsertWithoutAgendamentosInput
+    connect?: FuncionarioWhereUniqueInput
+    update?: XOR<XOR<FuncionarioUpdateToOneWithWhereWithoutAgendamentosInput, FuncionarioUpdateWithoutAgendamentosInput>, FuncionarioUncheckedUpdateWithoutAgendamentosInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -10234,13 +10402,17 @@ export namespace Prisma {
   export type AgendamentoCreateWithoutClienteInput = {
     data: Date | string
     descricao: string
+    endereco: string
     status?: $Enums.Status
+    funcionario: FuncionarioCreateNestedOneWithoutAgendamentosInput
   }
 
   export type AgendamentoUncheckedCreateWithoutClienteInput = {
     id?: number
     data: Date | string
     descricao: string
+    funcionarioCpf: string
+    endereco: string
     status?: $Enums.Status
   }
 
@@ -10257,16 +10429,16 @@ export namespace Prisma {
   export type EnderecoCreateWithoutClienteInput = {
     endereco: string
     cep: string
-    cidade: string
-    estado: string
+    cidade?: string
+    estado?: string
   }
 
   export type EnderecoUncheckedCreateWithoutClienteInput = {
     id?: number
     endereco: string
     cep: string
-    cidade: string
-    estado: string
+    cidade?: string
+    estado?: string
   }
 
   export type EnderecoCreateOrConnectWithoutClienteInput = {
@@ -10328,6 +10500,8 @@ export namespace Prisma {
     data?: DateTimeFilter<"Agendamento"> | Date | string
     descricao?: StringFilter<"Agendamento"> | string
     clienteCpf?: StringFilter<"Agendamento"> | string
+    funcionarioCpf?: StringFilter<"Agendamento"> | string
+    endereco?: StringFilter<"Agendamento"> | string
     status?: EnumStatusFilter<"Agendamento"> | $Enums.Status
   }
 
@@ -10386,6 +10560,33 @@ export namespace Prisma {
     status?: EnumStatusSalaFilter<"Sala"> | $Enums.StatusSala
   }
 
+  export type AgendamentoCreateWithoutFuncionarioInput = {
+    data: Date | string
+    descricao: string
+    endereco: string
+    status?: $Enums.Status
+    cliente: ClienteCreateNestedOneWithoutAgendamentosInput
+  }
+
+  export type AgendamentoUncheckedCreateWithoutFuncionarioInput = {
+    id?: number
+    data: Date | string
+    descricao: string
+    clienteCpf: string
+    endereco: string
+    status?: $Enums.Status
+  }
+
+  export type AgendamentoCreateOrConnectWithoutFuncionarioInput = {
+    where: AgendamentoWhereUniqueInput
+    create: XOR<AgendamentoCreateWithoutFuncionarioInput, AgendamentoUncheckedCreateWithoutFuncionarioInput>
+  }
+
+  export type AgendamentoCreateManyFuncionarioInputEnvelope = {
+    data: AgendamentoCreateManyFuncionarioInput | AgendamentoCreateManyFuncionarioInput[]
+    skipDuplicates?: boolean
+  }
+
   export type SalaCreateWithoutFuncionarioInput = {
     nome: string
     status: $Enums.StatusSala
@@ -10409,6 +10610,22 @@ export namespace Prisma {
   export type SalaCreateManyFuncionarioInputEnvelope = {
     data: SalaCreateManyFuncionarioInput | SalaCreateManyFuncionarioInput[]
     skipDuplicates?: boolean
+  }
+
+  export type AgendamentoUpsertWithWhereUniqueWithoutFuncionarioInput = {
+    where: AgendamentoWhereUniqueInput
+    update: XOR<AgendamentoUpdateWithoutFuncionarioInput, AgendamentoUncheckedUpdateWithoutFuncionarioInput>
+    create: XOR<AgendamentoCreateWithoutFuncionarioInput, AgendamentoUncheckedCreateWithoutFuncionarioInput>
+  }
+
+  export type AgendamentoUpdateWithWhereUniqueWithoutFuncionarioInput = {
+    where: AgendamentoWhereUniqueInput
+    data: XOR<AgendamentoUpdateWithoutFuncionarioInput, AgendamentoUncheckedUpdateWithoutFuncionarioInput>
+  }
+
+  export type AgendamentoUpdateManyWithWhereWithoutFuncionarioInput = {
+    where: AgendamentoScalarWhereInput
+    data: XOR<AgendamentoUpdateManyMutationInput, AgendamentoUncheckedUpdateManyWithoutFuncionarioInput>
   }
 
   export type SalaUpsertWithWhereUniqueWithoutFuncionarioInput = {
@@ -10553,6 +10770,7 @@ export namespace Prisma {
     email: string
     funcao: $Enums.Funcao
     working?: boolean
+    agendamentos?: AgendamentoCreateNestedManyWithoutFuncionarioInput
   }
 
   export type FuncionarioUncheckedCreateWithoutSalasInput = {
@@ -10563,6 +10781,7 @@ export namespace Prisma {
     email: string
     funcao: $Enums.Funcao
     working?: boolean
+    agendamentos?: AgendamentoUncheckedCreateNestedManyWithoutFuncionarioInput
   }
 
   export type FuncionarioCreateOrConnectWithoutSalasInput = {
@@ -10652,6 +10871,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     funcao?: EnumFuncaoFieldUpdateOperationsInput | $Enums.Funcao
     working?: BoolFieldUpdateOperationsInput | boolean
+    agendamentos?: AgendamentoUpdateManyWithoutFuncionarioNestedInput
   }
 
   export type FuncionarioUncheckedUpdateWithoutSalasInput = {
@@ -10662,6 +10882,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     funcao?: EnumFuncaoFieldUpdateOperationsInput | $Enums.Funcao
     working?: BoolFieldUpdateOperationsInput | boolean
+    agendamentos?: AgendamentoUncheckedUpdateManyWithoutFuncionarioNestedInput
   }
 
   export type SalaCreateWithoutMensagensInput = {
@@ -10739,6 +10960,33 @@ export namespace Prisma {
     create: XOR<ClienteCreateWithoutAgendamentosInput, ClienteUncheckedCreateWithoutAgendamentosInput>
   }
 
+  export type FuncionarioCreateWithoutAgendamentosInput = {
+    cpf: string
+    senha: string
+    nome: string
+    tel: string
+    email: string
+    funcao: $Enums.Funcao
+    working?: boolean
+    salas?: SalaCreateNestedManyWithoutFuncionarioInput
+  }
+
+  export type FuncionarioUncheckedCreateWithoutAgendamentosInput = {
+    cpf: string
+    senha: string
+    nome: string
+    tel: string
+    email: string
+    funcao: $Enums.Funcao
+    working?: boolean
+    salas?: SalaUncheckedCreateNestedManyWithoutFuncionarioInput
+  }
+
+  export type FuncionarioCreateOrConnectWithoutAgendamentosInput = {
+    where: FuncionarioWhereUniqueInput
+    create: XOR<FuncionarioCreateWithoutAgendamentosInput, FuncionarioUncheckedCreateWithoutAgendamentosInput>
+  }
+
   export type ClienteUpsertWithoutAgendamentosInput = {
     update: XOR<ClienteUpdateWithoutAgendamentosInput, ClienteUncheckedUpdateWithoutAgendamentosInput>
     create: XOR<ClienteCreateWithoutAgendamentosInput, ClienteUncheckedCreateWithoutAgendamentosInput>
@@ -10774,10 +11022,45 @@ export namespace Prisma {
     salas?: SalaUncheckedUpdateManyWithoutClienteNestedInput
   }
 
+  export type FuncionarioUpsertWithoutAgendamentosInput = {
+    update: XOR<FuncionarioUpdateWithoutAgendamentosInput, FuncionarioUncheckedUpdateWithoutAgendamentosInput>
+    create: XOR<FuncionarioCreateWithoutAgendamentosInput, FuncionarioUncheckedCreateWithoutAgendamentosInput>
+    where?: FuncionarioWhereInput
+  }
+
+  export type FuncionarioUpdateToOneWithWhereWithoutAgendamentosInput = {
+    where?: FuncionarioWhereInput
+    data: XOR<FuncionarioUpdateWithoutAgendamentosInput, FuncionarioUncheckedUpdateWithoutAgendamentosInput>
+  }
+
+  export type FuncionarioUpdateWithoutAgendamentosInput = {
+    cpf?: StringFieldUpdateOperationsInput | string
+    senha?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    tel?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    funcao?: EnumFuncaoFieldUpdateOperationsInput | $Enums.Funcao
+    working?: BoolFieldUpdateOperationsInput | boolean
+    salas?: SalaUpdateManyWithoutFuncionarioNestedInput
+  }
+
+  export type FuncionarioUncheckedUpdateWithoutAgendamentosInput = {
+    cpf?: StringFieldUpdateOperationsInput | string
+    senha?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    tel?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    funcao?: EnumFuncaoFieldUpdateOperationsInput | $Enums.Funcao
+    working?: BoolFieldUpdateOperationsInput | boolean
+    salas?: SalaUncheckedUpdateManyWithoutFuncionarioNestedInput
+  }
+
   export type AgendamentoCreateManyClienteInput = {
     id?: number
     data: Date | string
     descricao: string
+    funcionarioCpf: string
+    endereco: string
     status?: $Enums.Status
   }
 
@@ -10785,8 +11068,8 @@ export namespace Prisma {
     id?: number
     endereco: string
     cep: string
-    cidade: string
-    estado: string
+    cidade?: string
+    estado?: string
   }
 
   export type SalaCreateManyClienteInput = {
@@ -10799,13 +11082,17 @@ export namespace Prisma {
   export type AgendamentoUpdateWithoutClienteInput = {
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     descricao?: StringFieldUpdateOperationsInput | string
+    endereco?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    funcionario?: FuncionarioUpdateOneRequiredWithoutAgendamentosNestedInput
   }
 
   export type AgendamentoUncheckedUpdateWithoutClienteInput = {
     id?: IntFieldUpdateOperationsInput | number
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     descricao?: StringFieldUpdateOperationsInput | string
+    funcionarioCpf?: StringFieldUpdateOperationsInput | string
+    endereco?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
   }
 
@@ -10813,6 +11100,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     descricao?: StringFieldUpdateOperationsInput | string
+    funcionarioCpf?: StringFieldUpdateOperationsInput | string
+    endereco?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
   }
 
@@ -10861,11 +11150,46 @@ export namespace Prisma {
     status?: EnumStatusSalaFieldUpdateOperationsInput | $Enums.StatusSala
   }
 
+  export type AgendamentoCreateManyFuncionarioInput = {
+    id?: number
+    data: Date | string
+    descricao: string
+    clienteCpf: string
+    endereco: string
+    status?: $Enums.Status
+  }
+
   export type SalaCreateManyFuncionarioInput = {
     id?: number
     nome: string
     clienteId: string
     status: $Enums.StatusSala
+  }
+
+  export type AgendamentoUpdateWithoutFuncionarioInput = {
+    data?: DateTimeFieldUpdateOperationsInput | Date | string
+    descricao?: StringFieldUpdateOperationsInput | string
+    endereco?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    cliente?: ClienteUpdateOneRequiredWithoutAgendamentosNestedInput
+  }
+
+  export type AgendamentoUncheckedUpdateWithoutFuncionarioInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    data?: DateTimeFieldUpdateOperationsInput | Date | string
+    descricao?: StringFieldUpdateOperationsInput | string
+    clienteCpf?: StringFieldUpdateOperationsInput | string
+    endereco?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+  }
+
+  export type AgendamentoUncheckedUpdateManyWithoutFuncionarioInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    data?: DateTimeFieldUpdateOperationsInput | Date | string
+    descricao?: StringFieldUpdateOperationsInput | string
+    clienteCpf?: StringFieldUpdateOperationsInput | string
+    endereco?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
   }
 
   export type SalaUpdateWithoutFuncionarioInput = {

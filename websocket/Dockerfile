@@ -15,23 +15,27 @@ ENV NODE_ENV="production"
 # Throw-away build stage to reduce size of final image
 FROM base AS build
 
-# Install packages needed to build node modules
-RUN apt-get update -qq && \
+# Install required build tools and OpenSSL
+RUN apt-get update -y && \
     apt-get install --no-install-recommends -y \
         build-essential \
         node-gyp \
         pkg-config \
-        python-is-python3 && \
+        python-is-python3 \
+        openssl && \
     rm -rf /var/lib/apt/lists/*
 
 # Copy only package definition files first
 COPY package-lock.json package.json ./
 
-# Install only production dependencies
+# Install only production dependencies (must include prisma and @prisma/client)
 RUN npm ci --omit=dev
 
-# Copy application code
+# Copy application code including Prisma schema
 COPY . .
+
+# Generate Prisma client
+RUN npx prisma generate
 
 # Final stage for production image
 FROM base

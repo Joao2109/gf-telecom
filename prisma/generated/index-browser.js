@@ -171,6 +171,8 @@ exports.Prisma.AgendamentoScalarFieldEnum = {
   data: 'data',
   descricao: 'descricao',
   clienteCpf: 'clienteCpf',
+  funcionarioCpf: 'funcionarioCpf',
+  endereco: 'endereco',
   status: 'status'
 };
 
