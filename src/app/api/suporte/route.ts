@@ -8,6 +8,5 @@ export const GET = async () => {
       OR: [{ clienteId: user?.id }, { funcionarioId: user?.id }],
     },
   });
-  console.log(salas);
   return new Response(JSON.stringify(salas), { status: 200 });
 };

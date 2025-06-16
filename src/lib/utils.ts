@@ -11,6 +11,8 @@ export function sleep(ms: number) {
 export function convertForm(form: EventTarget & HTMLFormElement) {
   const data = new FormData(form);
   const object = Object.fromEntries(data);
+  if (object.cpf)
+    object.cpf = object.cpf.toString().replaceAll(".", "").replace("-", "");
   return object;
 }
 export const getHorarios = async (data: string) => {

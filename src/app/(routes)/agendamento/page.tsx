@@ -13,7 +13,8 @@ const AgendamentoPage = () => {
     setLoading(true);
     fetch("/api/agendamento/buscar", {
       method: "POST",
-      body: JSON.stringify(user),
+      //@ts-expect-error type
+      body: JSON.stringify({ id: user.id, type: "cliente" }),
     }).then(async (res) => {
       const data = await res.json();
       setagendamentos(data);

@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useAppDispatch } from "@/lib/hooks";
 import { login } from "@/lib/features/user/user-slice";
 import { Alert } from "./alert";
+import { convertForm } from "@/lib/utils";
 export const SignIn = () => {
   const [alert, setAlert] = useState<string | null>(null);
   const [error, setError] = useState<string | undefined>(undefined);
@@ -26,7 +27,7 @@ export const SignIn = () => {
           }
           const res = await signIn("credentials", {
             redirect: false,
-            ...Object.fromEntries(new FormData(e.currentTarget)),
+            ...convertForm(e.currentTarget),
           });
           if (res?.error || res == undefined) {
             setError("Ocorreu um erro, por favor, verifique suas credenciais.");
