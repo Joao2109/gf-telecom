@@ -3,9 +3,9 @@ import { auth } from "@/auth";
 const PlanosPage = async () => {
   const session = await auth();
   const planos = [
-    { valor: 99.99, download: 100 },
-    { valor: 149.99, download: 300 },
-    { valor: 199.99, download: 500 },
+    { valor: 89.99, download: 100 },
+    { valor: 119.99, download: 300 },
+    { valor: 149.99, download: 500 },
   ];
   console.log(Number(session?.user?.plano?.replace("MB", "")));
   return (
