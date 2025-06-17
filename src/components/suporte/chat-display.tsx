@@ -11,7 +11,7 @@ const ChatDisplay = ({
   const scrollRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+      scrollRef.current.scrollTo({top: scrollRef.current.clientHeight});
     }
   }, []);
   return (
